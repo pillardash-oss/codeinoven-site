@@ -20,6 +20,8 @@ RUN npm run build --workspace @codeinoven/agents-favicon
 # ---- Runtime stage ----------------------------------------------------------
 FROM node:22-alpine
 
+RUN apk add --no-cache tini su-exec
+
 WORKDIR /app
 
 ENV NODE_ENV=production \
@@ -45,6 +47,13 @@ COPY --from=builder /app/apps/agents-favicon/tsconfig.json ./apps/agents-favicon
 COPY apps/agents-favicon/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+# The long-running server runs as the non-root `appuser` (via su-exec in the
+# entrypoint). The data volume must be writable by this user; empty named
+# volumes inherit the ownership of the image path they mount over.
+RUN adduser -D -h /app appuser \
+	&& mkdir -p /app/data \
+	&& chown -R appuser:appuser /app
+
 # Persistent volume: SQLite database + icon files. Must survive redeploys.
 VOLUME /app/data
 
@@ -53,4 +62,4 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
   CMD wget -q --spider http://127.0.0.1:${PORT:-3000}/ || exit 1
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["tini", "--", "docker-entrypoint.sh"]

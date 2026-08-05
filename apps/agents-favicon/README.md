@@ -71,7 +71,8 @@ docker compose -f apps/agents-favicon/docker-compose.yml up --build
 ```
 
 The container runs seed on boot, schedules a daily crawl via busybox crond,
-and serves on port 3000. `/app/data` must be a persistent volume.
+and serves on port 3000 as the non-root `appuser`. `/app/data` must be a
+persistent volume.
 
 On Coolify: create a Docker Compose resource pointing at this repo with
 `dockerfile: apps/agents-favicon/Dockerfile`, set `ORIGIN` to the public URL,
