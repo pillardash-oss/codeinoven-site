@@ -1,0 +1,25 @@
+# Local/self-hosted deployment. On Coolify, point a Docker Compose resource
+# at this file — the named volume keeps icons + SQLite across redeploys.
+# Build context is the monorepo root (both apps share a bun/npm workspace).
+services:
+  app:
+    build:
+      context: ../..
+      dockerfile: apps/agents-favicon/Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - icons-data:/app/data
+    environment:
+      # Public origin of the deployment (used by adapter-node).
+      - ORIGIN=${ORIGIN:-http://localhost:3000}
+      # Optional: raises GitHub API rate limits for the crawler.
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      # Daily crawl inside the container (busybox crond). Set to false to
+      # use a Coolify scheduled task instead: cd /app/apps/agents-favicon && npm run crawl
+      - ENABLE_CRON=${ENABLE_CRON:-true}
+      - CRAWL_CRON=${CRAWL_CRON:-0 4 * * *}
+    restart: unless-stopped
+
+volumes:
+  icons-data:

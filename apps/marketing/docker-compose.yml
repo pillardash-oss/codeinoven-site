@@ -1,0 +1,11 @@
+# Local/self-hosted deployment for the CodeInOven marketing site.
+# On Coolify, point a Docker Compose resource at this file.
+# Build context is the monorepo root (both apps share a bun workspace).
+services:
+  web:
+    build:
+      context: ../..
+      dockerfile: apps/marketing/Dockerfile
+    ports:
+      - '8080:80'
+    restart: unless-stopped

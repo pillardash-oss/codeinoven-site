@@ -1,0 +1,22 @@
+# Root build context for both app images — keep context small.
+node_modules
+**/node_modules
+**/build
+**/.svelte-kit
+**/.output
+**/.vercel
+**/.netlify
+.git
+.gitignore
+.DS_Store
+Thumbs.db
+*.md
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+apps/agents-favicon/data
+apps/agents-favicon/build
+apps/marketing/build
+**/package-lock.json

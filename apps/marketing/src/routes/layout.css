@@ -1,0 +1,1507 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-sans:
+		'Satoshi', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-mono:
+		'JetBrains Mono', 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		'Liberation Mono', monospace;
+
+	/* Mirrors the product's dark tokens in the desktop app's src/renderer/app.css
+	   — true neutral blacks, no blue tint — with Ember (#ca5a00) as the accent.
+	   #ff7200 is the brand mark's own flame and is used only for the heat
+	   element, never for text. */
+	--color-app: #0b0b0d;
+	--color-surface: #141417;
+	--color-elevated: #1c1c20;
+	--color-overlay: #242429;
+	--color-raised: #202025;
+
+	--color-foreground: #f5f4f0;
+	--color-foreground-dim: #e5e4df;
+	--color-muted: #9d9da6;
+	--color-dimmed: #5f5f68;
+
+	--color-accent: #ca5a00;
+	--color-accent-hover: #a94a00;
+	--color-flame: #ff7200;
+	--color-on-accent: #f5f4f0;
+
+	--color-line: #27272c;
+	--color-line-strong: #3b3b42;
+}
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/Satoshi-400.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/Satoshi-500.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/Satoshi-700.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/Satoshi-900.woff2') format('woff2');
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		@apply bg-app font-sans text-foreground antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	::selection {
+		@apply bg-accent text-on-accent;
+	}
+}
+
+/* ═══ Shell ══════════════════════════════════════════════════════════════ */
+
+.shell {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+/* Shared horizontal gutter, so every band lines up on one column. */
+.hero,
+.section,
+.closer,
+.nav,
+.site-footer {
+	--gutter: clamp(1.25rem, 5vw, 3rem);
+}
+
+/* ═══ Navigation ═════════════════════════════════════════════════════════ */
+
+.nav {
+	position: sticky;
+	top: 0;
+	z-index: 40;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 3.5rem;
+	padding: 0 var(--gutter);
+	background: color-mix(in srgb, var(--color-app) 82%, transparent);
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	border-bottom: 1px solid transparent;
+	transition: border-color 200ms;
+}
+
+.nav:hover {
+	border-bottom-color: var(--color-line);
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	text-decoration: none;
+	color: inherit;
+}
+
+.brand-word {
+	font-weight: 700;
+	font-size: 0.9375rem;
+	letter-spacing: -0.015em;
+}
+
+.brand-word em {
+	font-style: normal;
+	color: var(--color-accent);
+}
+
+.nav-links {
+	display: flex;
+	align-items: center;
+	gap: 0.125rem;
+}
+
+.nav-links a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.375rem;
+	white-space: nowrap;
+	padding: 0.375rem 0.75rem;
+	font-size: 0.8125rem;
+	font-weight: 500;
+	color: var(--color-muted);
+	text-decoration: none;
+	transition: color 160ms;
+}
+
+.nav-links a:hover {
+	color: var(--color-foreground);
+}
+
+/* Desktop links above 900px; the sheet takes over below it. */
+.nav-mobile {
+	display: none;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+/* An app-style icon button — no border, just a hover tile, exactly like the
+   header controls in the product (h-8 w-8, squared, muted → foreground). */
+.nav-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	border: none;
+	border-radius: 2px;
+	background: transparent;
+	color: var(--color-muted);
+	cursor: pointer;
+	transition:
+		background 160ms,
+		color 160ms;
+}
+
+.nav-toggle:hover {
+	background: var(--color-elevated);
+	color: var(--color-foreground);
+}
+
+/* The sheet drops from under the header. Height animates so it does not jump. */
+.mobile-sheet {
+	position: sticky;
+	top: 3.5rem;
+	z-index: 39;
+	display: none;
+	flex-direction: column;
+	overflow: hidden;
+	max-height: 0;
+	padding-inline: var(--gutter, 1.25rem);
+	background: color-mix(in srgb, var(--color-app) 96%, transparent);
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	border-bottom: 1px solid transparent;
+	transition:
+		max-height 260ms cubic-bezier(0.16, 1, 0.3, 1),
+		border-color 260ms;
+}
+
+.mobile-sheet a {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.875rem 0;
+	font-size: 0.9375rem;
+	font-weight: 500;
+	color: var(--color-muted);
+	text-decoration: none;
+	border-bottom: 1px solid var(--color-line);
+}
+
+.mobile-sheet a:last-child {
+	border-bottom: none;
+}
+
+.mobile-sheet a:hover {
+	color: var(--color-foreground);
+}
+
+/* Download is the terminal action of the sheet — a real primary button, not
+   another plain row. */
+.mobile-sheet .mobile-download {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1rem 0;
+	padding: 0.625rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: var(--color-app);
+	background: var(--color-foreground);
+	border: none;
+	border-radius: 2px;
+	transition: background 160ms;
+}
+
+.mobile-sheet .mobile-download:hover {
+	color: var(--color-app);
+	background: var(--color-foreground-dim);
+}
+
+@media (max-width: 900px) {
+	.nav-links {
+		display: none;
+	}
+
+	.nav-mobile {
+		display: flex;
+	}
+
+	.mobile-sheet {
+		display: flex;
+		--gutter: clamp(1.25rem, 5vw, 3rem);
+	}
+
+	.menu-open .mobile-sheet {
+		max-height: 26rem;
+		border-bottom-color: var(--color-line);
+	}
+}
+
+/* ═══ The heat element ═══════════════════════════════════════════════════ */
+/* The single recurring graphic device, lifted from the oven bar in the product
+   mark. Used as a section rule — never as decoration for its own sake. */
+
+.heat-bar {
+	position: relative;
+	height: 2px;
+	width: 100%;
+	max-width: 34rem;
+	margin-top: 3.25rem;
+	margin-inline: auto;
+	border-radius: 2px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		color-mix(in srgb, var(--color-accent) 55%, transparent) 18%,
+		var(--color-flame) 50%,
+		color-mix(in srgb, var(--color-accent) 55%, transparent) 82%,
+		transparent
+	);
+	box-shadow: 0 0 24px color-mix(in srgb, var(--color-flame) 28%, transparent);
+}
+
+.heat-core {
+	position: absolute;
+	inset: -1px 0;
+	border-radius: 2px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		color-mix(in srgb, var(--color-flame) 70%, transparent),
+		transparent
+	);
+	filter: blur(3px);
+	animation: heat-breathe 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes heat-breathe {
+	from {
+		opacity: 0.35;
+		transform: scaleX(0.82);
+	}
+	to {
+		opacity: 0.9;
+		transform: scaleX(1);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.heat-core {
+		animation: none;
+		opacity: 0.6;
+	}
+}
+
+/* ═══ Hero ═══════════════════════════════════════════════════════════════ */
+
+.hero {
+	padding: clamp(3.5rem, 9vw, 7rem) var(--gutter) 0;
+}
+
+.hero-inner {
+	max-width: 56rem;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	font-weight: 500;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--color-muted);
+}
+
+.eyebrow-dot {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: var(--color-flame);
+	box-shadow: 0 0 8px var(--color-flame);
+}
+
+.hero-title {
+	margin-top: 1.5rem;
+	font-size: clamp(2.25rem, 6vw, 4.25rem);
+	font-weight: 900;
+	line-height: 1.03;
+	letter-spacing: -0.03em;
+	text-wrap: balance;
+}
+
+.hero-title-accent {
+	color: var(--color-muted);
+}
+
+.hero-lead {
+	margin-top: 1.5rem;
+	max-width: 40rem;
+	font-size: clamp(1rem, 1.6vw, 1.125rem);
+	line-height: 1.65;
+	color: var(--color-muted);
+}
+
+.hero-actions {
+	margin-top: 2.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+	flex-wrap: wrap;
+}
+
+/* ═══ Controls ═══════════════════════════════════════════════════════════ */
+
+.button {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	height: 2.5rem;
+	padding: 0 1.375rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: var(--color-app);
+	background: var(--color-foreground);
+	border: none;
+	border-radius: 2px;
+	text-decoration: none;
+	cursor: pointer;
+	transition:
+		background 160ms,
+		transform 160ms;
+}
+
+.button:hover {
+	background: var(--color-foreground-dim);
+}
+
+.button:active {
+	transform: scale(0.985);
+}
+
+.button :global(svg) {
+	width: 1.0625rem;
+	height: 1.0625rem;
+}
+
+.ghost-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.375rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--color-muted);
+	text-decoration: none;
+	transition: color 160ms;
+}
+
+.ghost-link:hover {
+	color: var(--color-foreground);
+}
+
+.ghost-link :global(svg) {
+	width: 0.9375rem;
+	height: 0.9375rem;
+}
+
+/* ═══ Screenshots ════════════════════════════════════════════════════════ */
+
+.hero-shot {
+	max-width: 78rem;
+	margin: clamp(3rem, 7vw, 5rem) auto 0;
+}
+
+.hero-shot img,
+.inline-shot img,
+.composer-shot img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* The app supplies its own window chrome, so the capture only needs a seam and
+   a shadow to lift it off the page — never an invented browser frame. */
+.hero-shot img {
+	border: 1px solid var(--color-line);
+	border-radius: 0.75rem;
+	box-shadow: 0 40px 90px -20px rgb(0 0 0 / 0.75);
+}
+
+.hero-shot figcaption,
+.inline-shot figcaption,
+.composer-shot figcaption {
+	margin-top: 0.875rem;
+	font-size: 0.8125rem;
+	line-height: 1.55;
+	color: var(--color-dimmed);
+	text-align: center;
+	max-width: 34rem;
+	margin-inline: auto;
+}
+
+.inline-shot,
+.composer-shot {
+	max-width: var(--content);
+	margin: 3.5rem auto 0;
+}
+
+.inline-shot img,
+.composer-shot img {
+	border: 1px solid var(--color-line);
+	border-radius: 0.75rem;
+	background: var(--color-surface);
+}
+
+/* ═══ Sections ═══════════════════════════════════════════════════════════ */
+
+.section {
+	padding: clamp(3.5rem, 6.5vw, 6rem) var(--gutter);
+	/* Every block inside a section shares one measure, so headings and content
+	   always start on the same left edge. */
+	--content: 78rem;
+}
+
+/* Reading-width sections: the lifecycle rail and the principles grid. */
+.section-narrow {
+	--content: 60rem;
+}
+
+.section-head {
+	max-width: var(--content);
+	margin: 0 auto 3.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.kicker {
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--color-accent);
+}
+
+.section-head h2 {
+	max-width: 34rem;
+	font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+	font-weight: 900;
+	line-height: 1.08;
+	letter-spacing: -0.025em;
+	text-wrap: balance;
+}
+
+.section-lead {
+	max-width: 40rem;
+	font-size: 1rem;
+	line-height: 1.7;
+	color: var(--color-muted);
+}
+
+/* ═══ Harness matrix ═════════════════════════════════════════════════════ */
+/* Hairline grid: one shared border, cells separated by gap-px on the line
+   color, exactly like the dense panels in the app. */
+
+.harness-grid {
+	max-width: var(--content);
+	margin: 0 auto;
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1px;
+	background: var(--color-line);
+	border: 1px solid var(--color-line);
+	border-radius: 0.875rem;
+	overflow: hidden;
+}
+
+@media (max-width: 900px) {
+	.harness-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 560px) {
+	.harness-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.harness-cell a {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-areas:
+		'mark name'
+		'mark vendor'
+		'cmd  flag';
+	column-gap: 0.875rem;
+	row-gap: 0.25rem;
+	align-items: center;
+	height: 100%;
+	padding: 1.5rem;
+	background: var(--color-app);
+	text-decoration: none;
+	color: inherit;
+	transition: background 180ms;
+}
+
+.harness-cell a:hover {
+	background: var(--color-surface);
+}
+
+.harness-mark {
+	grid-area: mark;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	border-radius: 0.625rem;
+	overflow: hidden;
+}
+
+.harness-mark.is-glyph {
+	border: 1px solid var(--color-line);
+	background: var(--color-elevated);
+	transition: border-color 180ms;
+}
+
+.harness-cell a:hover .harness-mark.is-glyph {
+	border-color: var(--color-line-strong);
+}
+
+.harness-mark.is-tile img {
+	width: 100%;
+	height: 100%;
+}
+
+.harness-mark.is-glyph img {
+	width: 1.375rem;
+	height: 1.375rem;
+	object-fit: contain;
+}
+
+.harness-name {
+	grid-area: name;
+	font-size: 0.9375rem;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	align-self: end;
+}
+
+.harness-vendor {
+	grid-area: vendor;
+	font-size: 0.75rem;
+	color: var(--color-dimmed);
+	align-self: start;
+}
+
+.harness-cmd {
+	grid-area: cmd;
+	margin-top: 1rem;
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	color: var(--color-muted);
+	background: var(--color-elevated);
+	border: 1px solid var(--color-line);
+	border-radius: 0.25rem;
+	padding: 0.125rem 0.375rem;
+	justify-self: start;
+}
+
+.harness-flag {
+	grid-area: flag;
+	margin-top: 1rem;
+	justify-self: end;
+	font-family: var(--font-mono);
+	font-size: 0.625rem;
+	letter-spacing: 0.04em;
+	color: var(--color-accent);
+}
+
+.harness-flag-off {
+	color: var(--color-dimmed);
+}
+
+/* ─── Backends ─── */
+
+.backend-split {
+	max-width: var(--content);
+	margin: 3.5rem auto 0;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1px;
+	background: var(--color-line);
+	border: 1px solid var(--color-line);
+	border-radius: 0.875rem;
+	overflow: hidden;
+}
+
+@media (max-width: 860px) {
+	.backend-split {
+		grid-template-columns: 1fr;
+	}
+}
+
+.backend-block {
+	padding: 2rem;
+	background: var(--color-app);
+}
+
+.backend-block h3 {
+	font-size: 1.0625rem;
+	font-weight: 700;
+	letter-spacing: -0.015em;
+}
+
+.backend-block > p {
+	margin-top: 0.625rem;
+	font-size: 0.875rem;
+	line-height: 1.65;
+	color: var(--color-muted);
+	max-width: 30rem;
+}
+
+.backend-list {
+	margin-top: 1.5rem;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.backend-list li {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.625rem 0.75rem;
+	border: 1px solid var(--color-line);
+	border-radius: 0.5rem;
+	background: var(--color-surface);
+}
+
+.backend-mark {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.25rem;
+	height: 1.25rem;
+	color: var(--color-muted);
+	flex-shrink: 0;
+}
+
+/* Vendor marks arrive in a dozen brand colors. Flatten each to a white
+   silhouette so the wall reads as one system instead of a logo salad. */
+.backend-mark img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	filter: brightness(0) invert(1);
+	opacity: 0.75;
+}
+
+.backend-name {
+	font-size: 0.875rem;
+	font-weight: 600;
+	flex-shrink: 0;
+}
+
+.backend-list code {
+	margin-left: auto;
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	color: var(--color-dimmed);
+}
+
+@media (max-width: 520px) {
+	.backend-list code {
+		display: none;
+	}
+}
+
+.provider-wall {
+	margin-top: 1.5rem;
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.provider-wall li {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 3rem;
+	height: 3rem;
+	border: 1px solid var(--color-line);
+	border-radius: 0.5rem;
+	background: var(--color-surface);
+	transition:
+		border-color 180ms,
+		background 180ms;
+}
+
+.provider-wall li:hover {
+	border-color: var(--color-line-strong);
+	background: var(--color-elevated);
+}
+
+.provider-wall img {
+	width: 1.375rem;
+	height: 1.375rem;
+	object-fit: contain;
+	filter: brightness(0) invert(1);
+	opacity: 0.55;
+	transition: opacity 180ms;
+}
+
+.provider-wall li:hover img {
+	opacity: 1;
+}
+
+/* ═══ Lifecycle rail ═════════════════════════════════════════════════════ */
+
+.stage-rail {
+	max-width: var(--content);
+	margin: 0 auto;
+	list-style: none;
+	position: relative;
+}
+
+/* The vertical run of the heat element, connecting the four stages. */
+.stage-rail::before {
+	content: '';
+	position: absolute;
+	left: 1.34rem;
+	top: 1.5rem;
+	bottom: 3rem;
+	width: 1px;
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-accent) 50%, transparent),
+		var(--color-line) 85%,
+		transparent
+	);
+}
+
+@media (max-width: 640px) {
+	.stage-rail::before {
+		display: none;
+	}
+}
+
+.stage {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 1.75rem;
+	padding-bottom: 3rem;
+}
+
+@media (max-width: 640px) {
+	.stage {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+}
+
+.stage-index {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	border: 1px solid var(--color-line);
+	border-radius: 0.625rem;
+	background: var(--color-surface);
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	font-weight: 700;
+	color: var(--color-accent);
+	font-variant-numeric: tabular-nums;
+}
+
+.stage-body h3 {
+	font-size: 1.375rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+}
+
+.stage-lead {
+	margin-top: 0.375rem;
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--color-foreground-dim);
+}
+
+.stage-copy {
+	margin-top: 0.75rem;
+	max-width: 42rem;
+	font-size: 0.9375rem;
+	line-height: 1.7;
+	color: var(--color-muted);
+}
+
+.stage-marks {
+	margin-top: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.375rem;
+}
+
+.stage-marks span {
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	color: var(--color-dimmed);
+	border: 1px solid var(--color-line);
+	border-radius: 0.25rem;
+	padding: 0.1875rem 0.5rem;
+	background: var(--color-surface);
+}
+
+/* ═══ Capability grid ════════════════════════════════════════════════════ */
+
+.cap-grid {
+	max-width: var(--content);
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1px;
+	background: var(--color-line);
+	border: 1px solid var(--color-line);
+	border-radius: 0.875rem;
+	overflow: hidden;
+}
+
+@media (max-width: 900px) {
+	.cap-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 560px) {
+	.cap-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.cap-cell {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	padding: 2rem;
+	background: var(--color-app);
+	transition: background 180ms;
+}
+
+.cap-cell:hover {
+	background: var(--color-surface);
+}
+
+.cap-cell :global(.cap-icon) {
+	width: 1.25rem;
+	height: 1.25rem;
+	color: var(--color-accent);
+}
+
+.cap-cell h3 {
+	font-size: 1rem;
+	font-weight: 700;
+	letter-spacing: -0.015em;
+}
+
+.cap-cell p {
+	font-size: 0.875rem;
+	line-height: 1.7;
+	color: var(--color-muted);
+}
+
+/* ═══ Principles ═════════════════════════════════════════════════════════ */
+
+.principle-grid {
+	max-width: var(--content);
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2.5rem 3rem;
+}
+
+@media (max-width: 720px) {
+	.principle-grid {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+}
+
+.principle-cell {
+	display: flex;
+	gap: 1rem;
+}
+
+.principle-cell :global(.principle-icon) {
+	width: 1.125rem;
+	height: 1.125rem;
+	margin-top: 0.25rem;
+	flex-shrink: 0;
+	color: var(--color-accent);
+}
+
+.principle-cell h3 {
+	font-size: 1rem;
+	font-weight: 700;
+	letter-spacing: -0.015em;
+}
+
+.principle-cell p {
+	margin-top: 0.5rem;
+	font-size: 0.9375rem;
+	line-height: 1.7;
+	color: var(--color-muted);
+}
+
+/* ═══ Closer ═════════════════════════════════════════════════════════════ */
+
+.closer {
+	padding: clamp(4.5rem, 10vw, 8rem) var(--gutter);
+	max-width: 44rem;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.closer-heat {
+	margin-top: 0;
+	margin-bottom: 3rem;
+}
+
+.closer h2 {
+	font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+	font-weight: 900;
+	line-height: 1.08;
+	letter-spacing: -0.025em;
+	text-wrap: balance;
+}
+
+.closer > p {
+	margin-top: 1.25rem;
+	font-size: 1rem;
+	line-height: 1.7;
+	color: var(--color-muted);
+}
+
+.closer-actions {
+	margin-top: 2.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+	flex-wrap: wrap;
+}
+
+/* ═══ Footer ═══════════════════════════════════════════════════════════ */
+
+.site-footer {
+	margin-top: auto;
+	border-top: 1px solid var(--color-line);
+	padding: 4rem var(--gutter) 1.75rem;
+}
+
+/* One centred identity block — the site navigation is not repeated here. */
+.footer-identity {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 0.5rem;
+}
+
+.footer-word {
+	font-size: 1.125rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+.footer-word em {
+	font-style: normal;
+	color: var(--color-accent);
+}
+
+.footer-line {
+	font-size: 0.9375rem;
+	color: var(--color-muted);
+}
+
+.footer-company {
+	font-size: 0.8125rem;
+	color: var(--color-dimmed);
+}
+
+.footer-company a {
+	color: var(--color-muted);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-color: var(--color-line-strong);
+	transition: color 160ms;
+}
+
+.footer-company a:hover {
+	color: var(--color-accent);
+}
+
+.footer-links {
+	margin-top: 1.25rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.375rem 1.5rem;
+}
+
+.footer-links a {
+	font-size: 0.8125rem;
+	color: var(--color-muted);
+	text-decoration: none;
+	transition: color 160ms;
+}
+
+.footer-links a:hover {
+	color: var(--color-foreground);
+}
+
+.footer-base {
+	max-width: 78rem;
+	margin: 3rem auto 0;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--color-line);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	font-size: 0.75rem;
+	color: var(--color-dimmed);
+}
+
+.footer-lifecycle {
+	font-family: var(--font-mono);
+}
+
+@media (max-width: 560px) {
+	.footer-base {
+		flex-direction: column;
+		text-align: center;
+	}
+}
+
+/* ═══ Reveal ═════════════════════════════════════════════════════════════ */
+
+/* Gated behind the `js` class the layout sets on <html>. Without scripting the
+   content is simply visible — a reveal animation must never be the reason a
+   section cannot be read. */
+.js .reveal {
+	opacity: 0;
+	transform: translateY(16px);
+	transition:
+		opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+		transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js .reveal.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.js .reveal {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+/* ═══ Hero entrance ══════════════════════════════════════════════════════ */
+/* A short staggered rise on load. `--d` carries the per-element delay. */
+
+.js .anim {
+	opacity: 0;
+	animation: rise 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	animation-delay: var(--d, 0ms);
+}
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ═══ Hero harness strip ═════════════════════════════════════════════════ */
+
+.hero-harnesses {
+	margin-top: 3.25rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.125rem;
+}
+
+.hero-harnesses p {
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--color-dimmed);
+}
+
+.hero-harnesses ul {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.625rem;
+}
+
+/* Four vendors ship a complete app tile with their own background; two ship a
+   bare glyph. Tiles render full-bleed, glyphs sit on a surface chip, and both
+   end up the same size so the row reads as one set. */
+.hero-harnesses li {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 3.25rem;
+	height: 3.25rem;
+	border-radius: 0.75rem;
+	overflow: hidden;
+	transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-harnesses li:hover {
+	transform: translateY(-3px);
+}
+
+.hero-harnesses li.is-glyph {
+	border: 1px solid var(--color-line);
+	background: var(--color-surface);
+	transition:
+		transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+		border-color 220ms,
+		background 220ms;
+}
+
+.hero-harnesses li.is-glyph:hover {
+	border-color: var(--color-line-strong);
+	background: var(--color-elevated);
+}
+
+.hero-harnesses li.is-tile img {
+	width: 100%;
+	height: 100%;
+}
+
+.hero-harnesses li.is-glyph img {
+	width: 1.625rem;
+	height: 1.625rem;
+	object-fit: contain;
+}
+
+/* ═══ Nav download CTA ═══════════════════════════════════════════════════ */
+
+.nav-links .nav-cta {
+	margin-left: 0.5rem;
+	padding: 0.375rem 0.875rem;
+	border: 1px solid var(--color-line-strong);
+	border-radius: 2px;
+	color: var(--color-foreground);
+	font-weight: 600;
+	transition:
+		background 160ms,
+		border-color 160ms;
+}
+
+.nav-links .nav-cta:hover {
+	background: var(--color-elevated);
+	border-color: var(--color-muted);
+}
+
+/* ═══ Download page ══════════════════════════════════════════════════════ */
+
+.dl {
+	--gutter: clamp(1.25rem, 5vw, 3rem);
+	max-width: 60rem;
+	margin: 0 auto;
+	padding: clamp(3rem, 7vw, 5rem) var(--gutter) clamp(4rem, 8vw, 6rem);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.dl-heat {
+	margin-top: 0;
+	margin-bottom: 2.5rem;
+	max-width: 24rem;
+}
+
+.dl h1 {
+	font-size: clamp(2rem, 5vw, 3rem);
+	font-weight: 900;
+	letter-spacing: -0.03em;
+	line-height: 1.05;
+}
+
+.dl-lead {
+	margin-top: 1.25rem;
+	max-width: 36rem;
+	font-size: 1rem;
+	line-height: 1.7;
+	color: var(--color-muted);
+}
+
+.dl-grid {
+	margin-top: 3rem;
+	width: 100%;
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1px;
+	background: var(--color-line);
+	border: 1px solid var(--color-line);
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+@media (max-width: 700px) {
+	.dl-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.dl-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.625rem;
+	height: 100%;
+	padding: 2rem 1.5rem;
+	background: var(--color-app);
+	color: inherit;
+	text-decoration: none;
+	transition: background 180ms;
+}
+
+.dl-card:hover {
+	background: var(--color-surface);
+}
+
+.dl-card :global(svg) {
+	color: var(--color-foreground);
+}
+
+.dl-os {
+	font-size: 1rem;
+	font-weight: 700;
+	letter-spacing: -0.015em;
+}
+
+.dl-card code {
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	color: var(--color-dimmed);
+}
+
+.dl-go {
+	margin-top: 0.5rem;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: var(--color-accent);
+}
+
+.dl-go :global(svg) {
+	width: 0.875rem;
+	height: 0.875rem;
+	color: var(--color-accent);
+}
+
+.dl-meta {
+	margin-top: 1.5rem;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.75rem;
+	font-size: 0.8125rem;
+	color: var(--color-dimmed);
+}
+
+.dl-meta a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.375rem;
+	color: var(--color-muted);
+	text-decoration: none;
+	transition: color 160ms;
+}
+
+.dl-meta a:hover {
+	color: var(--color-foreground);
+}
+
+.dl-reqs {
+	margin-top: 4rem;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+	text-align: left;
+}
+
+@media (max-width: 700px) {
+	.dl-reqs {
+		grid-template-columns: 1fr;
+	}
+}
+
+.dl-reqs article {
+	display: flex;
+	gap: 1rem;
+}
+
+.dl-reqs :global(.dl-req-icon) {
+	width: 1.125rem;
+	height: 1.125rem;
+	margin-top: 0.25rem;
+	flex-shrink: 0;
+	color: var(--color-accent);
+}
+
+.dl-reqs h2 {
+	font-size: 1rem;
+	font-weight: 700;
+	letter-spacing: -0.015em;
+}
+
+.dl-reqs p {
+	margin-top: 0.5rem;
+	font-size: 0.9375rem;
+	line-height: 1.7;
+	color: var(--color-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.js .anim {
+		opacity: 1;
+		animation: none;
+	}
+
+	.hero-harnesses li:hover {
+		transform: none;
+	}
+}
+
+/* ═══ Prose pages (privacy, policies) ════════════════════════════════════ */
+
+.prose-page {
+	--gutter: clamp(1.25rem, 5vw, 3rem);
+	max-width: 44rem;
+	margin: 0 auto;
+	padding: clamp(3rem, 7vw, 5rem) var(--gutter) clamp(4rem, 8vw, 6rem);
+}
+
+.prose-page h1 {
+	font-size: clamp(2rem, 5vw, 2.75rem);
+	font-weight: 900;
+	letter-spacing: -0.03em;
+}
+
+.prose-meta {
+	margin-top: 0.625rem;
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--color-dimmed);
+}
+
+.prose-lead {
+	margin-top: 2rem;
+	font-size: 1.0625rem;
+	line-height: 1.7;
+	color: var(--color-foreground-dim);
+}
+
+.prose-page h2 {
+	margin-top: 2.5rem;
+	font-size: 1.0625rem;
+	font-weight: 700;
+	letter-spacing: -0.015em;
+}
+
+.prose-page p {
+	margin-top: 0.875rem;
+	font-size: 0.9375rem;
+	line-height: 1.75;
+	color: var(--color-muted);
+}
+
+.prose-page a {
+	color: var(--color-foreground);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-color: var(--color-line-strong);
+	transition: text-decoration-color 160ms;
+}
+
+.prose-page a:hover {
+	text-decoration-color: var(--color-accent);
+}

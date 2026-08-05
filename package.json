@@ -1,0 +1,5 @@
+{
+  "name": "codeinoven-website",
+  "private": true,
+  "workspaces": ["apps/*"]
+}
