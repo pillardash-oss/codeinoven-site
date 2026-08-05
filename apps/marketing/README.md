@@ -1,6 +1,6 @@
 # CodeInOven — Marketing Site
 
-The public marketing site for [CodeInOven](https://codeinoven.dev) — a desktop
+The public marketing site for [CodeInOven](https://codeinoven.com) — a desktop
 workstation for coordinated agentic software engineering.
 
 Built with SvelteKit (Svelte 5, runes) + Tailwind CSS v4, following the brand
