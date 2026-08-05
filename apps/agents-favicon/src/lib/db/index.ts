@@ -1,8 +1,8 @@
 import path from 'node:path';
 import fs from 'node:fs';
-import Database from 'better-sqlite3';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
-import { migrate } from 'drizzle-orm/better-sqlite3/migrator';
+import { Database } from 'bun:sqlite';
+import { drizzle } from 'drizzle-orm/bun-sqlite';
+import { migrate } from 'drizzle-orm/bun-sqlite/migrator';
 import * as schema from './schema';
 
 /**
@@ -16,8 +16,8 @@ export const DB_PATH = path.join(DATA_DIR, 'icons.db');
 fs.mkdirSync(ICONS_DIR, { recursive: true });
 
 const sqlite = new Database(DB_PATH);
-sqlite.pragma('journal_mode = WAL');
-sqlite.pragma('foreign_keys = ON');
+sqlite.exec('PRAGMA journal_mode = WAL');
+sqlite.exec('PRAGMA foreign_keys = ON');
 
 export const db = drizzle(sqlite, { schema });
 

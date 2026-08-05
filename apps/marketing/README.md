@@ -33,4 +33,4 @@ docker compose -f apps/marketing/docker-compose.yml up --build
 
 The image is `nginx:alpine` serving the static adapter output on port 80 with
 an SPA fallback. On Coolify, point a Docker Compose resource at the repo root
-with `dockerfile: apps/marketing/Dockerfile`.
+with `dockerfile: Dockerfile.marketing`.

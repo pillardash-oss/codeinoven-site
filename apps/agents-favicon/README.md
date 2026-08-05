@@ -63,22 +63,22 @@ the same official source. A failed crawl never removes a working icon.
 ## Deployment (Docker / Coolify)
 
 This app lives in a monorepo workspace (`apps/agents-favicon`). The Docker
-build context is the **repo root**, so point the build at the root with the
-app's Dockerfile:
+build context is the **repo root**, with a single root-level Dockerfile:
 
 ```sh
 docker compose -f apps/agents-favicon/docker-compose.yml up --build
 ```
 
-The container runs seed on boot, schedules a daily crawl via busybox crond,
-and serves on port 3000 as the non-root `appuser`. `/app/data` must be a
-persistent volume.
+The image is a two-stage Bun build (the pillardash pattern): the seeded
+registry is baked in at build time, the seeded DB is copied from the build
+stage into `/app/data`, and Bun serves the adapter-node bundle on port 3000.
+A named volume keeps icons + SQLite across redeploys (Docker copies the baked
+seed into the volume on first boot).
 
 On Coolify: create a Docker Compose resource pointing at this repo with
-`dockerfile: apps/agents-favicon/Dockerfile`, set `ORIGIN` to the public URL,
-and keep the `icons-data` volume. To use a Coolify scheduled task instead of
-the built-in cron, set `ENABLE_CRON=false` and schedule
-`cd /app/apps/agents-favicon && npm run crawl` daily in the container.
+`dockerfile: Dockerfile.favicon`, set `ORIGIN` to the public URL, and keep the
+`icons-data` volume. To refresh icons, schedule a crawl in the container:
+`cd /app/apps/agents-favicon && bun run crawl`.
 
 Optional `PUBLIC_SUBMISSIONS_URL` controls the "Open a submission issue" button
 target (defaults to the project GitHub issues page).
