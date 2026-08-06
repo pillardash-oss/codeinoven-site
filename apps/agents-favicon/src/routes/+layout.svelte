@@ -8,7 +8,6 @@
 </script>
 
 <svelte:head>
-  <link rel="icon" href="https://codeinoven.com/favicon.ico" />
   <title>Favicons — icons for AI coding agents</title>
   <meta
     name="description"
