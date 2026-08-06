@@ -1,47 +1,46 @@
 <script lang="ts">
-	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
-	import { Toaster } from '$lib/components/ui/sonner';
-	import SiteHeader from '$lib/components/site/site-header.svelte';
-	import SiteFooter from '$lib/components/site/site-footer.svelte';
+  import "./layout.css";
+  import { Toaster } from "$lib/components/ui/sonner";
+  import SiteHeader from "$lib/components/site/site-header.svelte";
+  import SiteFooter from "$lib/components/site/site-footer.svelte";
 
-	let { children } = $props();
+  let { children } = $props();
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
-	<title>Favicons — icons for AI coding agents</title>
-	<meta
-		name="description"
-		content="A curated, daily-refreshed directory of icons for AI coding agents and agentic developer tools. Copy SVG, download originals, or use the JSON API."
-	/>
-	<meta property="og:title" content="Favicons — icons for AI coding agents" />
-	<meta
-		property="og:description"
-		content="A curated, daily-refreshed directory of icons for AI coding agents and agentic developer tools."
-	/>
-	<meta property="og:type" content="website" />
-	<meta property="og:locale" content="en_US" />
-	<meta property="og:image" content="/meta.webp" />
-	<meta property="og:image:type" content="image/webp" />
-	<meta property="og:image:width" content="1731" />
-	<meta property="og:image:height" content="909" />
-	<meta property="og:site_name" content="Favicons" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Favicons — icons for AI coding agents" />
-	<meta
-		name="twitter:description"
-		content="A curated, daily-refreshed directory of icons for AI coding agents and agentic developer tools."
-	/>
-	<meta name="twitter:image" content="/meta.webp" />
+  <link rel="icon" href="/favicon.ico" />
+  <title>Favicons — icons for AI coding agents</title>
+  <meta
+    name="description"
+    content="A curated, daily-refreshed directory of icons for AI coding agents and agentic developer tools. Copy SVG, download originals, or use the JSON API."
+  />
+  <meta property="og:title" content="Favicons — icons for AI coding agents" />
+  <meta
+    property="og:description"
+    content="A curated, daily-refreshed directory of icons for AI coding agents and agentic developer tools."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="/meta.webp" />
+  <meta property="og:image:type" content="image/webp" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:site_name" content="Favicons" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Favicons — icons for AI coding agents" />
+  <meta
+    name="twitter:description"
+    content="A curated, daily-refreshed directory of icons for AI coding agents and agentic developer tools."
+  />
+  <meta name="twitter:image" content="/meta.webp" />
 </svelte:head>
 
 <Toaster richColors />
 
 <div class="flex min-h-svh flex-col bg-background text-foreground">
-	<SiteHeader />
-	<main class="flex-1">
-		{@render children()}
-	</main>
-	<SiteFooter />
+  <SiteHeader />
+  <main class="flex-1">
+    {@render children()}
+  </main>
+  <SiteFooter />
 </div>

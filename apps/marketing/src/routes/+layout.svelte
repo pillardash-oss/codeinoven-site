@@ -29,7 +29,7 @@
 />
 
 <svelte:head>
-	<link rel="icon" href="/favicon.svg" />
+	<link rel="icon" href="/favicon.ico" />
 	<title>CodeInOven — Coordinated agentic software engineering</title>
 	<meta name="description" content={PRODUCT.description} />
 	<meta property="og:title" content="CodeInOven — The control plane for your coding agents." />
