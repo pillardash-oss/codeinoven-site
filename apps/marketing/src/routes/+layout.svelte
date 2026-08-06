@@ -29,7 +29,6 @@
 />
 
 <svelte:head>
-  <link rel="icon" href="https://codeinoven.com/favicon.ico" />
   <title>CodeInOven — Coordinated agentic software engineering</title>
   <meta name="description" content={PRODUCT.description} />
   <meta
