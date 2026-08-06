@@ -1,5 +1,3 @@
-# Simple two-stage build for the marketing site (prerendered static output).
-
 # Build stage
 FROM oven/bun:1-slim AS builder
 
@@ -15,9 +13,17 @@ RUN bun install --frozen-lockfile
 COPY apps/marketing ./apps/marketing
 RUN bun run --cwd apps/marketing build
 
-# Serve the prerendered site as plain static files.
-FROM nginx:alpine
+# Production stage — Bun serves the SvelteKit output.
+FROM oven/bun:1-slim AS runner
 
-COPY --from=builder /app/apps/marketing/build /usr/share/nginx/html
+WORKDIR /app
 
-EXPOSE 80
+ENV NODE_ENV=production
+ENV PORT=3000
+
+COPY --from=builder /app/apps/marketing/build ./build
+COPY --from=builder /app/apps/marketing/package.json ./package.json
+
+EXPOSE 3000
+
+CMD ["bun", "./build/index.js"]
