@@ -34,13 +34,18 @@
 	<meta name="description" content={PRODUCT.description} />
 	<meta property="og:title" content="CodeInOven — The control plane for your coding agents." />
 	<meta property="og:description" content={PRODUCT.description} />
-	<meta property="og:image" content="/brand/codeinoven-logo.png" />
+	<meta property="og:type" content="website" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:image" content="/meta.webp" />
+	<meta property="og:image:type" content="image/webp" />
+	<meta property="og:image:width" content="1731" />
+	<meta property="og:image:height" content="909" />
 	<meta property="og:url" content="https://codeinoven.com" />
 	<meta property="og:site_name" content="CodeInOven" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="CodeInOven — The control plane for your coding agents." />
 	<meta name="twitter:description" content={PRODUCT.description} />
-	<meta name="twitter:image" content="/brand/codeinoven-logo.png" />
+	<meta name="twitter:image" content="/meta.webp" />
 </svelte:head>
 
 <div class="shell" class:menu-open={menuOpen}>
