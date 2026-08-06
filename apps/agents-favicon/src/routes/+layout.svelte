@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="https://codeinoven.com/favicon.ico" />
   <title>Favicons — icons for AI coding agents</title>
   <meta
     name="description"
@@ -21,7 +21,7 @@
   />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="/meta.webp" />
+  <meta property="og:image" content="https://codeinoven.com/meta.webp" />
   <meta property="og:image:type" content="image/webp" />
   <meta property="og:image:width" content="1731" />
   <meta property="og:image:height" content="909" />
@@ -32,7 +32,7 @@
     name="twitter:description"
     content="A curated, daily-refreshed directory of icons for AI coding agents and agentic developer tools."
   />
-  <meta name="twitter:image" content="/meta.webp" />
+  <meta name="twitter:image" content="https://codeinoven.com/meta.webp" />
 </svelte:head>
 
 <Toaster richColors />
