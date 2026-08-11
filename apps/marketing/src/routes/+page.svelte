@@ -9,8 +9,10 @@
 		GitBranch,
 		History,
 		LockKeyhole,
+		MonitorPlay,
 		Radio,
 		Replace,
+		ScanEye,
 		ScrollText,
 		ShieldCheck,
 		SlidersHorizontal,
@@ -55,6 +57,16 @@
 			icon: Replace,
 			title: 'One workflow, any harness',
 			body: 'OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code and more all plug in behind a single typed driver contract. Swap the engine mid-project; the threads, specs and history stay exactly where they were.'
+		},
+		{
+			icon: ScanEye,
+			title: 'Vision on any model',
+			body: 'Every agent has eyes through our image descriptor, so you can pick the cheapest text-only model and still get full image understanding. The power and price of a text model, with vision bolted on — no premium vision model required.'
+		},
+		{
+			icon: MonitorPlay,
+			title: 'Computer use, out of the box',
+			body: 'That same vision lets agents actually use the computer. They can run the project, click through the UI and test the result as they build — really trying the thing, not just writing code and hoping it works.'
 		},
 		{
 			icon: History,
@@ -182,17 +194,23 @@
 	</div>
 
 	<!-- Real capture of the running application. The app has its own window
-	     chrome, so it is shown as-is rather than inside an invented frame. -->
+	     chrome, so it is shown as-is rather than inside an invented frame.
+	     The static frame is the poster; once it loads the muted recording
+	     plays through the same shot. -->
 	<figure id="workstation" class="hero-shot reveal">
-		<img
-			src="/shots/workspace.png"
-			alt="The CodeInOven workspace: a project and thread rail on the left, an agent run in the
+		<video
+			src="/shots/workspace-hero.mp4"
+			poster="/shots/workspace.png"
+			aria-label="The CodeInOven workspace: a project and thread rail on the left, an agent run in the
 			middle showing reasoning traces and tool calls with status, and a context panel on the right."
-			width="2988"
-			height="1878"
-			fetchpriority="high"
-			decoding="async"
-		/>
+			autoplay
+			muted
+			loop
+			playsinline
+			preload="metadata"
+			width="1920"
+			height="1254"
+		></video>
 		<figcaption>
 			The actual application. Threads on the left, the run in the middle, assembled context on the
 			right.
