@@ -7,3 +7,6 @@ Thumbs.db
 !.env.test
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# CodeInOven agent scratch space (context, reports, temp work)
+.cio/
