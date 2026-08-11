@@ -5,17 +5,18 @@
 	import OsIcon from '$lib/components/os-icon.svelte';
 	import {
 		ArrowUpRight,
+		Brain,
+		Cloud,
 		FileCheck2,
-		GitBranch,
-		History,
-		LockKeyhole,
+		GitPullRequest,
 		MonitorPlay,
 		Radio,
 		Replace,
 		ScanEye,
-		ScrollText,
 		ShieldCheck,
 		SlidersHorizontal,
+		Smartphone,
+		Target,
 		TerminalSquare
 	} from '@lucide/svelte';
 
@@ -56,42 +57,47 @@
 		{
 			icon: Replace,
 			title: 'One workflow, any harness',
-			body: 'OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code and more all plug in behind a single typed driver contract. Swap the engine mid-project; the threads, specs and history stay exactly where they were.'
+			body: 'OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code and more plug in behind a single typed driver contract. Pick the engine per thread and swap mid-project — the threads, specs and history stay exactly where they were.'
 		},
 		{
 			icon: ScanEye,
 			title: 'Vision on any model',
-			body: 'Every agent has eyes through our image descriptor, so you can pick the cheapest text-only model and still get full image understanding. The power and price of a text model, with vision bolted on — no premium vision model required.'
+			body: 'Every agent sees through our image descriptor, so you can pick the cheapest text-only model and still get full image understanding. The power and price of a text model, with vision bolted on — no premium vision model required.'
 		},
 		{
 			icon: MonitorPlay,
 			title: 'Computer use, out of the box',
-			body: 'That same vision lets agents actually use the computer. They can run the project, click through the UI and test the result as they build — really trying the thing, not just writing code and hoping it works.'
+			body: 'Agents can run the project, click through the UI and test the result as they build — actually trying the thing, not just writing code and hoping it works.'
 		},
 		{
-			icon: History,
-			title: 'Chunked, atomic history',
-			body: 'Every write lands as a temp file and a rename. History is chunked and capped, pinned threads survive cleanup, and no session ends up half-written because something crashed.'
+			icon: GitPullRequest,
+			title: 'Git & pull requests, in the loop',
+			body: 'Status, diffs, staging, commits and push all live in the workspace. Open a pull request and review the change side-by-side without leaving the run you are watching.'
 		},
 		{
-			icon: GitBranch,
-			title: 'Per-thread branches',
-			body: 'Threads carry their own branch and change set. Review the diff, commit or compare from the context panel without leaving the run you are watching.'
+			icon: Cloud,
+			title: 'Cloud deployments at a glance',
+			body: 'Monitor live deployments from Coolify, Vercel, Railway, Dokploy or Netlify in the same window — watch a commit go from build to live while the agent is still working.'
 		},
 		{
-			icon: LockKeyhole,
-			title: 'Scope you can see',
-			body: 'The permission level for the current thread sits in the composer, beside the model and the thinking level. You know what the agent may do before you press send.'
+			icon: Brain,
+			title: 'A memory the agents share',
+			body: 'Durable, searchable memory with categories, priorities and per-project scope. Agents record and recall it across threads, so the next run already knows your rules.'
+		},
+		{
+			icon: Smartphone,
+			title: 'Remote from your phone',
+			body: 'One QR scan pairs your phone over an encrypted link. Keep chatting, reviewing and approving from anywhere — LAN-first, with a cloud relay when you are away.'
+		},
+		{
+			icon: Target,
+			title: 'Threads scoped to the job',
+			body: 'Scope a thread to a goal or a feature and track it on a kanban board — todo, working, done, issue, pinned. Every agent stays inside the boundary you drew.'
 		},
 		{
 			icon: TerminalSquare,
 			title: 'A real terminal, attached',
 			body: 'A PTY-backed terminal lives beside the conversation, so the commands an agent runs and the commands you run share one machine and one working tree.'
-		},
-		{
-			icon: ScrollText,
-			title: 'Thinking you can read',
-			body: 'Reasoning traces, tool calls, durations and exit status render inline and stay in the record. When a run goes wrong you scroll up instead of guessing.'
 		}
 	];
 
@@ -156,8 +162,9 @@
 		</h1>
 
 		<p class="hero-lead anim" style="--d:120ms">
-			CodeInOven is the desktop control plane that sits above your coding agents — harness-agnostic, one
-			reviewable lifecycle, one auditable record. Bring your own subscription. Fork the whole thing.
+			CodeInOven is the desktop control plane that sits above your coding agents — harness-agnostic,
+			one reviewable lifecycle, one auditable record. Git, deployments, memory and phone remote all
+			live in the same window. Bring your own subscription. Fork the whole thing.
 		</p>
 
 		<div class="hero-actions anim" style="--d:180ms">
@@ -354,16 +361,15 @@
 	<figure class="composer-shot reveal">
 		<img
 			src="/shots/composer.png"
-			alt="The CodeInOven composer, showing the current permission level set to Full Access, the
-			selected model, a Medium thinking level, and a stop control while the agent works."
+			alt="The CodeInOven composer, showing the current permission scope set to Full Access, the
+			selected model, and a stop control while the agent works."
 			width="1400"
 			height="263"
 			loading="lazy"
 			decoding="async"
 		/>
 		<figcaption>
-			Permission level, model and thinking level sit in the composer — visible before you send, not
-			after.
+			The permission scope sits in the composer — visible before you send, not after.
 		</figcaption>
 	</figure>
 </section>
