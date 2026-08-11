@@ -53,8 +53,8 @@
 	const capabilities = [
 		{
 			icon: Replace,
-			title: 'One workflow, six harnesses',
-			body: 'OpenCode, Codex, Claude Code, Pi, Cline and Antigravity all plug in behind a single typed driver contract. Swap the engine mid-project; the threads, specs and history stay exactly where they were.'
+			title: 'One workflow, any harness',
+			body: 'OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code and more all plug in behind a single typed driver contract. Swap the engine mid-project; the threads, specs and history stay exactly where they were.'
 		},
 		{
 			icon: History,
@@ -144,7 +144,7 @@
 		</h1>
 
 		<p class="hero-lead anim" style="--d:120ms">
-			CodeInOven is the desktop control plane that sits above your coding agents — six harnesses, one
+			CodeInOven is the desktop control plane that sits above your coding agents — harness-agnostic, one
 			reviewable lifecycle, one auditable record. Bring your own subscription. Fork the whole thing.
 		</p>
 

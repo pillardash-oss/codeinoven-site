@@ -13,7 +13,7 @@
 		{
 			icon: TerminalSquare,
 			title: 'At least one harness installed',
-			body: 'CodeInOven drives the agent CLIs already on your machine — OpenCode, Codex, Claude Code, Pi, Cline or Antigravity. It detects whatever is on your PATH at startup.'
+			body: 'CodeInOven drives the agent CLIs already on your machine — OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code and more. It detects whatever is on your PATH at startup.'
 		},
 		{
 			icon: ShieldCheck,

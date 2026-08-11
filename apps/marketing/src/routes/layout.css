@@ -1211,7 +1211,7 @@
 	gap: 0.625rem;
 }
 
-/* Four vendors ship a complete app tile with their own background; two ship a
+/* Five vendors ship a complete app tile with their own background; two ship a
    bare glyph. Tiles render full-bleed, glyphs sit on a surface chip, and both
    end up the same size so the row reads as one set. */
 .hero-harnesses li {
