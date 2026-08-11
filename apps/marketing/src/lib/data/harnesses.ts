@@ -79,6 +79,15 @@ export const HARNESSES: readonly Harness[] = [
 		customProviders: false,
 		tile: true,
 		website: 'https://antigravity.google'
+	},
+	{
+		id: 'muse-code',
+		name: 'Muse Code',
+		vendor: 'Meta',
+		command: 'muse',
+		customProviders: false,
+		tile: true,
+		website: 'https://developer.meta.com/ai/products/muse-code/'
 	}
 ];
 
