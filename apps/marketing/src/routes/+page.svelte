@@ -71,11 +71,11 @@
     {
       icon: MonitorPlay,
       title: "Computer use, out of the box",
-      body: "Agents can open your project UI and test features as they work, so changes are checked in real behavior, not only in files.",
+      body: "Agents can open your project UI and test features as they work. Changes are checked in real behavior, not just in files.",
     },
     {
       icon: GitPullRequest,
-      title: "Git & pull requests, in the loop",
+      title: "Git and pull requests stay visible",
       body: "Status, diffs, staging, commits, and pushes all stay in one place. You can review pull requests without jumping out of your current workflow.",
     },
     {
@@ -243,8 +243,8 @@
     </h2>
     <p class="section-lead">
       Most tools marry you to one agent. CodeInOven detects what is already
-      installed and drives each one the same way —
-      so the choice of engine is a practical decision, not a lock-in decision.
+      installed and drives each one the same way.
+      The choice of engine becomes a practical decision, not lock-in.
     </p>
   </div>
 

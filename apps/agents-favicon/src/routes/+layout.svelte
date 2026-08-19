@@ -8,15 +8,15 @@
 </script>
 
 <svelte:head>
-  <title>Favicons — icons for AI coding agents</title>
+  <title>Favicons: icons for AI coding agents</title>
   <meta
     name="description"
-    content="A curated, daily-refreshed directory of icons for AI coding agents and agentic developer tools. Copy SVG, download originals, or use the JSON API."
+    content="A curated directory of icons for AI coding agents and coding tools, refreshed daily. Copy SVG, download originals, or use the JSON API."
   />
-  <meta property="og:title" content="Favicons — icons for AI coding agents" />
+  <meta property="og:title" content="Favicons: icons for AI coding agents" />
   <meta
     property="og:description"
-    content="A curated, daily-refreshed directory of icons for AI coding agents and agentic developer tools."
+    content="A curated directory of icons for AI coding agents and coding tools, refreshed daily."
   />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_US" />
@@ -26,10 +26,10 @@
   <meta property="og:image:height" content="909" />
   <meta property="og:site_name" content="CodeInOven Agents Favicons" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Favicons — icons for AI coding agents" />
+  <meta name="twitter:title" content="Favicons: icons for AI coding agents" />
   <meta
     name="twitter:description"
-    content="A curated, daily-refreshed directory of icons for AI coding agents and agentic developer tools."
+    content="A curated directory of icons for AI coding agents and coding tools, refreshed daily."
   />
   <meta name="twitter:image" content="https://codeinoven.com/meta.webp" />
 </svelte:head>

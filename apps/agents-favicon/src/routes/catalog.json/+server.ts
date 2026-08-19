@@ -15,7 +15,7 @@ export const GET: RequestHandler = ({ url, setHeaders }) => {
 	return json({
 		name: 'Favicons',
 		description:
-			'Curated directory of icons for AI coding agents and agentic developer tools. Logos belong to their respective owners.',
+			'A daily updated directory of icons for AI coding agents and coding tools. Logos belong to their owners.',
 		baseUrl: url.origin,
 		updatedAt: lastUpdatedAt(),
 		total: entries.length,

@@ -67,10 +67,10 @@
 </script>
 
 <svelte:head>
-	<title>{agent.name} icon — Favicons</title>
+	<title>{agent.name} icon | Favicons</title>
 	<meta
 		name="description"
-		content="Download the official {agent.name} icon in {agent.formats.join(', ') || 'SVG/PNG'} format, or fetch it via the JSON API."
+		content="Download the official {agent.name} icon in {agent.formats.join(', ') || 'SVG/PNG'} format or use the JSON API."
 	/>
 </svelte:head>
 
@@ -129,7 +129,7 @@
 			<Card.Root>
 				<Card.Header>
 					<Card.Title>Official links</Card.Title>
-					<Card.Description>Where this project lives</Card.Description>
+					<Card.Description>Use these links to verify the source.</Card.Description>
 				</Card.Header>
 				<Card.Content class="flex flex-col gap-3 text-sm">
 					{#if agent.websiteUrl}
@@ -157,7 +157,7 @@
 						</a>
 					{/if}
 					{#if !agent.websiteUrl && !agent.githubUrl}
-						<p class="text-muted-foreground">No links recorded.</p>
+						<p class="text-muted-foreground">No links saved.</p>
 					{/if}
 				</Card.Content>
 			</Card.Root>
@@ -165,7 +165,7 @@
 			<Card.Root>
 				<Card.Header>
 					<Card.Title>Icon provenance</Card.Title>
-					<Card.Description>Last verified {verifiedLabel}</Card.Description>
+					<Card.Description>Last verified on {verifiedLabel}</Card.Description>
 				</Card.Header>
 				<Card.Content class="flex flex-col gap-3 text-sm">
 					{#if agent.source}
@@ -181,7 +181,7 @@
 							</a>
 						</div>
 					{:else}
-						<p class="text-muted-foreground">No icon collected yet — check back after the next daily crawl.</p>
+						<p class="text-muted-foreground">No icon downloaded yet. Check again after the next daily crawl.</p>
 					{/if}
 					{#if agent.width && agent.height}
 						<div class="flex flex-col gap-1">
@@ -228,7 +228,7 @@
 		<Card.Root>
 			<Card.Header>
 				<Card.Title>API examples</Card.Title>
-				<Card.Description>Fetch this icon programmatically — no API key required</Card.Description>
+				<Card.Description>Use these commands to fetch this icon in automation.</Card.Description>
 			</Card.Header>
 			<Card.Content>
 				<Tabs.Root value={apiExamples[0].label}>

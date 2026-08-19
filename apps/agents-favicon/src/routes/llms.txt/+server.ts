@@ -11,9 +11,9 @@ export const GET: RequestHandler = ({ url, setHeaders }) => {
 
 	const body = `# Favicons
 
-> A curated, daily-refreshed directory of icons for AI coding agents and
-> agentic developer tools (Claude Code, OpenCode, Codex, Cursor, and more).
-> SVG preferred; PNG, WebP and ICO also available. All SVGs are sanitized.
+> A daily updated directory of icons for AI coding agents and coding tools
+> (Claude Code, OpenCode, Codex, Cursor, and more). SVG is the preferred format.
+> PNG, WebP, and ICO are also available. All SVG files are sanitized.
 
 Agents listed: ${entries.length} (${withIcons.length} with icons)
 Last updated: ${lastUpdatedAt() ?? 'never'}
@@ -21,14 +21,14 @@ Last updated: ${lastUpdatedAt() ?? 'never'}
 ## What this contains
 
 - Official product icons collected from each project's official website or
-  GitHub repository. The source URL of every icon is stored and published.
+  GitHub repository. We store and publish the source URL for every icon.
 - This is an icon directory, not a general-purpose search engine.
 
 ## Machine-readable endpoints
 
 - ${origin}/catalog.json
-  Full registry: every agent with name, slug, vendor, icon URL, formats,
-  source URL and verification date. Use this instead of scraping HTML.
+  Full registry with every agent name, slug, vendor, icon URL, formats,
+  source URL, and verification date. Use this instead of scraping HTML.
 - ${origin}/api/agents
   List agents. Query params: ?q=<search terms> and ?format=svg|png|webp|ico
 - ${origin}/api/agents/{slug}
@@ -54,7 +54,7 @@ Example slugs: ${withIcons.slice(0, 6).map((e) => e.agent.slug).join(', ')}
 - Icons are not necessarily freely licensed just because they are publicly
   accessible.
 
-No API key is required. Please cache responses and be gentle.
+No API key is required. Cache responses and avoid heavy repeated requests.
 `;
 
 	setHeaders({ 'cache-control': 'public, max-age=3600' });
