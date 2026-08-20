@@ -12,8 +12,8 @@
 	const requirements = [
 		{
 			icon: TerminalSquare,
-			title: 'At least one agent tool installed',
-			body: 'CodeInOven starts the agent tools already on your machine, such as OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, and Muse Code. It reads what is on your PATH at startup.'
+			title: 'At least one harness installed',
+			body: 'CodeInOven drives the agent CLIs already on your machine — OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code and more. It detects whatever is on your PATH at startup.'
 		},
 		{
 			icon: ShieldCheck,

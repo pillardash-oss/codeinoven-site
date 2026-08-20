@@ -29,29 +29,29 @@
     {
       id: "specify",
       title: "Specify",
-      lead: "Start with clear instructions, not a guess.",
-      body: "You define the goal, constraints, and checks in one place. Before the agent runs, you can review the full context you gave it and make corrections.",
+      lead: "Write the engineering specification, not a prompt.",
+      body: "Specs stay editable through inline and section annotations. Context is assembled explicitly — system, project, skills, MCPs, checklist, history — so you can see what the agent will be told before it is told.",
       marks: ["system", "project", "skills", "MCPs", "checklist", "history"],
     },
     {
       id: "review",
       title: "Review",
-      lead: "You review each step before it goes to code.",
-      body: "The agent writes a plan in the same thread first. You see each proposed change and approve only what should move forward.",
+      lead: "The human reviews. The agent implements.",
+      body: "Plans surface in the same thread as the work, with visible state transitions and a real approval gate. Nothing moves to implementation because a model felt confident about it.",
       marks: ["plan diff", "state transitions", "approve", "send back"],
     },
     {
       id: "approve",
       title: "Approve",
-      lead: "You decide what the agent can edit.",
-      body: "Permission level is always visible. Auto Review is safe by default, while full access is an explicit, manual choice.",
+      lead: "Permission is a policy, not a vibe.",
+      body: "Two levels, always on screen. Auto Review runs anything you have not explicitly denied. Full Access is the deliberate, clearly marked exception — the app calls it what it is rather than hiding it behind a friendly toggle.",
       marks: ["Auto Review", "Full Access"],
     },
     {
       id: "implement",
       title: "Implement",
-      lead: "Every run is reviewable, repeatable, and reversible.",
-      body: "After approval, changes are applied with checkpoints and clear diffs. You can replay work and rollback if needed.",
+      lead: "Runs you can replay, diff and roll back.",
+      body: "Implementation executes against the approved spec with independent audit and rework cycles. Atomic writes, chunked history, checkpoints and per-thread branches mean any session can be reconstructed later.",
       marks: ["checkpoint", "audit", "rework", "diff"],
     },
   ];
@@ -61,47 +61,47 @@
     {
       icon: Replace,
       title: "One workflow, any harness",
-      body: "Use the AI tools you already have. You can switch between OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code and others without losing your current work.",
+      body: "OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code and more plug in behind a single typed driver contract. Pick the engine per thread and swap mid-project — the threads, specs and history stay exactly where they were.",
     },
     {
       icon: ScanEye,
       title: "Vision on any model",
-      body: "Need image understanding? Add our image helper and keep using your preferred text model. You get visuals without changing your whole workflow.",
+      body: "Every agent sees through our image descriptor, so you can pick the cheapest text-only model and still get full image understanding. The power and price of a text model, with vision bolted on — no premium vision model required.",
     },
     {
       icon: MonitorPlay,
       title: "Computer use, out of the box",
-      body: "Agents can open your project UI and test features as they work. Changes are checked in real behavior, not just in files.",
+      body: "Agents can run the project, click through the UI and test the result as they build — actually trying the thing, not just writing code and hoping it works.",
     },
     {
       icon: GitPullRequest,
-      title: "Git and pull requests stay visible",
-      body: "Status, diffs, staging, commits, and pushes all stay in one place. You can review pull requests without jumping out of your current workflow.",
+      title: "Git & pull requests, in the loop",
+      body: "Status, diffs, staging, commits and push all live in the workspace. Open a pull request and review the change side-by-side without leaving the run you are watching.",
     },
     {
       icon: Cloud,
       title: "Cloud deployments at a glance",
-      body: "Watch deployments on Coolify, Vercel, Railway, Dokploy, or Netlify from the same interface, from code change to live update.",
+      body: "Monitor live deployments from Coolify, Vercel, Railway, Dokploy or Netlify in the same window — watch a commit go from build to live while the agent is still working.",
     },
     {
       icon: Brain,
       title: "A memory the agents share",
-      body: "Keep shared notes and rules per project. New runs can reuse that memory so each attempt starts from what matters.",
+      body: "Durable, searchable memory with categories, priorities and per-project scope. Agents record and recall it across threads, so the next run already knows your rules.",
     },
     {
       icon: Smartphone,
       title: "Remote from your phone",
-      body: "Pair once with a QR code. You can review and approve work from your phone whether you are local or away.",
+      body: "One QR scan pairs your phone over an encrypted link. Keep chatting, reviewing and approving from anywhere — LAN-first, with a cloud relay when you are away.",
     },
     {
       icon: Target,
       title: "Threads scoped to the job",
-      body: "Keep each run focused on one goal. The board shows todo, working, done, and issues so work stays scoped and organized.",
+      body: "Scope a thread to a goal or a feature and track it on a kanban board — todo, working, done, issue, pinned. Every agent stays inside the boundary you drew.",
     },
     {
       icon: TerminalSquare,
       title: "A real terminal, attached",
-      body: "A real terminal is available next to the conversation, so both you and the agent work from the same project folder.",
+      body: "A PTY-backed terminal lives beside the conversation, so the commands an agent runs and the commands you run share one machine and one working tree.",
     },
   ];
 
@@ -110,12 +110,12 @@
     {
       icon: Radio,
       title: "Determinism over vibes",
-      body: "If a run cannot be replayed from saved state, that is a bug we want to fix, not accepted behavior.",
+      body: "If a run cannot be replayed from persisted state, that is a bug — not a quirk of working with models.",
     },
     {
       icon: FileCheck2,
       title: "The human reviews",
-      body: "The agent proposes and executes work, but nothing lands without your approval.",
+      body: "The agent implements by default, but approval is a gate in the lifecycle, not a courtesy notification after the fact.",
     },
     {
       icon: ShieldCheck,
@@ -161,15 +161,15 @@
     </p>
 
     <h1 id="hero-title" class="hero-title anim" style="--d:60ms">
-      Your AI coding tools can start fast.<br />
-      <span class="hero-title-accent">You still keep control.</span>
+      Your agents already write the code.<br />
+      <span class="hero-title-accent">Somebody has to run the kitchen.</span>
     </h1>
 
     <p class="hero-lead anim" style="--d:120ms">
-      CodeInOven brings your existing coding agents together in one place.
-      You can review plans, approve changes, and watch Git, deployments,
-      memory, and remote sessions all in one interface. Bring your own model
-      access. Fork the project and run it your way.
+      CodeInOven is the desktop control plane that sits above your coding agents
+      — harness-agnostic, one reviewable lifecycle, one auditable record. Git,
+      deployments, memory and phone remote all live in the same window. Bring
+      your own subscription. Fork the whole thing.
     </p>
 
     <div class="hero-actions anim" style="--d:180ms">
@@ -190,7 +190,7 @@
 
     <!-- The harnesses, in their own colors, right where the claim is made. -->
     <div class="hero-harnesses anim" style="--d:300ms">
-      <p>Works with the agents you already use</p>
+      <p>Drives the agents you already have installed</p>
       <ul>
         {#each HARNESSES as harness, i (harness.id)}
           <li
@@ -224,8 +224,8 @@
       height="1254"
     ></video>
     <figcaption>
-      A video of DeepSeek implementing and testing a feature on CodeInOven using
-      the built-in app tester.
+      A video of DeepSeek V4 Flash 0731 using computer use to implement and test
+      a feature on CodeInOven
     </figcaption>
   </figure>
 </section>
@@ -243,8 +243,9 @@
     </h2>
     <p class="section-lead">
       Most tools marry you to one agent. CodeInOven detects what is already
-      installed and drives each one the same way.
-      The choice of engine becomes a practical decision, not lock-in.
+      installed on your machine and drives it through the same typed contract —
+      so the choice of engine stops being an architectural commitment and
+      becomes a dropdown.
     </p>
   </div>
 
@@ -273,8 +274,8 @@
     <div class="backend-block">
       <h3>Or point it at your own metal</h3>
       <p>
-        Any OpenAI-compatible endpoint works. These three are one-click presets;
-        everything else uses your base URL and model name.
+        Any OpenAI-compatible endpoint works. These three are one-click presets
+        — everything else is a base URL and a model id.
       </p>
       <ul class="backend-list">
         {#each LOCAL_BACKENDS as backend (backend.name)}
@@ -300,8 +301,9 @@
     <div class="backend-block">
       <h3>Or the hosted ones you already pay for</h3>
       <p>
-        Sign in through the harness account or add a key. Credentials stay in that
-        harness config; CodeInOven does not proxy your requests.
+        Sign in through the harness's own account, or bring a key. Credentials
+        stay in the harness's config where they belong — CodeInOven does not
+        proxy your traffic.
       </p>
       <ul class="provider-wall">
         {#each HOSTED_PROVIDERS as provider (provider)}
@@ -328,8 +330,8 @@
     <p class="kicker">The lifecycle</p>
     <h2 id="lifecycle-title">Four stages. No silent jumps between them.</h2>
     <p class="section-lead">
-      A normal chat can hide when a suggestion becomes real code. CodeInOven
-      makes that moment a clear, step-by-step check you cannot skip.
+      A chat window hides the moment a suggestion becomes a change. CodeInOven
+      makes that moment a stage you have to walk through.
     </p>
   </div>
 
@@ -364,7 +366,8 @@
       decoding="async"
     />
     <figcaption>
-      Reasoning, commands, timing, and results stay visible, not hidden in logs.
+      Reasoning, tool calls, durations and exit status — inline, and still there
+      tomorrow.
     </figcaption>
   </figure>
 </section>
@@ -378,7 +381,7 @@
   <div class="section-head">
     <p class="kicker">The workstation</p>
     <h2 id="capabilities-title">
-      Built for daily work, not marketing
+      Built like an instrument, not a landing page
     </h2>
   </div>
 
@@ -403,7 +406,8 @@
       decoding="async"
     />
     <figcaption>
-      Permission level is always visible before you start a run.
+      The permission scope sits in the composer — visible before you send, not
+      after.
     </figcaption>
   </figure>
 </section>
@@ -439,8 +443,9 @@
   </div>
   <h2 id="closer-title">Your agents. Your models. Your machine.</h2>
   <p>
-    CodeInOven runs on your desktop, works with your current setup, and keeps
-    every run easy to review, even after the chat is done.
+    CodeInOven runs on your desktop, drives the harnesses you already have
+    installed, and keeps every run reviewable long after the conversation
+    scrolls away.
   </p>
   <div class="closer-actions">
     <a class="button" href="/download">
