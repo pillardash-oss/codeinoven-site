@@ -5,15 +5,15 @@
 </script>
 
 <svelte:head>
-	<title>About — Favicons</title>
+	<title>About | Favicons</title>
 </svelte:head>
 
 <div class="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-12">
 	<div class="flex flex-col gap-3">
 		<h1 class="text-3xl font-bold tracking-tight">About</h1>
 		<p class="text-muted-foreground">
-			Favicons is a small public directory of icons for AI coding agents and agentic
-			developer tools — Claude Code, OpenCode, Codex, Cursor, Gemini CLI and friends.
+			Favicons is a public directory of icons for AI coding agents, including Claude Code,
+			OpenCode, Codex, Cursor, Gemini CLI, and many more.
 		</p>
 	</div>
 
@@ -24,18 +24,17 @@
 			</Card.Header>
 			<Card.Content class="flex flex-col gap-3 text-muted-foreground">
 				<p>
-					The agent list is curated by hand. A crawler runs once per day and only visits sources
-					registered for each agent: the official GitHub repository, the official product
-					website, or a manually approved icon URL.
+					The list is manually curated. A crawler runs once per day and only visits source links
+					we keep for each entry: the official GitHub repo, the official website, or a
+					manually approved icon URL.
 				</p>
 				<p>
-					SVG is preferred; PNG, WebP and ICO are accepted. Every scraped SVG is sanitized before
-					it is served — scripts, event handlers, external resources and embedded HTML are
-					removed. A 256×256 PNG preview is generated for every icon, and a SHA-256 hash is
-					stored for change detection.
+					We prefer SVG. PNG, WebP, and ICO are accepted. We strip scripts and embedded
+					html from every SVG before serving it. We also generate a 256x256 PNG preview and keep
+					a SHA-256 hash to detect changes.
 				</p>
 				<p>
-					A failed crawl never removes a working icon: the last valid file is always retained.
+					If a crawl fails, we keep the last working icon instead of removing it.
 				</p>
 			</Card.Content>
 		</Card.Root>
@@ -46,9 +45,8 @@
 			</Card.Header>
 			<Card.Content class="text-muted-foreground">
 				<p>
-					This is an icon directory, not a general-purpose search engine. There is no
-					internet-wide discovery, no AI logo recognition, and no automatic publishing of
-					unverified third-party sources.
+					This is an icon directory, not a general search engine. We do not do internet-wide
+					discovery, logo recognition, or automatic publishing from unverified sources.
 				</p>
 			</Card.Content>
 		</Card.Root>

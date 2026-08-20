@@ -17,31 +17,30 @@
 </script>
 
 <svelte:head>
-	<title>Submit an agent — Favicons</title>
+	<title>Submit an agent | Favicons</title>
 </svelte:head>
 
 <div class="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-12">
 	<div class="flex flex-col gap-3">
 		<h1 class="text-3xl font-bold tracking-tight">Submit an agent</h1>
 		<p class="text-muted-foreground">
-			Missing an AI coding agent or agentic developer tool? New applications are added manually
-			to keep the directory curated and reliable.
+			Missing a coding agent icon? Send the official source so we can add it.
 		</p>
 	</div>
 
 	<Card.Root>
 		<Card.Header>
-			<Card.Title>What we need</Card.Title>
+			<Card.Title>What to include</Card.Title>
 			<Card.Description>
-				Each entry needs an official website, a GitHub repository, or both.
+				Each submission needs one official website or repo.
 			</Card.Description>
 		</Card.Header>
 		<Card.Content class="flex flex-col gap-4">
 			<pre
 				class="overflow-x-auto rounded-lg border bg-muted/40 p-4 font-mono text-xs leading-relaxed">{exampleSubmission}</pre>
 			<p class="text-sm text-muted-foreground">
-				Once accepted, the daily crawler automatically finds and refreshes the icon from the
-				official sources you provide.
+				Once we accept it, the daily crawler fetches and refreshes the icon from your
+				sources.
 			</p>
 		</Card.Content>
 		<Card.Footer>
@@ -53,7 +52,6 @@
 	</Card.Root>
 
 	<p class="text-sm text-muted-foreground">
-		Only agents with identifiable official sources are accepted. Icons from random third-party
-		logo websites are never used.
+		Only agents with clear official sources are accepted. We do not use third-party logo sites.
 	</p>
 </div>

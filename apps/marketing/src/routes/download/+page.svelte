@@ -18,14 +18,14 @@
 		{
 			icon: ShieldCheck,
 			title: 'Your own model access',
-			body: 'Sign in through the harness, or point a custom base URL at Ollama, LM Studio or llama.cpp. CodeInOven never proxies your traffic and never resells tokens.'
+			body: 'Sign in with your current harness, or point a custom base URL at Ollama, LM Studio, or llama.cpp. CodeInOven does not proxy your traffic and does not resell tokens.'
 		}
 	];
 </script>
 
 <svelte:head>
 	<title>Download CodeInOven</title>
-	<meta name="description" content="Download CodeInOven for macOS, Windows and Linux. {PRODUCT.tagline}" />
+	<meta name="description" content="Download CodeInOven for macOS, Windows, and Linux. {PRODUCT.tagline}" />
 </svelte:head>
 
 <section class="dl">
@@ -34,7 +34,7 @@
 	<h1>Download CodeInOven</h1>
 	<p class="dl-lead">
 		Every button below opens the latest published release on GitHub. Pick the artifact for your
-		platform — there is no installer script, no account, and no telemetry gate.
+		platform. There is no installer script, no account, and no telemetry gate.
 	</p>
 
 	<ul class="dl-grid">

@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>Privacy — CodeInOven</title>
+	<title>Privacy | CodeInOven</title>
 	<meta name="description" content="How CodeInOven handles your data. Short version: it stays on your machine." />
 </svelte:head>
 
@@ -25,9 +25,9 @@
 
 	<h2>The application</h2>
 	<p>
-		{PRODUCT.name} stores its own state — projects, threads, specifications, history and checkpoints
-		— in its configuration directory on your computer. It does not upload that state anywhere, and
-		it does not write into your repository uninvited.
+		{PRODUCT.name} stores its own state in its configuration directory on your computer. That
+		state includes projects, threads, specifications, history, and checkpoints. It does not
+		upload data anywhere.
 	</p>
 	<p>
 		When you run an agent, {PRODUCT.name} invokes a coding harness that is already installed on your

@@ -47,8 +47,8 @@
 			Icons for AI coding agents
 		</h1>
 		<p class="max-w-xl text-lg text-muted-foreground text-balance">
-			A curated directory of official icons for agentic developer tools, refreshed daily from
-			official websites and repositories. Copy SVG, download originals, or use the JSON API.
+			A curated directory of official icons for AI coding agents. The site refreshes daily from
+			official websites and repositories. You can copy SVG, download originals, or use the JSON API.
 		</p>
 		<div class="relative w-full max-w-md">
 			<SearchIcon
@@ -100,7 +100,7 @@
 				</Empty.Media>
 				<Empty.Title>No agents found</Empty.Title>
 				<Empty.Description>
-					No agents match “{query}”. Try a different search, or
+					No agents match "{query}". Try a different search, or
 					<a href="/submissions" class="underline underline-offset-4">submit a missing agent</a>.
 				</Empty.Description>
 			</Empty.Header>

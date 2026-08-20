@@ -29,11 +29,11 @@
 />
 
 <svelte:head>
-  <title>CodeInOven — Coordinated agentic software engineering</title>
+  <title>CodeInOven: Your AI coding work, under control</title>
   <meta name="description" content={PRODUCT.description} />
   <meta
     property="og:title"
-    content="CodeInOven — The control plane for your coding agents."
+    content="CodeInOven: Your AI coding work, under control."
   />
   <meta property="og:description" content={PRODUCT.description} />
   <meta property="og:type" content="website" />
@@ -47,7 +47,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta
     name="twitter:title"
-    content="CodeInOven — The control plane for your coding agents."
+    content="CodeInOven: Your AI coding work, under control."
   />
   <meta name="twitter:description" content={PRODUCT.description} />
   <meta name="twitter:image" content="https://codeinoven.com/meta.webp" />
@@ -55,7 +55,7 @@
 
 <div class="shell" class:menu-open={menuOpen}>
   <header class="nav">
-    <a class="brand" aria-label="CodeInOven — home" href="/" onclick={close}>
+      <a class="brand" aria-label="CodeInOven home" href="/" onclick={close}>
       <BrandMark size={26} />
       <span class="brand-word">Code<em>In</em>Oven</span>
     </a>
