@@ -33,7 +33,12 @@
     alternateName: [COMPANY.shortName],
     url: COMPANY.url,
     logo: `${SITE_URL}/brand/codeinoven-logo.png`,
-    sameAs: [LINKS.github]
+    sameAs: [LINKS.github],
+    parentOrganization: {
+      '@type': 'Organization',
+      name: 'Pillardash Solutions Limited',
+      url: 'https://pillardash.com'
+    }
   };
 
   const websiteSchema = {
