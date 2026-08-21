@@ -29,29 +29,29 @@
     {
       id: "specify",
       title: "Specify",
-      lead: "Start with clear instructions, not a guess.",
-      body: "You define the goal, constraints, and checks in one place. Before the agent runs, you can review the full context you gave it and make corrections.",
+      lead: "Describe the job.",
+      body: "Goal, constraints, and checks in one place. You can read back the exact context the agent gets before it runs.",
       marks: ["system", "project", "skills", "MCPs", "checklist", "history"],
     },
     {
       id: "review",
       title: "Review",
-      lead: "You review each step before it goes to code.",
-      body: "The agent writes a plan in the same thread first. You see each proposed change and approve only what should move forward.",
+      lead: "Read the plan before it becomes code.",
+      body: "The agent writes a plan in the thread first. Each proposed change is shown separately, and you approve what moves forward.",
       marks: ["plan diff", "state transitions", "approve", "send back"],
     },
     {
       id: "approve",
       title: "Approve",
-      lead: "You decide what the agent can edit.",
-      body: "Permission level is always visible. Auto Review is safe by default, while full access is an explicit, manual choice.",
+      lead: "Set what the agent may touch.",
+      body: "The permission level is always visible. Auto Review is the default; full access has to be turned on by hand.",
       marks: ["Auto Review", "Full Access"],
     },
     {
       id: "implement",
       title: "Implement",
-      lead: "Every run is reviewable, repeatable, and reversible.",
-      body: "After approval, changes are applied with checkpoints and clear diffs. You can replay work and rollback if needed.",
+      lead: "Then it runs.",
+      body: "Changes land with checkpoints and diffs. Any run can be replayed or rolled back.",
       marks: ["checkpoint", "audit", "rework", "diff"],
     },
   ];
@@ -61,47 +61,47 @@
     {
       icon: Replace,
       title: "One workflow, any harness",
-      body: "Use the AI tools you already have. You can switch between OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code and others without losing your current work.",
+      body: "OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code, and more. Switching harnesses keeps your current work.",
     },
     {
       icon: ScanEye,
       title: "Vision on any model",
-      body: "Need image understanding? Add our image helper and keep using your preferred text model. You get visuals without changing your whole workflow.",
+      body: "Add the image helper when a task needs screenshots or mockups understood. You keep the text model you already use.",
     },
     {
       icon: MonitorPlay,
       title: "Computer use, out of the box",
-      body: "Agents can open your project UI and test features as they work. Changes are checked in real behavior, not just in files.",
+      body: "Agents open your project UI and test what they build against real behavior, not just the files they wrote.",
     },
     {
       icon: GitPullRequest,
       title: "Git and pull requests stay visible",
-      body: "Status, diffs, staging, commits, and pushes all stay in one place. You can review pull requests without jumping out of your current workflow.",
+      body: "Status, diffs, staging, commits, pushes, and pull requests live in the same view as the conversation.",
     },
     {
       icon: Cloud,
       title: "Cloud deployments at a glance",
-      body: "Watch deployments on Coolify, Vercel, Railway, Dokploy, or Netlify from the same interface, from code change to live update.",
+      body: "Deployments on Coolify, Vercel, Railway, Dokploy, and Netlify, from code change to live update.",
     },
     {
       icon: Brain,
       title: "A memory the agents share",
-      body: "Keep shared notes and rules per project. New runs can reuse that memory so each attempt starts from what matters.",
+      body: "Per-project notes and rules that every new run picks up.",
     },
     {
       icon: Smartphone,
       title: "Remote from your phone",
-      body: "Pair once with a QR code. You can review and approve work from your phone whether you are local or away.",
+      body: "Pair once with a QR code, then review and approve from anywhere.",
     },
     {
       icon: Target,
       title: "Threads scoped to the job",
-      body: "Keep each run focused on one goal. The board shows todo, working, done, and issues so work stays scoped and organized.",
+      body: "One goal per thread, tracked on a board: todo, working, done, issues.",
     },
     {
       icon: TerminalSquare,
       title: "A real terminal, attached",
-      body: "A real terminal is available next to the conversation, so both you and the agent work from the same project folder.",
+      body: "It sits next to the conversation and points at the same project folder, so you and the agent see the same files.",
     },
   ];
 
@@ -110,22 +110,22 @@
     {
       icon: Radio,
       title: "Determinism over vibes",
-      body: "If a run cannot be replayed from saved state, that is a bug we want to fix, not accepted behavior.",
+      body: "Every run replays from saved state. If one cannot, that is a bug.",
     },
     {
       icon: FileCheck2,
       title: "The human reviews",
-      body: "The agent proposes and executes work, but nothing lands without your approval.",
+      body: "The agent proposes and executes. Nothing lands without your approval.",
     },
     {
       icon: ShieldCheck,
       title: "Never touch what is not yours",
-      body: "CodeInOven keeps its own state in its own config directory. It does not write uninvited into your repository.",
+      body: "CodeInOven keeps its state in its own config directory and writes nothing uninvited into your repository.",
     },
     {
       icon: SlidersHorizontal,
       title: "Bounded on purpose",
-      body: "Threads, history chunks and checkpoints are all capped. Growth is a decision you make, never something that happens to you.",
+      body: "Threads, history chunks, and checkpoints are capped. Growth is a decision, not drift.",
     },
   ];
 
@@ -161,15 +161,15 @@
     </p>
 
     <h1 id="hero-title" class="hero-title anim" style="--d:60ms">
-      Your AI coding tools can start fast.<br />
-      <span class="hero-title-accent">You still keep control.</span>
+      One place to run your<br />
+      <span class="hero-title-accent">AI coding agents.</span>
     </h1>
 
     <p class="hero-lead anim" style="--d:120ms">
-      CodeInOven brings your existing coding agents together in one place.
-      You can review plans, approve changes, and watch Git, deployments,
-      memory, and remote sessions all in one interface. Bring your own model
-      access. Fork the project and run it your way.
+      CodeInOven is a desktop app that runs OpenCode, Claude Code, Codex, and
+      other agents in one window. Every change passes through a plan you
+      review and approve before it reaches your code. Bring your own model
+      access.
     </p>
 
     <div class="hero-actions anim" style="--d:180ms">
@@ -238,13 +238,10 @@
 >
   <div class="section-head">
     <p class="kicker">The matrix</p>
-    <h2 id="harnesses-title">
-      Bring your own harness. All of them, if you like.
-    </h2>
+    <h2 id="harnesses-title">Bring your own agent.</h2>
     <p class="section-lead">
-      Most tools marry you to one agent. CodeInOven detects what is already
-      installed and drives each one the same way.
-      The choice of engine becomes a practical decision, not lock-in.
+      CodeInOven detects what is installed and drives every harness the same
+      way. Switching engines does not mean starting over.
     </p>
   </div>
 
@@ -271,10 +268,10 @@
 
   <div class="backend-split">
     <div class="backend-block">
-      <h3>Or point it at your own metal</h3>
+      <h3>Or your own backend</h3>
       <p>
-        Any OpenAI-compatible endpoint works. These three are one-click presets;
-        everything else uses your base URL and model name.
+        Any OpenAI-compatible endpoint works. These three are presets;
+        everything else takes a base URL and a model name.
       </p>
       <ul class="backend-list">
         {#each LOCAL_BACKENDS as backend (backend.name)}
@@ -326,10 +323,10 @@
 >
   <div class="section-head">
     <p class="kicker">The lifecycle</p>
-    <h2 id="lifecycle-title">Four stages. No silent jumps between them.</h2>
+    <h2 id="lifecycle-title">Four stages, no silent steps.</h2>
     <p class="section-lead">
-      A normal chat can hide when a suggestion becomes real code. CodeInOven
-      makes that moment a clear, step-by-step check you cannot skip.
+      In a normal chat you cannot tell when a suggestion became code. Here,
+      that moment is a step you approve.
     </p>
   </div>
 
@@ -364,7 +361,7 @@
       decoding="async"
     />
     <figcaption>
-      Reasoning, commands, timing, and results stay visible, not hidden in logs.
+      Reasoning, commands, timing, and results stay visible.
     </figcaption>
   </figure>
 </section>
@@ -378,7 +375,7 @@
   <div class="section-head">
     <p class="kicker">The workstation</p>
     <h2 id="capabilities-title">
-      Built for daily work, not marketing
+      Everything in one window
     </h2>
   </div>
 
@@ -416,7 +413,7 @@
 >
   <div class="section-head">
     <p class="kicker">Principles</p>
-    <h2 id="principles-title">The rules the product holds itself to</h2>
+    <h2 id="principles-title">The rules it runs by</h2>
   </div>
 
   <div class="principle-grid">
@@ -437,10 +434,10 @@
   <div class="heat-bar closer-heat" aria-hidden="true">
     <span class="heat-core"></span>
   </div>
-  <h2 id="closer-title">Your agents. Your models. Your machine.</h2>
+  <h2 id="closer-title">Runs on your desktop. Works with what you have.</h2>
   <p>
-    CodeInOven runs on your desktop, works with your current setup, and keeps
-    every run easy to review, even after the chat is done.
+    MIT licensed and free to fork. Every run stays reviewable, even after the
+    chat is done.
   </p>
   <div class="closer-actions">
     <a class="button" href="/download">
