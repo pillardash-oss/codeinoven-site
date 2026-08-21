@@ -1,0 +1,24 @@
+# CodeInOven (Code In Oven)
+
+> CodeInOven is a desktop control plane and workstation for AI coding agents. It runs OpenCode, Claude Code, Codex, Antigravity, Pi, Cline, Muse Code, and other coding agents in one window. Every change passes through a structured plan you review and approve before it touches your code.
+
+## Core Features
+- **Deterministic AI Workflow**: Structured lifecycle: Specify → Review → Approve → Implement.
+- **Universal Harness Support**: Drives local agent CLIs (Claude Code, OpenCode, Codex, Antigravity, Pi, Cline, Muse Code) with your own API keys or local models (Ollama, LM Studio, llama.cpp).
+- **Review & Approval Gate**: Explicit permission tiers (Auto Review, Full Access) so agents cannot modify files or execute dangerous commands without approval.
+- **Integrated Git & Dev Tools**: Built-in visual Git status, diff viewer, terminal, checkpoints, and cloud deployment hooks.
+- **Privacy First**: 100% local desktop application. No telemetry, no token reselling, no proxying of prompts or code.
+- **Open Source**: MIT licensed.
+
+## Platforms
+- macOS (.dmg)
+- Windows (.exe)
+- Linux (.AppImage, .deb)
+
+## Links
+- Website: https://codeinoven.com
+- Download: https://codeinoven.com/download
+- GitHub Repository: https://github.com/pillardash-oss/codeinoven
+- Documentation & Full Details: https://codeinoven.com/llms-full.txt
+- Privacy Policy: https://codeinoven.com/privacy
+- Organization: Pillardash Solutions Limited (https://pillardash.com)
