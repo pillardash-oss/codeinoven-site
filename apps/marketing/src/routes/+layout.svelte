@@ -28,30 +28,6 @@
   }}
 />
 
-<svelte:head>
-  <title>CodeInOven: Your AI coding work, under control</title>
-  <meta name="description" content={PRODUCT.description} />
-  <meta
-    property="og:title"
-    content="CodeInOven: Your AI coding work, under control."
-  />
-  <meta property="og:description" content={PRODUCT.description} />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://codeinoven.com/meta.webp" />
-  <meta property="og:image:type" content="image/webp" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
-  <meta property="og:url" content="https://codeinoven.com" />
-  <meta property="og:site_name" content="CodeInOven" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta
-    name="twitter:title"
-    content="CodeInOven: Your AI coding work, under control."
-  />
-  <meta name="twitter:description" content={PRODUCT.description} />
-  <meta name="twitter:image" content="https://codeinoven.com/meta.webp" />
-</svelte:head>
 
 <div class="shell" class:menu-open={menuOpen}>
   <header class="nav">

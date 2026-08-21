@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { LICENSE, LINKS, PLATFORMS, PRODUCT } from '$lib/config';
 	import OsIcon from '$lib/components/os-icon.svelte';
+	import Seo from '$lib/components/seo.svelte';
 	import { ArrowUpRight, ShieldCheck, TerminalSquare } from '@lucide/svelte';
 	import GithubMark from '$lib/components/github-mark.svelte';
 
@@ -23,10 +24,11 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Download CodeInOven</title>
-	<meta name="description" content="Download CodeInOven for macOS, Windows, and Linux. {PRODUCT.tagline}" />
-</svelte:head>
+<Seo
+	title="Download CodeInOven (Code In Oven) - Desktop AI Coding Agent Workstation"
+	description="Download CodeInOven for macOS, Windows, and Linux. Free, open-source desktop control plane for AI coding agents (Claude Code, OpenCode, Codex, Antigravity)."
+	canonical="/download"
+/>
 
 <section class="dl">
 	<div class="heat-bar dl-heat" aria-hidden="true"><span class="heat-core"></span></div>

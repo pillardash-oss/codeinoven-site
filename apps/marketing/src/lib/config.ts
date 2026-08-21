@@ -4,12 +4,23 @@
  * values below and the whole site follows.
  */
 
+export const SITE_URL = 'https://codeinoven.com';
+
 /** Product identity. Mirrors `src/lib/brand.ts` in the desktop app. */
 export const PRODUCT = {
   name: 'CodeInOven',
+  alternateNames: [
+    'Code In Oven',
+    'Code-In-Oven',
+    'codeinoven',
+    'CodeInOven Desktop',
+    'CodeInOven App'
+  ],
   tagline: 'A desktop workstation for AI coding agents.',
   description:
-    'CodeInOven runs OpenCode, Claude Code, Codex, and other coding agents in one desktop app. You review and approve every change.'
+    'CodeInOven runs OpenCode, Claude Code, Codex, and other coding agents in one desktop app. You review and approve every change.',
+  keywords:
+    'CodeInOven, Code In Oven, codeinoven, AI coding agents, desktop workstation, Claude Code desktop, OpenCode desktop, OpenAI Codex, Antigravity, AI developer tools, AI pair programming, Pillardash'
 } as const;
 
 /** The company behind the product. */

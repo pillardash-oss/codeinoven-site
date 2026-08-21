@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { COMPANY, LINKS, PRODUCT } from '$lib/config';
+	import Seo from '$lib/components/seo.svelte';
 
 	/**
 	 * Deliberately short and factual. Every claim here describes behaviour that
@@ -9,10 +10,11 @@
 	const updated = 'August 2026';
 </script>
 
-<svelte:head>
-	<title>Privacy | CodeInOven</title>
-	<meta name="description" content="How CodeInOven handles your data. Short version: it stays on your machine." />
-</svelte:head>
+<Seo
+	title="Privacy Policy | CodeInOven (Code In Oven)"
+	description="How CodeInOven handles your data. Your code, prompts, credentials, and local models stay 100% on your machine."
+	canonical="/privacy"
+/>
 
 <section class="prose-page">
 	<h1>Privacy</h1>

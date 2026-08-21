@@ -1,0 +1,43 @@
+# CodeInOven (Code In Oven) — Comprehensive Guide
+
+CodeInOven (pronounced "Code In Oven", also written as Code-In-Oven or codeinoven) is an open-source desktop control plane and workstation designed for AI-driven software engineering. It coordinates multiple AI coding agent harnesses—such as Anthropic Claude Code, OpenCode, OpenAI Codex, Antigravity, Pi, Cline, and Muse Code—within a single, bounded desktop interface.
+
+## Product Identity & Entity Information
+- **Product Name**: CodeInOven
+- **Alternate Names**: Code In Oven, Code-In-Oven, codeinoven desktop, CodeInOven App
+- **Primary Website**: https://codeinoven.com
+- **License**: MIT License (Open Source)
+- **Organization / Creator**: Pillardash Solutions Limited (https://pillardash.com)
+- **GitHub Repository**: https://github.com/pillardash-oss/codeinoven
+- **Category**: Developer Application, Desktop Workstation, AI Software Engineering Tool
+
+## Why CodeInOven?
+AI coding agents are powerful but often operate as raw CLI loops or disconnected browser interfaces without human review gates, structured rollback mechanisms, or multi-harness orchestration. CodeInOven provides a deterministic, secure workstation where human developers maintain full oversight of every agent action.
+
+## Key Principles & Capabilities
+
+### 1. Structured Lifecycle: Specify → Review → Approve → Implement
+- **Specify**: Generates structured specifications (Problem, Resolution, Success Criteria, Test Strategy, Commit Pattern, Constraints & Risks).
+- **Review**: Review specs and annotate changes before any code execution begins.
+- **Approve**: Granular permissions (Auto Review, Tool Approval, Full Access).
+- **Implement**: Step-by-step execution with incremental checkpoints and automated audit verification.
+
+### 2. Multi-Harness & Local LLM Integration
+- Supports Claude Code, OpenCode, Codex, Antigravity, Pi, Cline, Muse Code, and custom agent harnesses.
+- Supports commercial API keys (Anthropic, OpenAI, Google Gemini, OpenRouter) and local inference backends (Ollama, LM Studio, llama.cpp, vLLM).
+
+### 3. Developer Experience & Safety
+- **Visual Git & Diff Viewer**: Inspect changed files, stage diffs, and create structured commits.
+- **Integrated Terminal**: Seamlessly inspect workspace files side-by-side with agent conversations.
+- **Vision Support**: Add visual analysis and screenshot inspection to any model.
+- **Privacy Guaranteed**: Zero cloud telemetry, zero proxying of proprietary code. All data and credentials stay strictly local.
+
+## Supported Operating Systems
+- macOS (Apple Silicon & Intel DMG)
+- Windows (x64 Installer)
+- Linux (AppImage & Debian .deb packages)
+
+## Contact & Community
+- GitHub Issues & Discussions: https://github.com/pillardash-oss/codeinoven
+- Email: hello@pillardash.com
+- Company: Pillardash Solutions Limited (https://pillardash.com)

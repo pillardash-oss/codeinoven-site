@@ -7,6 +7,7 @@
   } from "$lib/data/harnesses";
   import { LICENSE, LINKS } from "$lib/config";
   import OsIcon from "$lib/components/os-icon.svelte";
+  import Seo from "$lib/components/seo.svelte";
   import {
     ArrowUpRight,
     Brain,
@@ -158,6 +159,12 @@
     return () => observer.disconnect();
   });
 </script>
+
+<Seo
+  title="CodeInOven: Your AI coding work, under control"
+  description="CodeInOven (Code In Oven) is a desktop workstation for AI coding agents. Run OpenCode, Claude Code, Codex, Antigravity, and local models with full human review."
+  canonical="/"
+/>
 
 <!-- ─── Hero ─────────────────────────────────────────────────────────────── -->
 <section class="hero" aria-labelledby="hero-title">

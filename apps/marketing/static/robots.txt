@@ -1,3 +1,5 @@
-# allow crawling everything by default
+# CodeInOven - Robots Configuration
 User-agent: *
-Disallow:
+Allow: /
+
+Sitemap: https://codeinoven.com/sitemap.xml
