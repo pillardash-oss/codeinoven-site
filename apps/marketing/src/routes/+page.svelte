@@ -232,7 +232,7 @@
       height="1254"
     ></video>
     <figcaption>
-      DeepSeek v4 flash 0731 operating the Mac using the CUA seamlessly.
+      DeepSeek v4 flash 0731 operating a Mac using the CUA driver seamlessly.
     </figcaption>
   </figure>
 </section>
@@ -260,8 +260,6 @@
             <img src="/harness/{harness.id}.svg" alt="" aria-hidden="true" />
           </span>
           <span class="harness-name">{harness.name}</span>
-          <span class="harness-vendor">{harness.vendor}</span>
-          <code class="harness-cmd">{harness.command}</code>
         </a>
       </li>
     {/each}

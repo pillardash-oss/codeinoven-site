@@ -658,13 +658,6 @@
 	align-self: end;
 }
 
-.harness-vendor {
-	grid-area: vendor;
-	font-size: 0.75rem;
-	color: var(--color-dimmed);
-	align-self: start;
-}
-
 .harness-cmd {
 	grid-area: cmd;
 	margin-top: 1rem;
