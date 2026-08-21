@@ -29,30 +29,36 @@
     {
       id: "specify",
       title: "Specify",
-      lead: "Describe the job.",
-      body: "Goal, constraints, and checks in one place. You can read back the exact context the agent gets before it runs.",
-      marks: ["system", "project", "skills", "MCPs", "checklist", "history"],
+      lead: "A spec with fixed sections.",
+      body: "Problem, Resolution, Success Criteria, Test Strategy, Commit Pattern, Constraints & Risks. Same structure every time, so nothing important stays unsaid.",
+      marks: [
+        "problem",
+        "resolution",
+        "success criteria",
+        "test strategy",
+        "commit pattern",
+      ],
     },
     {
       id: "review",
       title: "Review",
-      lead: "Read the plan before it becomes code.",
-      body: "The agent writes a plan in the thread first. Each proposed change is shown separately, and you approve what moves forward.",
-      marks: ["plan diff", "state transitions", "approve", "send back"],
+      lead: "Read it before anything runs.",
+      body: "The agent drafts the spec from your thread. Annotate any section and send it back. Once you approve, that text is the contract the work is held to.",
+      marks: ["annotations", "versions", "approve", "send back"],
     },
     {
       id: "approve",
       title: "Approve",
-      lead: "Set what the agent may touch.",
-      body: "The permission level is always visible. Auto Review is the default; full access has to be turned on by hand.",
+      lead: "Permissions are explicit.",
+      body: "Tool calls ask within the tier you set. Auto Review by default; full access only if you switch it on yourself.",
       marks: ["Auto Review", "Full Access"],
     },
     {
       id: "implement",
       title: "Implement",
-      lead: "Then it runs.",
-      body: "Changes land with checkpoints and diffs. Any run can be replayed or rolled back.",
-      marks: ["checkpoint", "audit", "rework", "diff"],
+      lead: "Checked work, phase by phase.",
+      body: "Each phase lands as a checkpoint with a diff. An audit pass tests the result against Success Criteria before you merge.",
+      marks: ["checkpoints", "diffs", "audit", "rollback"],
     },
   ];
 
@@ -174,12 +180,13 @@
 
     <div class="hero-actions anim" style="--d:180ms">
       <a class="button" href="/download">
-        <OsIcon os="macos" />
-        Download for macOS
-      </a>
-      <a class="ghost-link" href="/download">
-        Windows · Linux
-        <ArrowUpRight aria-hidden="true" />
+        Download
+        <span class="button-os" aria-hidden="true">
+          <OsIcon os="macos" />
+          <OsIcon os="windows" />
+          <OsIcon os="linux" />
+        </span>
+        <span class="sr-only">for macOS, Windows, and Linux</span>
       </a>
     </div>
 
@@ -201,6 +208,7 @@
             <img src="/harness/{harness.id}.svg" alt={harness.name} />
           </li>
         {/each}
+        <li class="is-more" title="And more">+∞</li>
       </ul>
     </div>
   </div>
@@ -224,8 +232,7 @@
       height="1254"
     ></video>
     <figcaption>
-      A video of DeepSeek implementing and testing a feature on CodeInOven using
-      the built-in app tester.
+      DeepSeek v4 flash 0731 operating the Mac using the CUA seamlessly.
     </figcaption>
   </figure>
 </section>
@@ -255,12 +262,6 @@
           <span class="harness-name">{harness.name}</span>
           <span class="harness-vendor">{harness.vendor}</span>
           <code class="harness-cmd">{harness.command}</code>
-          <span
-            class="harness-flag"
-            class:harness-flag-off={!harness.customProviders}
-          >
-            {harness.customProviders ? "custom providers" : "vendor models"}
-          </span>
         </a>
       </li>
     {/each}
@@ -270,8 +271,8 @@
     <div class="backend-block">
       <h3>Or your own backend</h3>
       <p>
-        Any OpenAI-compatible endpoint works. These three are presets;
-        everything else takes a base URL and a model name.
+        OpenAI- and Anthropic-compatible endpoints both work. These three are
+        presets; everything else takes a base URL and a model name.
       </p>
       <ul class="backend-list">
         {#each LOCAL_BACKENDS as backend (backend.name)}
@@ -307,6 +308,7 @@
               src="/providers/{provider}.svg"
               alt={provider}
               loading="lazy"
+              class={provider === "huggingface" ? "is-brand" : ""}
             />
           </li>
         {/each}
@@ -323,10 +325,10 @@
 >
   <div class="section-head">
     <p class="kicker">The lifecycle</p>
-    <h2 id="lifecycle-title">Four stages, no silent steps.</h2>
+    <h2 id="lifecycle-title">Spec first. Code after approval.</h2>
     <p class="section-lead">
-      In a normal chat you cannot tell when a suggestion became code. Here,
-      that moment is a step you approve.
+      Every job runs the same path: specify, review, approve, implement. Each
+      step leaves a record you can read later.
     </p>
   </div>
 
