@@ -7,9 +7,9 @@
 /** Product identity. Mirrors `src/lib/brand.ts` in the desktop app. */
 export const PRODUCT = {
   name: 'CodeInOven',
-  tagline: 'Keep control of AI coding work, from idea to delivery.',
+  tagline: 'A desktop workstation for AI coding agents.',
   description:
-    'CodeInOven helps your AI coding tools work together in one place, with your approval at every important step.'
+    'CodeInOven runs OpenCode, Claude Code, Codex, and other coding agents in one desktop app. You review and approve every change.'
 } as const;
 
 /** The company behind the product. */
