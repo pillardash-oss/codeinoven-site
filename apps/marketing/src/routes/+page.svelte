@@ -197,7 +197,7 @@
 
     <!-- The harnesses, in their own colors, right where the claim is made. -->
     <div class="hero-harnesses anim" style="--d:300ms">
-      <p>Works with the agents you already use</p>
+      <p>Drives the agents you already have installed</p>
       <ul>
         {#each HARNESSES as harness, i (harness.id)}
           <li
@@ -296,8 +296,9 @@
     <div class="backend-block">
       <h3>Or the hosted ones you already pay for</h3>
       <p>
-        Sign in through the harness account or add a key. Credentials stay in that
-        harness config; CodeInOven does not proxy your requests.
+        Sign in through the harness's own account, or bring a key. Credentials
+        stay in the harness's config where they belong — CodeInOven does not
+        proxy your traffic.
       </p>
       <ul class="provider-wall">
         {#each HOSTED_PROVIDERS as provider (provider)}
@@ -400,7 +401,8 @@
       decoding="async"
     />
     <figcaption>
-      Permission level is always visible before you start a run.
+      The permission scope sits in the composer — visible before you send, not
+      after.
     </figcaption>
   </figure>
 </section>
