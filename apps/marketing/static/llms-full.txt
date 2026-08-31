@@ -1,12 +1,11 @@
 # CodeInOven (Code In Oven) — Comprehensive Guide
 
-CodeInOven (pronounced "Code In Oven", also written as Code-In-Oven or codeinoven) is a source-available desktop control plane and workstation designed for AI-driven software engineering. It coordinates multiple AI coding agent harnesses—such as Anthropic Claude Code, OpenCode, OpenAI Codex, Antigravity, Pi, Cline, and Muse Code—within a single, bounded desktop interface.
+CodeInOven (pronounced "Code In Oven", also written as Code-In-Oven or codeinoven) is an open-source desktop control plane and workstation designed for AI-driven software engineering. It coordinates multiple AI coding agent harnesses—such as Anthropic Claude Code, OpenCode, OpenAI Codex, Antigravity, Pi, Cline, and Muse Code—within a single, bounded desktop interface.
 
 ## Product Identity & Entity Information
 - **Product Name**: CodeInOven
 - **Alternate Names**: Code In Oven, Code-In-Oven, codeinoven desktop, CodeInOven App
 - **Primary Website**: https://codeinoven.com
-- **License**: PolyForm Noncommercial 1.0.0 (source-available; free for personal and non-commercial use, commercial use requires a separate license)
 - **Organization / Creator**: Pillardash Solutions Limited (https://pillardash.com)
 - **GitHub Repository**: https://github.com/pillardash-oss/codeinoven
 - **Category**: Developer Application, Desktop Workstation, AI Software Engineering Tool

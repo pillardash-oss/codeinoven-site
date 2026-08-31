@@ -4,7 +4,7 @@
 
 	/**
 	 * Deliberately short and factual. Every claim here describes behaviour that
-	 * is verifiable in the public source repository — do not add commitments the
+	 * is verifiable in the open-source repository — do not add commitments the
 	 * code does not actually make.
 	 */
 	const updated = 'August 2026';
@@ -52,7 +52,7 @@
 	<h2>Verifying any of this</h2>
 	<p>
 		{PRODUCT.name} is
-		<a href={LINKS.license} target="_blank" rel="noopener noreferrer">source-available</a>. If you would
+		<a href={LINKS.license} target="_blank" rel="noopener noreferrer">open source</a>. If you would
 		rather confirm the above than take our word for it, the
 		<a href={LINKS.github} target="_blank" rel="noopener noreferrer">source is public</a>.
 	</p>

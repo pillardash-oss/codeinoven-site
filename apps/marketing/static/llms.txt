@@ -8,7 +8,7 @@
 - **Review & Approval Gate**: Explicit permission tiers (Auto Review, Full Access) so agents cannot modify files or execute dangerous commands without approval.
 - **Integrated Git & Dev Tools**: Built-in visual Git status, diff viewer, terminal, checkpoints, and cloud deployment hooks.
 - **Privacy First**: 100% local desktop application. No telemetry, no token reselling, no proxying of prompts or code.
-- **Source Available**: PolyForm Noncommercial 1.0.0 licensed; free for personal and non-commercial use.
+- **Open Source**: free for personal and non-commercial use.
 
 ## Platforms
 - macOS (.dmg)

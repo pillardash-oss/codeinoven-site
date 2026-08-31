@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { COMPANY, LICENSE, LINKS, PRODUCT, SITE_URL } from '$lib/config';
+  import { COMPANY, LINKS, PRODUCT, SITE_URL } from '$lib/config';
 
   interface Props {
     title?: string;

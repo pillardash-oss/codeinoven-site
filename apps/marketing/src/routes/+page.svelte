@@ -5,7 +5,7 @@
     HOSTED_PROVIDERS,
     LOCAL_BACKENDS,
   } from "$lib/data/harnesses";
-  import { LICENSE, LINKS } from "$lib/config";
+  import { LINKS } from "$lib/config";
   import OsIcon from "$lib/components/os-icon.svelte";
   import Seo from "$lib/components/seo.svelte";
   import {
@@ -170,7 +170,7 @@
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-inner">
     <p class="eyebrow anim" style="--d:0ms">
-      <span class="eyebrow-dot"></span>Source available · {LICENSE} licensed
+      <span class="eyebrow-dot"></span>Open source
     </p>
 
     <h1 id="hero-title" class="hero-title anim" style="--d:60ms">
