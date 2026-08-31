@@ -36,8 +36,8 @@ export const COMPANY = {
  */
 export const REPO = 'pillardash-oss/codeinoven';
 
-/** The open-source licence the repository ships under. */
-export const LICENSE = 'MIT';
+/** The licence the repository ships under (source-available; commercial use requires a separate license). */
+export const LICENSE = 'PolyForm Noncommercial 1.0.0';
 
 /** External links. */
 export const LINKS = {

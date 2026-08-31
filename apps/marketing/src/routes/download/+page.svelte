@@ -26,7 +26,7 @@
 
 <Seo
 	title="Download CodeInOven (Code In Oven) - Desktop AI Coding Agent Workstation"
-	description="Download CodeInOven for macOS, Windows, and Linux. Free, open-source desktop control plane for AI coding agents (Claude Code, OpenCode, Codex, Antigravity)."
+	description="Download CodeInOven for macOS, Windows, and Linux. Free for personal and non-commercial use — a desktop control plane for AI coding agents (Claude Code, OpenCode, Codex, Antigravity)."
 	canonical="/download"
 />
 
