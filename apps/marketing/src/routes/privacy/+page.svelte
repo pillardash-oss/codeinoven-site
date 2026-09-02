@@ -51,7 +51,7 @@
 
 	<h2>Verifying any of this</h2>
 	<p>
-		{PRODUCT.name} is {' '}
+		{PRODUCT.name} is
 		<a href={LINKS.license} target="_blank" rel="noopener noreferrer">open source</a>. If you would
 		rather confirm the above than take our word for it, the
 		<a href={LINKS.github} target="_blank" rel="noopener noreferrer">source is public</a>.

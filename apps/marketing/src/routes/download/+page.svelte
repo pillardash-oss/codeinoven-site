@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LICENSE, LINKS, PLATFORMS, PRODUCT } from '$lib/config';
+	import { LINKS, PLATFORMS, PRODUCT } from '$lib/config';
 	import OsIcon from '$lib/components/os-icon.svelte';
 	import Seo from '$lib/components/seo.svelte';
 	import { ArrowUpRight, ShieldCheck, TerminalSquare } from '@lucide/svelte';
@@ -67,7 +67,7 @@
 			Source on GitHub
 		</a>
 		<span aria-hidden="true">·</span>
-		<a href={LINKS.license} target="_blank" rel="noopener noreferrer">{LICENSE} licensed</a>
+		<a href={LINKS.license} target="_blank" rel="noopener noreferrer">License</a>
 		<span aria-hidden="true">·</span>
 		<a href={LINKS.security} target="_blank" rel="noopener noreferrer">Security policy</a>
 	</div>

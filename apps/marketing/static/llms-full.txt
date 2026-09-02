@@ -6,7 +6,6 @@ CodeInOven (pronounced "Code In Oven", also written as Code-In-Oven or codeinove
 - **Product Name**: CodeInOven
 - **Alternate Names**: Code In Oven, Code-In-Oven, codeinoven desktop, CodeInOven App
 - **Primary Website**: https://codeinoven.com
-- **License**: MIT License (Open Source)
 - **Organization / Creator**: Pillardash Solutions Limited (https://pillardash.com)
 - **GitHub Repository**: https://github.com/pillardash-oss/codeinoven
 - **Category**: Developer Application, Desktop Workstation, AI Software Engineering Tool
