@@ -6,7 +6,6 @@ WORKDIR /app
 # Workspace manifests first, so bun install can resolve every workspace.
 COPY package.json bun.lock ./
 COPY apps/marketing/package.json ./apps/marketing/
-COPY apps/agents-favicon/package.json ./apps/agents-favicon/
 
 RUN bun install --frozen-lockfile
 
