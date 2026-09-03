@@ -27,13 +27,13 @@ export interface Harness {
 
 export const HARNESSES: readonly Harness[] = [
 	{
-		id: 'opencode',
-		name: 'OpenCode',
-		vendor: 'OpenCode',
-		command: 'opencode',
+		id: 'pi',
+		name: 'Pi',
+		vendor: 'Earendil Works',
+		command: 'pi',
 		customProviders: true,
 		tile: true,
-		website: 'https://opencode.ai'
+		website: 'https://pi.dev'
 	},
 	{
 		id: 'codex',
@@ -54,13 +54,13 @@ export const HARNESSES: readonly Harness[] = [
 		website: 'https://docs.anthropic.com/en/docs/claude-code'
 	},
 	{
-		id: 'pi',
-		name: 'Pi',
-		vendor: 'Earendil Works',
-		command: 'pi',
+		id: 'opencode',
+		name: 'OpenCode',
+		vendor: 'OpenCode',
+		command: 'opencode',
 		customProviders: true,
 		tile: true,
-		website: 'https://pi.dev'
+		website: 'https://opencode.ai'
 	},
 	{
 		id: 'cline',
