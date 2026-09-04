@@ -16,11 +16,11 @@ export const PRODUCT = {
     'CodeInOven Desktop',
     'CodeInOven App'
   ],
-  tagline: 'A desktop workstation for AI coding agents.',
+  tagline: 'The all-day software engineering workspace for building real products with AI.',
   description:
-    'CodeInOven runs OpenCode, Claude Code, Codex, and other coding agents in one desktop app. You review and approve every change.',
+    'CodeInOven is an all-day desktop engineering workspace where you brainstorm, prototype, code, review GitHub PRs, run terminals, and test live web apps with AI agents. Bundled with Pi out of the box with zero ceremony.',
   keywords:
-    'CodeInOven, Code In Oven, codeinoven, AI coding agents, desktop workstation, Claude Code desktop, OpenCode desktop, OpenAI Codex, Antigravity, AI developer tools, AI pair programming, Pillardash'
+    'CodeInOven, Code In Oven, codeinoven, AI engineering workspace, software engineering workspace, AI pair programming, bundled Pi, Claude Code desktop, OpenCode desktop, OpenAI Codex, Antigravity, desktop developer tools, in-app browser, GitHub PR workflow, Pillardash'
 } as const;
 
 /** The company behind the product. */
