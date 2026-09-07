@@ -77,48 +77,48 @@
   const workstationCapabilities = [
     {
       icon: Globe,
-      title: "Integrated inner browser",
-      body: "Test web apps as they run in real time, inspect the live DOM, navigate technical docs, and let vision or CUA agents verify real user flows directly in the window.",
+      title: "Inner web browser",
+      body: "Test your running web app right in the window. Inspect DOM nodes, read documentation, and let browser agents verify UI flows without opening Chrome.",
     },
     {
       icon: Terminal,
       title: "Attached project terminal",
-      body: "A real shell session attached to your active project workspace. Run builds, linters, migrations, Docker commands, and scripts side-by-side with your agent.",
+      body: "A real shell session opened directly in your project root. Run migrations, build scripts, tests, or container commands alongside your agent thread.",
     },
     {
       icon: GitPullRequest,
-      title: "Native GitHub PR studio",
-      body: "Review pull requests, check live diffs, resolve merge conflicts, stage surgical changes, and commit directly without context-switching to the web.",
+      title: "GitHub pull request review",
+      body: "Review PRs, inspect diffs line by line, resolve git conflicts, and commit staged files without switching to GitHub in a browser tab.",
     },
     {
       icon: Sparkles,
-      title: "Ideation & brainstorm studio",
-      body: "Brainstorm product concepts, generate PRDs, prototype rapid spikes, and validate architectures before committing a single line of production code.",
+      title: "Ideation and prototyping",
+      body: "Work through architecture spikes, write PRDs, brainstorm edge cases, and run disposable prototype checks before touching production files.",
     },
     {
       icon: Gauge,
-      title: "Telemetry, usage & cost tracking",
-      body: "Live visibility into token burn, context windows, API rates, and per-step costs. Create reusable project actions to automate repetitive build routines.",
+      title: "Token, latency, and cost telemetry",
+      body: "See exact token counts, context window limits, response times, and model costs on every turn. Create project-specific action runners for common scripts.",
     },
     {
       icon: Kanban,
-      title: "Projects & scopes Kanban",
-      body: "Switch effortlessly between multiple repositories and organize work into focused scopes: Pinned, Todo, Spec, and Done—with zero context collision.",
+      title: "Projects and scopes board",
+      body: "Jump between repositories in one sidebar. Keep work organized across Pinned, Todo, Spec, and Done columns without cross-contaminating files or history.",
     },
     {
       icon: Replace,
-      title: "One workflow, any harness",
-      body: "Bundled with Pi out of the box, or drive your installed OpenCode, Codex, Claude Code, Antigravity, Cline, Muse Code, and more without starting over.",
+      title: "Any model endpoint, any harness",
+      body: "Connect your OpenAI-compatible or Anthropic-compatible API keys, local Ollama or LM Studio servers, or your existing Claude Code, OpenCode, Codex, or Cline installs.",
     },
     {
       icon: ScanEye,
-      title: "Vision & CUA on any model",
-      body: "Add the image helper when a task needs screenshots or mockups understood. Agents operate the desktop UI, test real interactions, and verify visual styling.",
+      title: "Vision and desktop driver",
+      body: "Attach mockups, wireframes, and screenshots. The model reads visual context and uses the desktop driver to test user flows on real screens.",
     },
     {
       icon: Smartphone,
-      title: "Remote review from mobile",
-      body: "Pair once with a QR code, then review and approve from anywhere. Watch progress, read diffs, and approve permissions from your phone.",
+      title: "Remote review from phone",
+      body: "Scan a QR code to pair your phone. Review diffs, read progress, and approve tool permissions away from your desk.",
     },
   ];
 
@@ -171,8 +171,8 @@
 </script>
 
 <Seo
-  title="CodeInOven: Where Real Software Gets Built"
-  description="CodeInOven is an all-day desktop engineering workspace. Brainstorm, prototype, code, review GitHub PRs, run terminals, and test live web apps with AI agents. Bundled with Pi out of the box."
+  title="CodeInOven: Software Engineering Desktop Workspace"
+  description="CodeInOven (Code in Oven) is a desktop workspace for developers. Brainstorm, code, run terminals, test in an inner browser, and review GitHub pull requests with AI agents."
   canonical="/"
 />
 
@@ -180,19 +180,19 @@
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-inner">
     <p class="eyebrow anim" style="--d:0ms">
-      <span class="eyebrow-dot"></span>Open source · All-day workspace
+      <span class="eyebrow-dot"></span>Open source · Desktop workbench
     </p>
 
     <h1 id="hero-title" class="hero-title anim" style="--d:60ms">
-      Where real software gets built.<br />
-      <span class="hero-title-accent">Not just where AI gets prompted.</span>
+      The desktop workspace where software gets built.
     </h1>
 
     <p class="hero-lead anim" style="--d:120ms">
-      CodeInOven is the desktop workspace where you spend the whole day building.
-      Brainstorm, prototype, code, review GitHub PRs, run terminals, and test web apps
-      live in the integrated browser—without leaving the window. Pre-tuned prompts keep
-      agents aligned like senior engineers, with zero setup ritual and bundled Pi out of the box.
+      CodeInOven (Code in Oven) gives you one place to spend your entire engineering day.
+      Brainstorm features, write code, run shell scripts in an attached terminal,
+      test localhost in the inner browser, and review GitHub pull requests without
+      jumping across windows. Pi comes bundled out of the box, with built-in engineering
+      rules that stop circular prompt arguments.
     </p>
 
     <div class="hero-actions anim" style="--d:180ms">
@@ -206,17 +206,17 @@
         <span class="sr-only">for macOS, Windows, and Linux</span>
       </a>
       <a class="ghost-link" href="#workstation">
-        Explore the workspace
+        See the workbench
         <ArrowUpRight aria-hidden="true" />
       </a>
     </div>
 
     <!-- Quick highlights -->
     <div class="hero-pills anim" style="--d:210ms">
-      <span class="hero-pill"><Flame aria-hidden="true" /> Bundled with Pi (zero prerequisites)</span>
-      <span class="hero-pill"><Boxes aria-hidden="true" /> Zero AGENTS.md ceremony</span>
-      <span class="hero-pill"><Globe aria-hidden="true" /> Inner browser & attached terminal</span>
-      <span class="hero-pill"><TerminalSquare aria-hidden="true" /> OpenAI & Anthropic endpoints</span>
+      <span class="hero-pill"><Flame aria-hidden="true" /> Bundled with Pi out of the box</span>
+      <span class="hero-pill"><Boxes aria-hidden="true" /> No AGENTS.md setup required</span>
+      <span class="hero-pill"><Globe aria-hidden="true" /> Built-in browser and terminal</span>
+      <span class="hero-pill"><TerminalSquare aria-hidden="true" /> OpenAI and Anthropic endpoints</span>
     </div>
 
     <!-- The heat element from the product mark, made live. -->
@@ -226,7 +226,7 @@
 
     <!-- The harnesses, in their own colors, right where the claim is made. -->
     <div class="hero-harnesses anim" style="--d:300ms">
-      <p>Drives the agents you already have installed</p>
+      <p>Runs alongside your installed CLI agents</p>
       <ul>
         {#each HARNESSES as harness, i (harness.id)}
           <li
@@ -247,7 +247,7 @@
     <video
       src="/shots/workspace-hero.mp4"
       poster="/shots/workspace.png"
-      aria-label="The CodeInOven workspace: a project and thread rail on the left, an agent run in the
+      aria-label="The CodeInOven workspace: project rail on the left, agent run in the
 			middle showing reasoning traces and tool calls with status, and a context panel on the right."
       autoplay
       muted
@@ -258,7 +258,7 @@
       height="1254"
     ></video>
     <figcaption>
-      DeepSeek v4 flash operating a Mac using the CUA driver seamlessly inside the CodeInOven workspace.
+      DeepSeek v4 flash running inside CodeInOven to test and operate a local desktop app.
     </figcaption>
   </figure>
 </section>
@@ -272,13 +272,12 @@
   <div class="section-head">
     <p class="kicker">The All-Day Workbench</p>
     <h2 id="workstation-title">
-      You barely need to leave CodeInOven.
+      Spend your workday in one window.
     </h2>
     <p class="section-lead">
-      When building in CodeInOven, you stop juggling 15 apps. You barely open an external browser
-      to test, barely launch a separate terminal for scripts, barely switch to GitHub for PRs,
-      and stop jumping to ChatGPT for research. Everything needed to take software from concept
-      to production lives in one coherent workbench.
+      On an average day, you switch between a terminal, a browser to test localhost,
+      GitHub web to review diffs, ChatGPT to brainstorm, and an editor.
+      CodeInOven keeps those tasks in one desktop application so you can stay focused.
     </p>
   </div>
 
@@ -297,28 +296,28 @@
     <figure class="workspace-card">
       <img
         src="/shots/engineering-toolbox.png"
-        alt="Engineering Toolbox — pick the stages to run: Brainstorm, PRD, Spec, Assignment, Achievement, Auto Pilot"
+        alt="Engineering Toolbox stages: Brainstorm, PRD, Spec, Assignment, Achievement, and Auto Pilot"
         width="1400"
         height="875"
         loading="lazy"
         decoding="async"
       />
       <figcaption>
-        <strong>Engineering Toolbox:</strong> Move cleanly through Brainstorm, PRD, Spec, Assignment, Achievement, and Auto Pilot without context loss.
+        <strong>Engineering toolbox:</strong> Pick the phase you need, from initial brainstorm and PRD to spec creation and implementation.
       </figcaption>
     </figure>
 
     <figure class="workspace-card">
       <img
         src="/shots/scopes-board.png"
-        alt="Scopes board — organize threads into Pinned, Todo, Spec, and Done columns across project scopes"
+        alt="Scopes board organizing threads into Pinned, Todo, Spec, and Done columns across project scopes"
         width="1400"
         height="875"
         loading="lazy"
         decoding="async"
       />
       <figcaption>
-        <strong>Scopes Kanban:</strong> Organize threads across Pinned, Todo, Spec, and Done columns for each repository scope.
+        <strong>Scopes board:</strong> Track work across Pinned, Todo, Spec, and Done columns for each project repository.
       </figcaption>
     </figure>
   </div>
@@ -326,16 +325,14 @@
   <figure class="composer-shot reveal">
     <img
       src="/shots/composer.png"
-      alt="The CodeInOven composer, showing the current permission scope set to Full Access, the
-			selected model, and a stop control while the agent works."
+      alt="The CodeInOven composer, showing permission scope, model selector, and run controls."
       width="1400"
       height="263"
       loading="lazy"
       decoding="async"
     />
     <figcaption>
-      The permission scope sits in the composer — visible before you send, not
-      after.
+      Permission controls sit right in the composer, so you verify access before sending a prompt.
     </figcaption>
   </figure>
 </section>
@@ -347,42 +344,42 @@
   aria-labelledby="ceremony-title"
 >
   <div class="section-head">
-    <p class="kicker">Zero Ceremony · No Prompt Fatigue</p>
+    <p class="kicker">Zero Setup Ceremony</p>
     <h2 id="ceremony-title">
-      Start immediately. No AGENTS.md or CLAUDE.md required.
+      No AGENTS.md or CLAUDE.md required.
     </h2>
     <p class="section-lead">
-      Most AI tools demand hours of prompt tinkering, rigid instruction files, and constant prompt
-      babysitting just to prevent circular drift and hallucinated file edits. CodeInOven bakes senior
-      engineering discipline directly into the system prompts and harness execution.
+      You do not need to write custom rules files just to get reasonable output.
+      CodeInOven includes structured instructions that guide agents to act like
+      disciplined software engineers on the first turn.
     </p>
   </div>
 
   <div class="ceremony-grid">
     <article class="ceremony-cell">
       <Sparkles aria-hidden="true" class="ceremony-icon" />
-      <span class="ceremony-badge">Engineered Scaffolding</span>
-      <h3>Pre-tuned engineering prompts</h3>
+      <span class="ceremony-badge">Built-in guidelines</span>
+      <h3>Structured engineering rules</h3>
       <p>
-        Built-in system instructions teach models to act like real software engineers: verifying facts before answering, adhering to repository conventions, writing surgical diffs, and explaining architectural decisions.
+        The harness instructs models to read files before editing, follow repository conventions, write small diffs, and test changes before reporting completion.
       </p>
     </article>
 
     <article class="ceremony-cell">
       <Workflow aria-hidden="true" class="ceremony-icon" />
-      <span class="ceremony-badge">Eliminate Fatigue</span>
-      <h3>Zero circular prompt loops</h3>
+      <span class="ceremony-badge">Less friction</span>
+      <h3>Fewer repetitive prompt rounds</h3>
       <p>
-        Cuts exhausting back-and-forth prompt babysitting between human and LLMs to the barest minimum. Tasks run phase-by-phase with clear checkpoints, deterministic tests, and explicit approvals.
+        Instead of arguing with an agent across twenty turns, work runs in stages with clean diffs and approval checkpoints. You spend less time correcting careless mistakes.
       </p>
     </article>
 
     <article class="ceremony-cell">
       <Boxes aria-hidden="true" class="ceremony-icon" />
-      <span class="ceremony-badge">Instant Productivity</span>
-      <h3>Drop in any project & go</h3>
+      <span class="ceremony-badge">Immediate start</span>
+      <h3>Add your project and start coding</h3>
       <p>
-        No setup ritual or configuration tax. Add any repository to Projects and your agent is immediately productive from turn one—without spending an afternoon authoring custom prompt manuals.
+        Point CodeInOven to any folder. Your agent gets straight to work without waiting for configuration files, custom setup wizards, or complex rulebooks.
       </p>
     </article>
   </div>
@@ -395,20 +392,20 @@
   aria-labelledby="harnesses-title"
 >
   <div class="section-head">
-    <p class="kicker">Batteries Included</p>
-    <h2 id="harnesses-title">Bundled with Pi. Ready for every harness and model.</h2>
+    <p class="kicker">Harnesses and Models</p>
+    <h2 id="harnesses-title">Bundled with Pi. Works with your existing tools too.</h2>
     <p class="section-lead">
-      If you do not have an agent harness installed, CodeInOven comes bundled with Pi out of the box.
-      Connect your favorite API key or local model and start coding immediately. If you already have
-      harnesses installed, CodeInOven auto-detects and unifies them all.
+      If you do not have any coding agent CLI installed, CodeInOven includes Pi out of the box.
+      Add an API key or local model and start immediately. If you already use Claude Code,
+      OpenCode, Codex, or Cline, CodeInOven recognizes and runs them.
     </p>
   </div>
 
   <div class="bundled-banner reveal">
     <div class="bundled-banner-left">
-      <span class="bundled-pill">Bundled Default</span>
+      <span class="bundled-pill">Bundled with app</span>
       <p>
-        <strong>Comes bundled with Pi.</strong> No harness installed on your machine? CodeInOven ships with Pi built-in so you can start working immediately—just add your API key or model endpoint.
+        <strong>Pi comes installed.</strong> You do not need to install Node packages, Python environments, or CLI binaries first. Just launch CodeInOven, paste an API key or set a local endpoint, and start.
       </p>
     </div>
   </div>
@@ -428,9 +425,9 @@
 
   <div class="backend-split">
     <div class="backend-block">
-      <h3>Or your own backend</h3>
+      <h3>Local models and private clouds</h3>
       <p>
-        OpenAI- and Anthropic-compatible endpoints both work. Connect local models, dedicated cloud GPUs, or private VPCs with a base URL and model name.
+        Supports OpenAI-compatible and Anthropic-compatible endpoints. Connect Ollama, LM Studio, vLLM, or dedicated private cloud servers with a base URL and model name.
       </p>
       <ul class="backend-list">
         {#each LOCAL_BACKENDS as backend (backend.name)}
@@ -454,11 +451,9 @@
     </div>
 
     <div class="backend-block">
-      <h3>Or the hosted ones you already pay for</h3>
+      <h3>Hosted provider keys</h3>
       <p>
-        Sign in through the harness's own account, or bring a key. Credentials
-        stay in the harness's config where they belong — CodeInOven does not
-        proxy your traffic.
+        Sign in through the provider or bring your own API key. Keys stay in local configuration files on your machine. CodeInOven never proxies your code or prompts through external middleman servers.
       </p>
       <ul class="provider-wall">
         {#each HOSTED_PROVIDERS as provider (provider)}
@@ -486,8 +481,8 @@
     <p class="kicker">The lifecycle</p>
     <h2 id="lifecycle-title">Spec first. Code after approval.</h2>
     <p class="section-lead">
-      Real engineering follows a predictable rhythm. Every job runs the same path:
-      specify, review, approve, implement. Each step leaves a record you can read later.
+      Solid engineering follows a reliable sequence: specify, review, approve, implement.
+      Every step leaves a clear record you can inspect at any time.
     </p>
   </div>
 
@@ -514,15 +509,14 @@
   <figure class="inline-shot reveal">
     <img
       src="/shots/trace.png"
-      alt="A CodeInOven run in progress: collapsible thinking blocks with durations, and tool call
-			rows showing shell commands and file reads with success, failure and running status."
+      alt="A CodeInOven run in progress showing reasoning traces, shell commands, and file reads with status"
       width="1400"
       height="960"
       loading="lazy"
       decoding="async"
     />
     <figcaption>
-      Reasoning, commands, timing, and results stay visible.
+      Reasoning steps, shell commands, execution time, and output stay visible on screen.
     </figcaption>
   </figure>
 </section>
@@ -531,30 +525,30 @@
 <section id="ethos" class="section reveal" aria-labelledby="ethos-title">
   <div class="ethos-banner">
     <div class="ethos-head">
-      <p class="kicker">Community & Ethos</p>
-      <h3 id="ethos-title">We build what people use. If it's missing, send a PR.</h3>
+      <p class="kicker">Our approach</p>
+      <h3 id="ethos-title">We build what people use. If something is missing, send a PR.</h3>
       <p>
-        We don't add features just for marketing bullet points. We build what directly enhances developer productivity, eliminates fatigue, and gets real software shipped. If a harness, provider, or capability matters to your workflow, our ethos is simple: open an issue or bring a PR. So long as developers use it, it will be built in CodeInOven.
+        We do not invent decorative features to pad release notes. We build tools that make daily engineering work faster and reduce mental strain. When a developer needs support for a harness, a model provider, or a local toolchain, we welcome issues and pull requests. If developers use it, it belongs in CodeInOven.
       </p>
     </div>
 
     <div class="ethos-grid">
       <div class="ethos-col">
-        <h4><HeartHandshake aria-hidden="true" /> Built to End Fatigue</h4>
+        <h4><HeartHandshake aria-hidden="true" /> Built for all-day focus</h4>
         <p>
-          Every workflow is designed for long, focused engineering sessions. We strip out cognitive friction, prompt anxiety, and context-switching so you can stay in flow.
+          Workspaces are designed for long sessions. Everything is organized to reduce window jumping, prompt retyping, and lost context.
         </p>
       </div>
       <div class="ethos-col">
-        <h4><GitFork aria-hidden="true" /> Community-Driven Evolution</h4>
+        <h4><GitFork aria-hidden="true" /> Driven by developer pull requests</h4>
         <p>
-          All we need is a PR. Whether it's an emerging model format, a new CLI agent, or a custom toolchain, whatever developers rely on gets embraced.
+          New harnesses and providers get added as the community needs them. Bring a PR and help shape the workbench.
         </p>
       </div>
       <div class="ethos-col">
-        <h4><ShieldCheck aria-hidden="true" /> 100% Local & Sovereign</h4>
+        <h4><ShieldCheck aria-hidden="true" /> Local and private</h4>
         <p>
-          Your source code never routes through third-party proxy services. State lives in your local machine and your project's .cio scratchpad, completely reviewable.
+          Your source code never routes through a proprietary proxy. Project state stays on your drive and in your repository scratchpad.
         </p>
       </div>
     </div>
@@ -590,10 +584,9 @@
   <div class="heat-bar closer-heat" aria-hidden="true">
     <span class="heat-core"></span>
   </div>
-  <h2 id="closer-title">Your entire software day, under one roof.</h2>
+  <h2 id="closer-title">Your entire software day, in one place.</h2>
   <p>
-    Free for personal and non-commercial use. Every run stays reviewable, even
-    after the chat is done.
+    Free for personal and non-commercial use. Every run stays reviewable even after you close the thread.
   </p>
   <div class="closer-actions">
     <a class="button" href="/download">

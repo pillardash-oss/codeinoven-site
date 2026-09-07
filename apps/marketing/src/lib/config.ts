@@ -11,16 +11,16 @@ export const PRODUCT = {
   name: 'CodeInOven',
   alternateNames: [
     'Code In Oven',
-    'Code-In-Oven',
-    'codeinoven',
+    'CodeInOven App',
     'CodeInOven Desktop',
-    'CodeInOven App'
+    'codeinoven',
+    'code in oven software'
   ],
-  tagline: 'The all-day software engineering workspace for building real products with AI.',
+  tagline: 'Code in Oven: the all-day desktop workbench where software gets built.',
   description:
-    'CodeInOven is an all-day desktop engineering workspace where you brainstorm, prototype, code, review GitHub PRs, run terminals, and test live web apps with AI agents. Bundled with Pi out of the box with zero ceremony.',
+    'CodeInOven (Code in Oven) is an all-day desktop software engineering workspace. Brainstorm, prototype, edit, run terminal commands, review GitHub pull requests, and test web apps directly in the inner browser with AI agents. Bundled with Pi out of the box.',
   keywords:
-    'CodeInOven, Code In Oven, codeinoven, AI engineering workspace, software engineering workspace, AI pair programming, bundled Pi, Claude Code desktop, OpenCode desktop, OpenAI Codex, Antigravity, desktop developer tools, in-app browser, GitHub PR workflow, Pillardash'
+    'CodeInOven, Code in Oven, codeinoven developer tool, code in oven app, software engineering workbench, AI coding agents desktop, bundled Pi coding, GitHub PR reviews, inner browser testing, terminal workspace, not codeine, Pillardash'
 } as const;
 
 /** The company behind the product. */

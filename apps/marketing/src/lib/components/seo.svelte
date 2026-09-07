@@ -84,10 +84,43 @@
     sameAs: [LINKS.github]
   };
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${SITE_URL}/#faq`,
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is CodeInOven?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'CodeInOven (pronounced Code In Oven, three words) is an open-source desktop engineering workspace for software developers. It brings together coding agents, an inner web browser, an attached terminal, and GitHub pull request reviews under one window. It is developer software, unrelated to pharmaceuticals.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Do I need to install an agent harness before using CodeInOven?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No. CodeInOven comes bundled with Pi out of the box. Add your model endpoint or API key and start working. If you already have Claude Code, OpenCode, Codex, Antigravity, Cline, or Muse Code installed on your machine, CodeInOven detects and runs them too.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Do I need an AGENTS.md or CLAUDE.md file in my project?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No. CodeInOven includes structured prompts that instruct agents to inspect repositories, follow existing patterns, keep diffs focused, and verify results before committing. You open your project and start.'
+        }
+      }
+    ]
+  };
+
   const jsonLd = JSON.stringify([
     organizationSchema,
     websiteSchema,
-    softwareAppSchema
+    softwareAppSchema,
+    faqSchema
   ]);
 </script>
 

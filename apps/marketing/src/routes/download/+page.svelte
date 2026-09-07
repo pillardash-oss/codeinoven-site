@@ -13,20 +13,20 @@
 	const requirements = [
 		{
 			icon: TerminalSquare,
-			title: 'Bundled with Pi (or drive your own harness)',
-			body: 'CodeInOven comes bundled with Pi out of the box so you can start immediately without installing external CLIs. If you already have OpenCode, Codex, Claude Code, Antigravity, Cline, or Muse Code installed, CodeInOven auto-detects them on your PATH.'
+			title: 'Bundled with Pi (or connect your existing CLIs)',
+			body: 'Pi is included inside the application, so you can start right away without installing command-line tools first. If you already use OpenCode, Codex, Claude Code, Antigravity, Cline, or Muse Code, CodeInOven detects them on your PATH.'
 		},
 		{
 			icon: ShieldCheck,
-			title: 'Your own model access',
-			body: 'Sign in with your provider key, or point a custom base URL at Ollama, LM Studio, llama.cpp, or dedicated cloud VPCs. Fully compatible with OpenAI and Anthropic endpoints without proxying traffic.'
+			title: 'Bring your own API key or local server',
+			body: 'Use your existing OpenAI or Anthropic API key, or connect a local server like Ollama, LM Studio, or llama.cpp. Requests go straight to the model provider, never through an intermediary proxy.'
 		}
 	];
 </script>
 
 <Seo
-	title="Download CodeInOven - Desktop Software Engineering Workspace"
-	description="Download CodeInOven for macOS, Windows, and Linux. Free, open-source desktop workspace for AI software engineering. Bundled with Pi out of the box."
+	title="Download CodeInOven (Code In Oven) for Mac, Windows, Linux"
+	description="Download CodeInOven (Code in Oven) for macOS, Windows, and Linux. Desktop software engineering workbench with bundled Pi, inner browser, terminal, and GitHub PR reviews."
 	canonical="/download"
 />
 

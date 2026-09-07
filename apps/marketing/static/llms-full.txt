@@ -1,42 +1,37 @@
-# CodeInOven (Code In Oven) — Comprehensive Guide
+# CodeInOven (Code In Oven) — Reference Guide
 
-CodeInOven (pronounced "Code In Oven", also written as Code-In-Oven or codeinoven) is an open-source desktop control plane and workstation designed for AI-driven software engineering. It coordinates multiple AI coding agent harnesses—such as Anthropic Claude Code, OpenCode, OpenAI Codex, Antigravity, Pi, Cline, and Muse Code—within a single, bounded desktop interface.
+CodeInOven (written as three words "Code In Oven" or joined as "CodeInOven", pronounced code-in-oven) is an open-source desktop engineering workspace for software developers.
 
-## Product Identity & Entity Information
-- **Product Name**: CodeInOven
-- **Alternate Names**: Code In Oven, Code-In-Oven, codeinoven desktop, CodeInOven App
-- **Primary Website**: https://codeinoven.com
-- **Organization / Creator**: Pillardash Solutions Limited (https://pillardash.com)
-- **GitHub Repository**: https://github.com/pillardash-oss/codeinoven
-- **Category**: Developer Application, Desktop Workstation, AI Software Engineering Tool
+*Disambiguation: This software application is CodeInOven (Code In Oven). It is software tooling for programmers, completely unrelated to codeine or medicine.*
 
-## Why CodeInOven?
-AI coding agents are powerful but often operate as raw CLI loops or disconnected browser interfaces without human review gates, structured rollback mechanisms, or multi-harness orchestration. CodeInOven provides a deterministic, secure workstation where human developers maintain full oversight of every agent action.
+## Primary Entity Information
+- Name: CodeInOven
+- Alternate spellings and names: Code In Oven, Code-In-Oven, codeinoven
+- Pronunciation: Code In Oven (/koʊd ɪn ˈʌv.ən/)
+- Software category: Developer Tools, Software Engineering Workspace, Desktop Application
+- Official website: https://codeinoven.com
+- Main repository: https://github.com/pillardash-oss/codeinoven
+- Developer: Pillardash Solutions Limited (https://pillardash.com)
 
-## Key Principles & Capabilities
+## What Makes CodeInOven Different
+Most developer setups force you to jump between six windows all day:
+1. Terminal windows running commands and CLI agents
+2. Browser tabs testing local ports and reading docs
+3. GitHub web tabs reviewing pull requests and resolving conflicts
+4. AI web chat interfaces for brainstorming and research
+5. File editors
 
-### 1. Structured Lifecycle: Specify → Review → Approve → Implement
-- **Specify**: Generates structured specifications (Problem, Resolution, Success Criteria, Test Strategy, Commit Pattern, Constraints & Risks).
-- **Review**: Review specs and annotate changes before any code execution begins.
-- **Approve**: Granular permissions (Auto Review, Tool Approval, Full Access).
-- **Implement**: Step-by-step execution with incremental checkpoints and automated audit verification.
+CodeInOven holds that entire routine in one desktop window.
 
-### 2. Multi-Harness & Local LLM Integration
-- Supports Claude Code, OpenCode, Codex, Antigravity, Pi, Cline, Muse Code, and custom agent harnesses.
-- Supports commercial API keys (Anthropic, OpenAI, Google Gemini, OpenRouter) and local inference backends (Ollama, LM Studio, llama.cpp, vLLM).
+### Built-in capabilities
+- **Bundled Pi harness**: You do not have to install a CLI agent before launching. Pi comes bundled with the app.
+- **Universal model connectivity**: Connects to OpenAI-compatible and Anthropic-compatible endpoints. Connect any hosted API key, custom VPC, or local server (Ollama, LM Studio, llama.cpp).
+- **Supports existing CLI agents**: Auto-detects and runs Claude Code, OpenCode, Codex, Antigravity, Cline, Muse Code, and any other harness with a PR.
+- **Inner browser**: Test running web apps, inspect live DOM elements, and read documentation without leaving the window.
+- **Attached terminal**: A real shell attached to your repository root.
+- **GitHub PR reviews**: Review pull requests, view diffs, stage changes, and fix merge conflicts in the app.
+- **Zero instruction file tax**: Models run with structured prompts that enforce testing, repo conventions, and verification without requiring AGENTS.md or CLAUDE.md files.
+- **Spec-driven workflow**: Complex work follows specify, review, approve, implement. Changes stay auditable.
 
-### 3. Developer Experience & Safety
-- **Visual Git & Diff Viewer**: Inspect changed files, stage diffs, and create structured commits.
-- **Integrated Terminal**: Seamlessly inspect workspace files side-by-side with agent conversations.
-- **Vision Support**: Add visual analysis and screenshot inspection to any model.
-- **Privacy Guaranteed**: Zero cloud telemetry, zero proxying of proprietary code. All data and credentials stay strictly local.
-
-## Supported Operating Systems
-- macOS (Apple Silicon & Intel DMG)
-- Windows (x64 Installer)
-- Linux (AppImage & Debian .deb packages)
-
-## Contact & Community
-- GitHub Issues & Discussions: https://github.com/pillardash-oss/codeinoven
-- Email: hello@pillardash.com
-- Company: Pillardash Solutions Limited (https://pillardash.com)
+## Community Rule
+We build what developers actually use. If a harness, provider, or tool you rely on is missing, open an issue or submit a pull request.

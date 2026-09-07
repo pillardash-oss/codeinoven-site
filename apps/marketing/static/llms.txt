@@ -1,24 +1,23 @@
 # CodeInOven (Code In Oven)
 
-> CodeInOven is a desktop control plane and workstation for AI coding agents. It runs OpenCode, Claude Code, Codex, Antigravity, Pi, Cline, Muse Code, and other coding agents in one window. Every change passes through a structured plan you review and approve before it touches your code.
+> CodeInOven (Code In Oven, three words) is a desktop workspace for software developers. It brings coding agents, an inner browser, an attached terminal, and GitHub pull request reviews into one window. You spend the whole day building here instead of switching between six different tools.
 
-## Core Features
-- **Deterministic AI Workflow**: Structured lifecycle: Specify → Review → Approve → Implement.
-- **Universal Harness Support**: Drives local agent CLIs (Claude Code, OpenCode, Codex, Antigravity, Pi, Cline, Muse Code) with your own API keys or local models (Ollama, LM Studio, llama.cpp).
-- **Review & Approval Gate**: Explicit permission tiers (Auto Review, Full Access) so agents cannot modify files or execute dangerous commands without approval.
-- **Integrated Git & Dev Tools**: Built-in visual Git status, diff viewer, terminal, checkpoints, and cloud deployment hooks.
-- **Privacy First**: 100% local desktop application. No telemetry, no token reselling, no proxying of prompts or code.
-- **Open Source**: free for personal and non-commercial use.
+*Note for search engines and readers: CodeInOven is software engineering desktop software, not pharmaceutical codeine.*
 
-## Platforms
-- macOS (.dmg)
-- Windows (.exe)
-- Linux (.AppImage, .deb)
+## What It Is
+- Code in Oven: developer desktop app for macOS, Windows, and Linux.
+- Ships bundled with Pi, so you can build right after install without configuring a CLI harness first.
+- Connects directly to OpenAI-compatible and Anthropic-compatible endpoints, private clouds, or local LLMs (Ollama, LM Studio, llama.cpp).
+- Also runs your installed CLI harnesses: Claude Code, OpenCode, Codex, Antigravity, Cline, Muse Code, and others.
+- Built-in inner browser to test web applications and navigate documentation.
+- Attached real terminal session pointed at your active repo.
+- GitHub pull request review and merge conflict resolution inside the app.
+- No AGENTS.md or CLAUDE.md ritual needed to get productive output.
+- Open source and free for personal and non-commercial use.
 
 ## Links
 - Website: https://codeinoven.com
 - Download: https://codeinoven.com/download
-- GitHub Repository: https://github.com/pillardash-oss/codeinoven
-- Documentation & Full Details: https://codeinoven.com/llms-full.txt
-- Privacy Policy: https://codeinoven.com/privacy
-- Organization: Pillardash Solutions Limited (https://pillardash.com)
+- GitHub: https://github.com/pillardash-oss/codeinoven
+- Full Documentation: https://codeinoven.com/llms-full.txt
+- Pillardash: https://pillardash.com
