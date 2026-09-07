@@ -91,10 +91,10 @@
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'What is CodeInOven?',
+        name: 'What is CodeInOven (Code in oven)?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'CodeInOven (pronounced Code In Oven, three words) is an open-source desktop engineering workspace for software developers. It brings together coding agents, an inner web browser, an attached terminal, and GitHub pull request reviews under one window. It is developer software, unrelated to pharmaceuticals.'
+          text: 'CodeInOven (often searched as "Code in oven" or phonetically misheard as "codene") is an open-source desktop engineering workspace for software developers. It brings together coding agents, an inner browser, an attached terminal, and GitHub pull request reviews under one window. It is developer software, unrelated to pharmaceuticals.'
         }
       },
       {

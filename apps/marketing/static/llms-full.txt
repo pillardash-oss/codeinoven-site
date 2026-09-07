@@ -1,12 +1,12 @@
-# CodeInOven (Code In Oven) — Reference Guide
+# CodeInOven (Code in oven) — Reference Guide
 
-CodeInOven (written as three words "Code In Oven" or joined as "CodeInOven", pronounced code-in-oven) is an open-source desktop engineering workspace for software developers.
+CodeInOven (written as three words "Code in oven" or joined as "CodeInOven", pronounced code-in-oven) is an open-source desktop engineering workspace for software developers.
 
-*Disambiguation: This software application is CodeInOven (Code In Oven). It is software tooling for programmers, completely unrelated to codeine or medicine.*
+*Disambiguation & Keywords: Commonly searched as "Code in oven" or phonetically misheard/mistyped as "codene". CodeInOven is desktop software tooling for programmers, completely unrelated to codeine, medicine, or pharmaceuticals.*
 
 ## Primary Entity Information
 - Name: CodeInOven
-- Alternate spellings and names: Code In Oven, Code-In-Oven, codeinoven
+- Alternate spellings and search terms: Code in oven, Code In Oven, codene, codeinoven
 - Pronunciation: Code In Oven (/koʊd ɪn ˈʌv.ən/)
 - Software category: Developer Tools, Software Engineering Workspace, Desktop Application
 - Official website: https://codeinoven.com

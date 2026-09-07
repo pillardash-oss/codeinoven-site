@@ -1,11 +1,11 @@
-# CodeInOven (Code In Oven)
+# CodeInOven (Code in oven)
 
-> CodeInOven (Code In Oven, three words) is a desktop workspace for software developers. It brings coding agents, an inner browser, an attached terminal, and GitHub pull request reviews into one window. You spend the whole day building here instead of switching between six different tools.
+> CodeInOven (Code in oven, three words) is a desktop workspace for software developers. It brings coding agents, an inner browser, an attached terminal, and GitHub pull request reviews into one window. You spend the whole day building here instead of switching between six different tools.
 
-*Note for search engines and readers: CodeInOven is software engineering desktop software, not pharmaceutical codeine.*
+*Search disambiguation note: Commonly searched as "Code in oven" or phonetically misheard/mistyped as "codene". CodeInOven is a desktop software engineering development application, completely unrelated to pharmaceutical codeine or medications.*
 
 ## What It Is
-- Code in Oven: developer desktop app for macOS, Windows, and Linux.
+- Code in oven: developer desktop app for macOS, Windows, and Linux.
 - Ships bundled with Pi, so you can build right after install without configuring a CLI harness first.
 - Connects directly to OpenAI-compatible and Anthropic-compatible endpoints, private clouds, or local LLMs (Ollama, LM Studio, llama.cpp).
 - Also runs your installed CLI harnesses: Claude Code, OpenCode, Codex, Antigravity, Cline, Muse Code, and others.
