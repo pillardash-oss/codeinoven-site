@@ -26,7 +26,7 @@ The app uses a restrained workspace aesthetic:
 
 - Strong numeric hierarchy with tabular figures.
 
-- Satoshi as the product typeface.
+- JetBrains Mono as the product typeface (bundled variable font), light body weight with strong bold contrast.
 
 - Lucide icons for actions and module cues.
 
@@ -70,7 +70,7 @@ Light mode uses Ivory backgrounds with dark ink. Dark mode uses true neutral bla
 
 ## Typography
 
-Use Satoshi from `apps/app/static/assets/font` through the app font stack. Keep text practical and compact.
+Use JetBrains Mono Variable through the app font stack. Keep text practical and compact; body copy sits at a light weight (200–300) so semibold/bold headings carry the hierarchy.
 
 - Page titles: `text-xl` to `text-2xl`, `font-bold` or `font-semibold`, `tracking-tight`.
 

@@ -10,9 +10,11 @@
   const year = new Date().getFullYear();
 
   const navLinks = [
-    { href: "/#lifecycle", label: "Lifecycle" },
+    { href: "/#workstation", label: "Workspace" },
+    { href: "/#zero-ceremony", label: "Zero Ceremony" },
     { href: "/#harnesses", label: "Harnesses" },
-    { href: "/#workstation", label: "Workstation" },
+    { href: "/#lifecycle", label: "Lifecycle" },
+    { href: "/#ethos", label: "Ethos" },
     { href: "/#principles", label: "Principles" },
   ];
 

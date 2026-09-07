@@ -13,20 +13,20 @@
 	const requirements = [
 		{
 			icon: TerminalSquare,
-			title: 'At least one harness installed',
-			body: 'CodeInOven drives the agent CLIs already on your machine — OpenCode, Codex, Claude Code, Pi, Cline, Antigravity, Muse Code and more. It detects whatever is on your PATH at startup.'
+			title: 'Bundled with Pi (or connect your existing CLIs)',
+			body: 'Pi is included inside the application, so you can start right away without installing command-line tools first. If you already use OpenCode, Codex, Claude Code, Antigravity, Cline, or Muse Code, CodeInOven detects them on your PATH.'
 		},
 		{
 			icon: ShieldCheck,
-			title: 'Your own model access',
-			body: 'Sign in with your current harness, or point a custom base URL at Ollama, LM Studio, or llama.cpp. CodeInOven does not proxy your traffic and does not resell tokens.'
+			title: 'Bring your own API key or local server',
+			body: 'Use your existing OpenAI or Anthropic API key, or connect a local server like Ollama, LM Studio, or llama.cpp. Requests go straight to the model provider, never through an intermediary proxy.'
 		}
 	];
 </script>
 
 <Seo
-	title="Download CodeInOven (Code In Oven) - Desktop AI Coding Agent Workstation"
-	description="Download CodeInOven for macOS, Windows, and Linux. Free, open-source desktop control plane for AI coding agents (Claude Code, OpenCode, Codex, Antigravity)."
+	title="Download CodeInOven (Code In Oven) for Mac, Windows, Linux"
+	description="Download CodeInOven (Code in Oven) for macOS, Windows, and Linux. Desktop software engineering workbench with bundled Pi, inner browser, terminal, and GitHub PR reviews."
 	canonical="/download"
 />
 
