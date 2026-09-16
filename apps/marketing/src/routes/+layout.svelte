@@ -2,7 +2,7 @@
   import "./layout.css";
   import BrandMark from "$lib/components/brand-mark.svelte";
   import GithubMark from "$lib/components/github-mark.svelte";
-  import { COMPANY, LINKS, PRODUCT } from "$lib/config";
+  import { COMPANY, LICENSE, LINKS, PRODUCT } from "$lib/config";
   import { Kanban, X } from "@lucide/svelte";
 
   let { children } = $props();
@@ -94,7 +94,7 @@
       rel="noopener noreferrer"
       onclick={close}
     >
-      License
+      {LICENSE} License
     </a>
     <a class="mobile-download" href="/download" onclick={close}>Download</a>
   </nav>
@@ -126,7 +126,7 @@
         >
         <a href={LINKS.privacy}>Privacy</a>
         <a href={LINKS.license} target="_blank" rel="noopener noreferrer"
-          >License</a
+          >{LICENSE} License</a
         >
       </nav>
     </div>

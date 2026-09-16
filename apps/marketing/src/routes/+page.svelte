@@ -184,11 +184,12 @@
     </p>
 
     <h1 id="hero-title" class="hero-title anim" style="--d:60ms">
-      The desktop workspace where software gets built.
+      The AI workspace for real software development.
     </h1>
 
     <p class="hero-lead anim" style="--d:120ms">
-      Brainstorm, code, run shell commands, test web apps in an inner browser, and review pull requests without leaving the window. Pi is bundled out of the box.
+      Brainstorm, prototype, code, live test, review, and monitor cloud deployment all in the same workspace.
+      Download and start working no ceremony needed.
     </p>
 
     <div class="hero-actions anim" style="--d:180ms">
@@ -201,10 +202,6 @@
         </span>
         <span class="sr-only">for macOS, Windows, and Linux</span>
       </a>
-      <a class="ghost-link" href="#workstation">
-        See the workbench
-        <ArrowUpRight aria-hidden="true" />
-      </a>
     </div>
 
     <!-- The heat element from the product mark, made live. -->
@@ -214,7 +211,7 @@
 
     <!-- The harnesses, in their own colors, right where the claim is made. -->
     <div class="hero-harnesses anim" style="--d:260ms">
-      <p>Works with your installed CLI agents</p>
+      <p>Works with or without your installed CLI agents</p>
       <ul>
         {#each HARNESSES as harness, i (harness.id)}
           <li
@@ -225,7 +222,6 @@
             <img src="/harness/{harness.id}.svg" alt={harness.name} />
           </li>
         {/each}
-        <li class="is-more" title="And more">+∞</li>
       </ul>
     </div>
   </div>
@@ -245,9 +241,6 @@
       width="1920"
       height="1254"
     ></video>
-    <figcaption>
-      DeepSeek v4 flash running inside CodeInOven to test and operate a local desktop app.
-    </figcaption>
   </figure>
 </section>
 
@@ -258,7 +251,6 @@
   aria-labelledby="workstation-title"
 >
   <div class="section-head">
-    <p class="kicker">The All-Day Workbench</p>
     <h2 id="workstation-title">
       Spend your workday in one window.
     </h2>
