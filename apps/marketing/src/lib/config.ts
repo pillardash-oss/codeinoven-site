@@ -38,6 +38,9 @@ export const COMPANY = {
  */
 export const REPO = 'pillardash-oss/codeinoven';
 
+/** The open-source licence the repository ships under. */
+export const LICENSE = 'MIT';
+
 /** External links. */
 export const LINKS = {
   github: `https://github.com/${REPO}`,
@@ -47,7 +50,7 @@ export const LINKS = {
   security: `https://github.com/${REPO}/security/policy`,
   privacy: '/privacy',
   docs: null as string | null,
-  contact: 'mailto:hello@pillardash.com'
+  contact: 'mailto:hey@pillardash.com'
 } as const;
 
 export interface Platform {
