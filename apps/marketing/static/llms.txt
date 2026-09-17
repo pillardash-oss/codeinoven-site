@@ -13,7 +13,7 @@
 - Attached real terminal session pointed at your active repo.
 - GitHub pull request review and merge conflict resolution inside the app.
 - No AGENTS.md or CLAUDE.md ritual needed to get productive output.
-- Open source and free for personal and non-commercial use.
+- Open source MIT Licensed.
 
 ## Links
 - Website: https://codeinoven.com

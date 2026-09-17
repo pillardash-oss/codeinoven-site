@@ -171,7 +171,7 @@
 </script>
 
 <Seo
-  title="CodeInOven: Software Engineering Desktop Workspace"
+  title="CodeInOven: AI Software Development Application"
   description="CodeInOven (Code in Oven) is a desktop workspace for developers. Brainstorm, code, run terminals, test in an inner browser, and review GitHub pull requests with AI agents."
   canonical="/"
 />
@@ -188,8 +188,9 @@
     </h1>
 
     <p class="hero-lead anim" style="--d:120ms">
-      Brainstorm, prototype, code, live test, review, and monitor cloud deployment all in the same workspace.
-      Download and start working no ceremony needed.
+      Brainstorm, prototype, code, live test, review, and monitor cloud
+      deployment all in the same workspace. Download and start working no
+      ceremony needed.
     </p>
 
     <div class="hero-actions anim" style="--d:180ms">
@@ -251,12 +252,10 @@
   aria-labelledby="workstation-title"
 >
   <div class="section-head">
-    <h2 id="workstation-title">
-      Spend your workday in one window.
-    </h2>
+    <h2 id="workstation-title">Spend your workday in one window.</h2>
     <p class="section-lead">
-      No more bouncing across terminal windows, browser tabs, GitHub PRs, and chat boxes.
-      Everything you need to build software sits in one workstation.
+      No more bouncing across terminal windows, browser tabs, GitHub PRs, and
+      chat boxes. Everything you need to build software sits in one workstation.
     </p>
   </div>
 
@@ -282,7 +281,8 @@
         decoding="async"
       />
       <figcaption>
-        <strong>Engineering toolbox:</strong> Pick the phase you need, from initial brainstorm and PRD to spec creation and implementation.
+        <strong>Engineering toolbox:</strong> Pick the phase you need, from initial
+        brainstorm and PRD to spec creation and implementation.
       </figcaption>
     </figure>
 
@@ -296,7 +296,8 @@
         decoding="async"
       />
       <figcaption>
-        <strong>Scopes board:</strong> Track work across Pinned, Todo, Spec, and Done columns for each project repository.
+        <strong>Scopes board:</strong> Track work across Pinned, Todo, Spec, and
+        Done columns for each project repository.
       </figcaption>
     </figure>
   </div>
@@ -311,7 +312,8 @@
       decoding="async"
     />
     <figcaption>
-      Permission controls sit right in the composer, so you verify access before sending a prompt.
+      Permission controls sit right in the composer, so you verify access before
+      sending a prompt.
     </figcaption>
   </figure>
 </section>
@@ -324,11 +326,10 @@
 >
   <div class="section-head">
     <p class="kicker">Zero Ceremony</p>
-    <h2 id="ceremony-title">
-      No AGENTS.md or CLAUDE.md required.
-    </h2>
+    <h2 id="ceremony-title">No AGENTS.md or CLAUDE.md required.</h2>
     <p class="section-lead">
-      Built-in instructions guide models to inspect code, adhere to repository conventions, write focused diffs, and test before finishing.
+      Built-in instructions guide models to inspect code, adhere to repository
+      conventions, write focused diffs, and test before finishing.
     </p>
   </div>
 
@@ -338,7 +339,8 @@
       <span class="ceremony-badge">Built-in rules</span>
       <h3>Engineered discipline</h3>
       <p>
-        Agents read files before editing, match existing style, keep diffs small, and test before finishing.
+        Agents read files before editing, match existing style, keep diffs
+        small, and test before finishing.
       </p>
     </article>
 
@@ -347,7 +349,8 @@
       <span class="ceremony-badge">Checkpoints</span>
       <h3>No prompt loops</h3>
       <p>
-        Work runs in phases with clear diffs and approvals. No endless prompt babysitting.
+        Work runs in phases with clear diffs and approvals. No endless prompt
+        babysitting.
       </p>
     </article>
 
@@ -356,7 +359,8 @@
       <span class="ceremony-badge">Instant start</span>
       <h3>Open and build</h3>
       <p>
-        Open any project folder and start coding right away. Zero manual configuration.
+        Open any project folder and start coding right away. Zero manual
+        configuration.
       </p>
     </article>
   </div>
@@ -370,10 +374,13 @@
 >
   <div class="section-head">
     <p class="kicker">Harnesses & Models</p>
-    <h2 id="harnesses-title">Bundled with Pi. Works with your existing tools.</h2>
+    <h2 id="harnesses-title">
+      Bundled with Pi. Works with your existing tools.
+    </h2>
     <p class="section-lead">
-      CodeInOven comes bundled with Pi. Bring an API key or point to a local model.
-      If you already have Claude Code, OpenCode, Codex, or Cline installed, CodeInOven runs them too.
+      CodeInOven comes bundled with Pi. Bring an API key or point to a local
+      model. If you already have Claude Code, OpenCode, Codex, or Cline
+      installed, CodeInOven runs them too.
     </p>
   </div>
 
@@ -381,7 +388,8 @@
     <div class="bundled-banner-left">
       <span class="bundled-pill">Bundled</span>
       <p>
-        <strong>Pi is included.</strong> No CLI installs required. Add your model key or endpoint and start building.
+        <strong>Pi is included.</strong> No CLI installs required. Add your model
+        key or endpoint and start building.
       </p>
     </div>
   </div>
@@ -403,7 +411,9 @@
     <div class="backend-block">
       <h3>Local models and private clouds</h3>
       <p>
-        Supports OpenAI-compatible and Anthropic-compatible endpoints. Connect Ollama, LM Studio, vLLM, or dedicated private cloud servers with a base URL and model name.
+        Supports OpenAI-compatible and Anthropic-compatible endpoints. Connect
+        Ollama, LM Studio, vLLM, or dedicated private cloud servers with a base
+        URL and model name.
       </p>
       <ul class="backend-list">
         {#each LOCAL_BACKENDS as backend (backend.name)}
@@ -429,7 +439,9 @@
     <div class="backend-block">
       <h3>Hosted provider keys</h3>
       <p>
-        Sign in through the provider or bring your own API key. Keys stay in local configuration files on your machine. CodeInOven never proxies your code or prompts through external middleman servers.
+        Sign in through the provider or bring your own API key. Keys stay in
+        local configuration files on your machine. CodeInOven never proxies your
+        code or prompts through external middleman servers.
       </p>
       <ul class="provider-wall">
         {#each HOSTED_PROVIDERS as provider (provider)}
@@ -457,8 +469,8 @@
     <p class="kicker">The lifecycle</p>
     <h2 id="lifecycle-title">Spec first. Code after approval.</h2>
     <p class="section-lead">
-      Solid engineering follows a reliable sequence: specify, review, approve, implement.
-      Every step leaves a clear record you can inspect at any time.
+      Solid engineering follows a reliable sequence: specify, review, approve,
+      implement. Every step leaves a clear record you can inspect at any time.
     </p>
   </div>
 
@@ -492,7 +504,8 @@
       decoding="async"
     />
     <figcaption>
-      Reasoning steps, shell commands, execution time, and output stay visible on screen.
+      Reasoning steps, shell commands, execution time, and output stay visible
+      on screen.
     </figcaption>
   </figure>
 </section>
@@ -502,9 +515,13 @@
   <div class="ethos-banner">
     <div class="ethos-head">
       <p class="kicker">Our approach</p>
-      <h3 id="ethos-title">We build what people use. If something is missing, send a PR.</h3>
+      <h3 id="ethos-title">
+        We build what people use. If something is missing, send a PR.
+      </h3>
       <p>
-        No gimmicks or bloat. We build what developers actually need to ship code. If a harness, provider, or tool you use is missing, open an issue or bring a PR.
+        No gimmicks or bloat. We build what developers actually need to ship
+        code. If a harness, provider, or tool you use is missing, open an issue
+        or bring a PR.
       </p>
     </div>
 
@@ -512,7 +529,8 @@
       <div class="ethos-col">
         <h4><HeartHandshake aria-hidden="true" /> Built for all-day focus</h4>
         <p>
-          Organized to keep you in flow without jumping between windows or losing context.
+          Organized to keep you in flow without jumping between windows or
+          losing context.
         </p>
       </div>
       <div class="ethos-col">
@@ -524,7 +542,8 @@
       <div class="ethos-col">
         <h4><ShieldCheck aria-hidden="true" /> Local and private</h4>
         <p>
-          Your code never routes through third-party proxies. State stays on your machine.
+          Your code never routes through third-party proxies. State stays on
+          your machine.
         </p>
       </div>
     </div>
@@ -560,13 +579,15 @@
   <div class="heat-bar closer-heat" aria-hidden="true">
     <span class="heat-core"></span>
   </div>
-  <h2 id="closer-title">Your entire software day, in one place.</h2>
-  <p>
-    Free for personal and non-commercial use. Every run stays reviewable even after you close the thread.
-  </p>
+  <h2 id="closer-title">
+    Brainstorm, prototype, implement, test and deploy all in one place
+  </h2>
+  <p>Free and open source for everyone - MIT Licensed.</p>
   <div class="closer-actions">
     <a class="button" href="/download">
       <OsIcon os="macos" />
+      <OsIcon os="windows" />
+      <OsIcon os="linux" />
       Download CodeInOven
     </a>
     <a
