@@ -14,7 +14,7 @@
     description = PRODUCT.description,
     canonical = '/',
     type = 'website',
-    image = `${SITE_URL}/meta.webp`
+    image = `${SITE_URL}/meta.png`
   }: Props = $props();
 
   const canonicalUrl = $derived(
@@ -79,8 +79,8 @@
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock'
     },
-    image: `${SITE_URL}/meta.webp`,
-    screenshot: `${SITE_URL}/meta.webp`,
+    image: `${SITE_URL}/meta.png`,
+    screenshot: `${SITE_URL}/meta.png`,
     sameAs: [LINKS.github]
   };
 
@@ -140,9 +140,9 @@
   <meta property="og:type" content={type} />
   <meta property="og:locale" content="en_US" />
   <meta property="og:image" content={image} />
-  <meta property="og:image:type" content="image/webp" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1624" />
+  <meta property="og:image:height" content="1061" />
   <meta property="og:image:alt" content="CodeInOven (Code In Oven) - Desktop workstation for AI coding agents" />
 
   <!-- Twitter / X -->
