@@ -72,6 +72,11 @@ export const PLATFORMS: readonly Platform[] = [
 /**
  * The release mirror. Builds are served from here rather than GitHub, so a
  * download is a straight file fetch with no redirect chain.
+ *
+ * The mirror holds one release per channel under versionless file names
+ * (`stable/codeinoven-arm64.dmg`), so an artifact URL never changes and only the
+ * version behind it moves. That is what makes a prerendered page safe: the link
+ * baked at build time still downloads the newest build.
  */
 export const MIRROR_ORIGIN = 'https://dl.codeinoven.com';
 
@@ -82,7 +87,14 @@ export const RELEASE_MANIFEST_URL = `${MIRROR_ORIGIN}/stable/RELEASE.json`;
 export type OsPlatform = 'macos' | 'windows' | 'linux';
 
 export interface ReleaseArtifact {
+  /** The mirror's own file name, without a version: `codeinoven-arm64.dmg`. */
   name: string;
+  /**
+   * The versioned file name this copy came from in the GitHub release
+   * (`codeinoven-0.5.56-arm64.dmg`). The mirror serves one release per channel,
+   * so only the GitHub archive carries the version in a name.
+   */
+  source: string;
   platform: string;
   arch: string;
   kind: string;
@@ -128,9 +140,13 @@ export function selectArtifact(
   return release.artifacts.find((a) => a.platform === platform && a.kind === kind) ?? null;
 }
 
-/** A copy-paste command that always names the current artifact. */
+/**
+ * A copy-paste command that downloads the current artifact. `-O` keeps the
+ * file's own name, which the mirror serves without a version, so the command is
+ * the same string for every release.
+ */
 export function downloadCommand(artifact: ReleaseArtifact): string {
-  return `curl -fL -o ${artifact.name} ${artifact.url}`;
+  return `curl -fLO ${artifact.url}`;
 }
 
 /**
