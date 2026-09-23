@@ -9,12 +9,19 @@
     image?: string;
   }
 
+  /**
+   * The published social card. `static/meta.webp` is kept beside it as a plain
+   * alias of the same image, so card URLs that social crawlers cached before the
+   * swap keep resolving instead of 404ing. Update both when the card changes.
+   */
+  const SOCIAL_IMAGE = `${SITE_URL}/meta.png`;
+
   let {
     title = 'CodeInOven: Build real products with AI',
     description = PRODUCT.description,
     canonical = '/',
     type = 'website',
-    image = `${SITE_URL}/meta.png`
+    image = SOCIAL_IMAGE
   }: Props = $props();
 
   const canonicalUrl = $derived(
@@ -79,8 +86,8 @@
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock'
     },
-    image: `${SITE_URL}/meta.png`,
-    screenshot: `${SITE_URL}/meta.png`,
+    image: SOCIAL_IMAGE,
+    screenshot: SOCIAL_IMAGE,
     sameAs: [LINKS.github]
   };
 
