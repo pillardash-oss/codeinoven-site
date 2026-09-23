@@ -8,7 +8,7 @@
 	} from '$lib/config';
 	import OsIcon from '$lib/components/os-icon.svelte';
 	import Seo from '$lib/components/seo.svelte';
-	import { ArrowUpRight, ShieldCheck, TerminalSquare } from '@lucide/svelte';
+	import { ArrowUpRight, Download, ShieldCheck, TerminalSquare } from '@lucide/svelte';
 	import GithubMark from '$lib/components/github-mark.svelte';
 
 	let { data } = $props();
@@ -18,8 +18,10 @@
 
 	/**
 	 * Every platform card links at the mirror artifact for the current stable
-	 * release, so the file is a direct fetch. The GitHub release page stays in
-	 * the meta row as a separate fallback, and the cards fall back to it too
+	 * release, so the file is a direct fetch. Where a platform ships a second
+	 * package (Linux's `.deb`), it gets its own link under the card, because a
+	 * file name nobody can click is not an offer. The GitHub release page stays
+	 * in the meta row as a separate fallback, and the cards fall back to it too
 	 * when the manifest could not be read.
 	 */
 	const requirements = [
@@ -56,7 +58,7 @@
 			{@const artifact = selectArtifact(release, platform.id, RELEASE_PRIMARY_KIND[platform.id])}
 			{@const secondaryKind = RELEASE_SECONDARY_KIND[platform.id]}
 			{@const extra = secondaryKind ? selectArtifact(release, platform.id, secondaryKind) : null}
-			<li>
+			<li class="dl-item">
 				<a
 					class="dl-card"
 					href={artifact?.url ?? LINKS.releases}
@@ -68,7 +70,6 @@
 					<span class="dl-os">{platform.name}</span>
 					{#if artifact}
 						<code>{artifact.name}</code>
-						{#if extra}<code>{extra.name}</code>{/if}
 					{:else}
 						<code>{platform.artifact}</code>
 					{/if}
@@ -77,6 +78,18 @@
 						<ArrowUpRight aria-hidden="true" />
 					</span>
 				</a>
+				{#if extra}
+					<a
+						class="dl-alt"
+						href={extra.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						title={`Download ${extra.name}`}
+					>
+						<Download aria-hidden="true" />
+						<code>{extra.name}</code>
+					</a>
+				{/if}
 			</li>
 		{/each}
 	</ul>
