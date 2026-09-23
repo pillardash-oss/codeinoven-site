@@ -1,14 +1,26 @@
 <script lang="ts">
-	import { LINKS, PLATFORMS, PRODUCT } from '$lib/config';
+	import {
+		LINKS,
+		PLATFORMS,
+		RELEASE_PRIMARY_KIND,
+		RELEASE_SECONDARY_KIND,
+		selectArtifact
+	} from '$lib/config';
 	import OsIcon from '$lib/components/os-icon.svelte';
 	import Seo from '$lib/components/seo.svelte';
 	import { ArrowUpRight, ShieldCheck, TerminalSquare } from '@lucide/svelte';
 	import GithubMark from '$lib/components/github-mark.svelte';
 
+	let { data } = $props();
+
+	/** The stable manifest; null when the mirror could not be read. */
+	const release = $derived(data.release ?? null);
+
 	/**
-	 * Every button points at the repository's `releases/latest` page rather than
-	 * a pinned artifact URL, so a new release is live here the moment it is
-	 * published — nothing on this site needs editing per version.
+	 * Every platform card links at the mirror artifact for the current stable
+	 * release, so the file is a direct fetch. The GitHub release page stays in
+	 * the meta row as a separate fallback, and the cards fall back to it too
+	 * when the manifest could not be read.
 	 */
 	const requirements = [
 		{
@@ -35,25 +47,33 @@
 
 	<h1>Download CodeInOven</h1>
 	<p class="dl-lead">
-		Choose your platform and start building. Every download comes from the latest GitHub release.
-		There is no installer script and no account wall.
+		Choose your platform and start building. Downloads come straight from our mirror, so they are
+		fast. The GitHub release page stays available as a fallback.
 	</p>
 
 	<ul class="dl-grid">
 		{#each PLATFORMS as platform (platform.id)}
+			{@const artifact = selectArtifact(release, platform.id, RELEASE_PRIMARY_KIND[platform.id])}
+			{@const secondaryKind = RELEASE_SECONDARY_KIND[platform.id]}
+			{@const extra = secondaryKind ? selectArtifact(release, platform.id, secondaryKind) : null}
 			<li>
 				<a
 					class="dl-card"
-					href={LINKS.releases}
+					href={artifact?.url ?? LINKS.releases}
 					target="_blank"
 					rel="noopener noreferrer"
 					class:dl-card-soon={!platform.available}
 				>
 					<OsIcon os={platform.id} size={26} />
 					<span class="dl-os">{platform.name}</span>
-					<code>{platform.artifact}</code>
+					{#if artifact}
+						<code>{artifact.name}</code>
+						{#if extra}<code>{extra.name}</code>{/if}
+					{:else}
+						<code>{platform.artifact}</code>
+					{/if}
 					<span class="dl-go">
-						Latest release
+						{artifact ? 'Fast download' : 'Latest release'}
 						<ArrowUpRight aria-hidden="true" />
 					</span>
 				</a>
@@ -62,10 +82,12 @@
 	</ul>
 
 	<div class="dl-meta">
-		<a href={LINKS.github} target="_blank" rel="noopener noreferrer">
+		<a href={LINKS.releases} target="_blank" rel="noopener noreferrer">
 			<GithubMark size={15} />
-			Source on GitHub
+			GitHub releases (fallback)
 		</a>
+		<span aria-hidden="true">·</span>
+		<a href={LINKS.github} target="_blank" rel="noopener noreferrer">Source on GitHub</a>
 		<span aria-hidden="true">·</span>
 		<a href={LINKS.license} target="_blank" rel="noopener noreferrer">License</a>
 		<span aria-hidden="true">·</span>

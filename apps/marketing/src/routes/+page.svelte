@@ -6,6 +6,7 @@
     LOCAL_BACKENDS,
   } from "$lib/data/harnesses";
   import { LINKS } from "$lib/config";
+  import DownloadCommand from "$lib/components/download-command.svelte";
   import OsIcon from "$lib/components/os-icon.svelte";
   import Seo from "$lib/components/seo.svelte";
   import {
@@ -146,6 +147,8 @@
     },
   ];
 
+  let { data } = $props();
+
   onMount(() => {
     const els = document.querySelectorAll(".reveal");
     // `js` is set synchronously in app.html; drop it if we cannot observe, so
@@ -190,15 +193,7 @@
     </p>
 
     <div class="hero-actions anim" style="--d:180ms">
-      <a class="button" href="/download">
-        Download
-        <span class="button-os" aria-hidden="true">
-          <OsIcon os="macos" />
-          <OsIcon os="windows" />
-          <OsIcon os="linux" />
-        </span>
-        <span class="sr-only">for macOS, Windows, and Linux</span>
-      </a>
+      <DownloadCommand release={data.release} />
     </div>
 
     <!-- The heat element from the product mark, made live. -->

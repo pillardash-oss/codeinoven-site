@@ -2,10 +2,11 @@
   import "./layout.css";
   import BrandMark from "$lib/components/brand-mark.svelte";
   import GithubMark from "$lib/components/github-mark.svelte";
+  import DownloadCommand from "$lib/components/download-command.svelte";
   import { COMPANY, LICENSE, LINKS, PRODUCT } from "$lib/config";
   import { Kanban, X } from "@lucide/svelte";
 
-  let { children } = $props();
+  let { children, data } = $props();
 
   const year = new Date().getFullYear();
 
@@ -114,6 +115,10 @@
           >{COMPANY.name}</a
         >
       </p>
+
+      <div class="footer-download">
+        <DownloadCommand release={data.release} compact />
+      </div>
 
       <nav class="footer-links" aria-label="Footer">
         <a href="/download">Download</a>
