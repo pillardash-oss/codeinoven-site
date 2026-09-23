@@ -439,8 +439,11 @@
 .dl-command {
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
 	gap: 0.5rem;
-	width: 100%;
+	/* Shrink to the command itself so the copy button sits beside the text
+	   instead of drifting to the edge of a stretched bar. */
+	width: fit-content;
 	max-width: min(50rem, 100%);
 	min-width: 0;
 	margin: 0 auto;
@@ -464,7 +467,7 @@
 }
 
 .cmd-line code {
-	flex: 1 1 0;
+	flex: 0 1 auto;
 	min-width: 0;
 	padding: 0.6875rem 0.875rem;
 	font-family: var(--font-mono);
