@@ -6,7 +6,6 @@
 		RELEASE_PRIMARY_KIND,
 		RELEASE_SECONDARY_KIND,
 		selectArtifact,
-		VERIFY_COMMAND,
 		type OsPlatform,
 		type ReleaseManifest
 	} from '$lib/config';
@@ -86,10 +85,6 @@
 {:else if primary}
 	<div class="dl-command" class:is-compact={compact}>
 		{@render commandLine(downloadCommand(primary), 'primary', 'download command')}
-		<p class="cmd-verify">
-			<span>Verify</span>
-			<code>{VERIFY_COMMAND}</code>
-		</p>
 		{#if secondary}
 			<p class="cmd-alt">Or take the .deb instead</p>
 			{@render commandLine(downloadCommand(secondary), 'secondary', '.deb download command')}

@@ -511,22 +511,6 @@
 	color: var(--color-accent);
 }
 
-.cmd-verify {
-	display: flex;
-	align-items: baseline;
-	flex-wrap: wrap;
-	gap: 0.5rem;
-	min-width: 0;
-	font-size: 0.75rem;
-	color: var(--color-dimmed);
-}
-
-.cmd-verify code {
-	font-family: var(--font-mono);
-	color: var(--color-muted);
-	overflow-wrap: anywhere;
-}
-
 .cmd-alt {
 	margin-top: 0.25rem;
 	font-size: 0.75rem;

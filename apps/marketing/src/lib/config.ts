@@ -78,12 +78,6 @@ export const MIRROR_ORIGIN = 'https://dl.codeinoven.com';
 /** The stable channel's manifest: one entry per published artifact. */
 export const RELEASE_MANIFEST_URL = `${MIRROR_ORIGIN}/stable/RELEASE.json`;
 
-/** The checksum list the mirror publishes next to the artifacts. */
-export const CHECKSUMS_URL = `${MIRROR_ORIGIN}/stable/SHA256SUMS.txt`;
-
-/** The verify step shown under every download command. */
-export const VERIFY_COMMAND = 'shasum -a 256 -c SHA256SUMS.txt';
-
 /** The desktop platforms the product ships for. */
 export type OsPlatform = 'macos' | 'windows' | 'linux';
 
