@@ -179,10 +179,6 @@
 <!-- ─── Hero ─────────────────────────────────────────────────────────────── -->
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-inner">
-    <p class="eyebrow anim" style="--d:0ms">
-      <span class="eyebrow-dot"></span>Free and open source · macOS, Windows, Linux
-    </p>
-
     <h1 id="hero-title" class="hero-title anim" style="--d:60ms">
       Build real products with AI.
     </h1>
@@ -212,7 +208,6 @@
 
     <!-- The harnesses, in their own colors, right where the claim is made. -->
     <div class="hero-harnesses anim" style="--d:260ms">
-      <p>Bring the coding agents and models you already use</p>
       <ul>
         {#each HARNESSES as harness, i (harness.id)}
           <li
@@ -326,7 +321,6 @@
   aria-labelledby="ceremony-title"
 >
   <div class="section-head">
-    <p class="kicker">Start here</p>
     <h2 id="ceremony-title">Open your project. Start building.</h2>
     <p class="section-lead">
       You do not need to assemble a toolchain or write instruction files before
@@ -338,7 +332,6 @@
   <div class="ceremony-grid">
     <article class="ceremony-cell">
       <Sparkles aria-hidden="true" class="ceremony-icon" />
-      <span class="ceremony-badge">Project aware</span>
       <h3>It reads before it writes</h3>
       <p>
         Agents inspect your repository, follow its patterns, keep changes
@@ -348,7 +341,6 @@
 
     <article class="ceremony-cell">
       <Workflow aria-hidden="true" class="ceremony-icon" />
-      <span class="ceremony-badge">Checkpoints</span>
       <h3>Long work has a shape</h3>
       <p>
         Complex tasks move through clear phases with checkpoints, diffs, and
@@ -358,7 +350,6 @@
 
     <article class="ceremony-cell">
       <Boxes aria-hidden="true" class="ceremony-icon" />
-      <span class="ceremony-badge">Instant start</span>
       <h3>Setup is not the product</h3>
       <p>
         Open a folder and get to the part that matters. Add your own tools and
@@ -375,7 +366,6 @@
   aria-labelledby="harnesses-title"
 >
   <div class="section-head">
-    <p class="kicker">Your tools</p>
     <h2 id="harnesses-title">Use the models and coding agents you trust.</h2>
     <p class="section-lead">
       Keep the tools that already work for you. CodeInOven runs installed coding
@@ -385,7 +375,6 @@
 
   <div class="bundled-banner reveal">
     <div class="bundled-banner-left">
-      <span class="bundled-pill">Your choice</span>
       <p>
         <strong>One workspace, different agents.</strong> Move work across
         harnesses and models without rebuilding your process around each one.
@@ -465,7 +454,6 @@
   aria-labelledby="lifecycle-title"
 >
   <div class="section-head">
-    <p class="kicker">The lifecycle</p>
     <h2 id="lifecycle-title">Give complex work a clear path.</h2>
     <p class="section-lead">
       Describe the outcome, review the plan, set the permissions, and let the
@@ -513,7 +501,6 @@
 <section id="ethos" class="section reveal" aria-labelledby="ethos-title">
   <div class="ethos-banner">
     <div class="ethos-head">
-      <p class="kicker">Our approach</p>
       <h3 id="ethos-title">
         Free to use. Open to change.
       </h3>
@@ -557,7 +544,6 @@
   aria-labelledby="principles-title"
 >
   <div class="section-head">
-    <p class="kicker">Principles</p>
     <h2 id="principles-title">Serious tools earn trust.</h2>
   </div>
 
