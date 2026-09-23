@@ -11,11 +11,10 @@
 
   const navLinks = [
     { href: "/#workstation", label: "Workspace" },
-    { href: "/#zero-ceremony", label: "Zero Ceremony" },
-    { href: "/#harnesses", label: "Harnesses" },
-    { href: "/#lifecycle", label: "Lifecycle" },
-    { href: "/#ethos", label: "Ethos" },
-    { href: "/#principles", label: "Principles" },
+    { href: "/#zero-ceremony", label: "Get started" },
+    { href: "/#harnesses", label: "Tools" },
+    { href: "/#lifecycle", label: "How it works" },
+    { href: "/#ethos", label: "Open source" },
   ];
 
   let menuOpen = $state(false);

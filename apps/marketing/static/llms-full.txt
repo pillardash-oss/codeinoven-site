@@ -1,6 +1,6 @@
-# CodeInOven (Code in oven) — Reference Guide
+# CodeInOven (Code in oven) reference guide
 
-CodeInOven (written as three words "Code in oven" or joined as "CodeInOven", pronounced code-in-oven) is an open-source desktop engineering workspace for software developers.
+CodeInOven (written as three words "Code in oven" or joined as "CodeInOven", pronounced code-in-oven) is a free, open-source workspace for building real software with AI.
 
 *Disambiguation & Keywords: Commonly searched as "Code in oven" or phonetically misheard/mistyped as "codene". CodeInOven is desktop software tooling for programmers, completely unrelated to codeine, medicine, or pharmaceuticals.*
 
@@ -14,24 +14,19 @@ CodeInOven (written as three words "Code in oven" or joined as "CodeInOven", pro
 - Developer: Pillardash Solutions Limited (https://pillardash.com)
 
 ## What Makes CodeInOven Different
-Most developer setups force you to jump between six windows all day:
-1. Terminal windows running commands and CLI agents
-2. Browser tabs testing local ports and reading docs
-3. GitHub web tabs reviewing pull requests and resolving conflicts
-4. AI web chat interfaces for brainstorming and research
-5. File editors
-
-CodeInOven holds that entire routine in one desktop window.
+CodeInOven removes the setup work between installing an AI tool and building a real product. Open a project, choose a model or coding agent, and work in one place. The same workspace can carry an idea through prototyping, implementation, browser testing, pull request review, and deployment monitoring.
 
 ### Built-in capabilities
-- **Bundled Pi harness**: You do not have to install a CLI agent before launching. Pi comes bundled with the app.
-- **Universal model connectivity**: Connects to OpenAI-compatible and Anthropic-compatible endpoints. Connect any hosted API key, custom VPC, or local server (Ollama, LM Studio, llama.cpp).
-- **Supports existing CLI agents**: Auto-detects and runs Claude Code, OpenCode, Codex, Antigravity, Cline, Muse Code, and any other harness with a PR.
+- **Start without assembling a toolchain**: Install the app, add a model provider, and open a project.
+- **Use your preferred models**: Connect OpenAI-compatible and Anthropic-compatible endpoints, hosted providers, private clouds, or local servers such as Ollama, LM Studio, and llama.cpp.
+- **Keep your coding agents**: Runs Claude Code, OpenCode, Codex, Antigravity, Cline, Pi, Muse Code, and other supported harnesses.
 - **Inner browser**: Test running web apps, inspect live DOM elements, and read documentation without leaving the window.
 - **Attached terminal**: A real shell attached to your repository root.
 - **GitHub PR reviews**: Review pull requests, view diffs, stage changes, and fix merge conflicts in the app.
-- **Zero instruction file tax**: Models run with structured prompts that enforce testing, repo conventions, and verification without requiring AGENTS.md or CLAUDE.md files.
-- **Spec-driven workflow**: Complex work follows specify, review, approve, implement. Changes stay auditable.
+- **Long-running work**: Keep multi-phase work organized across projects, harnesses, automations, and worktrees.
+- **Computer use and vision**: Give supported models visual context and let agents operate desktop interfaces to verify their work.
+- **No required instruction files**: Start without writing AGENTS.md or CLAUDE.md files first.
+- **A reviewable path for complex work**: Specify, review, approve, and implement with visible checkpoints and diffs.
 
-## Community Rule
-We build what developers actually use. If a harness, provider, or tool you rely on is missing, open an issue or submit a pull request.
+## Free and Open Source
+CodeInOven is free to use and open source under the MIT license. If a model, integration, or workflow you need is missing, you can open an issue, submit a pull request, or build it for your own use.

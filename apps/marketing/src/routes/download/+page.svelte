@@ -13,8 +13,8 @@
 	const requirements = [
 		{
 			icon: TerminalSquare,
-			title: 'Bundled with Pi (or connect your existing CLIs)',
-			body: 'Pi is included inside the application, so you can start right away without installing command-line tools first. If you already use OpenCode, Codex, Claude Code, Antigravity, Cline, or Muse Code, CodeInOven detects them on your PATH.'
+			title: 'Open a project and start',
+			body: 'CodeInOven is ready for useful work after installation. If you already use OpenCode, Codex, Claude Code, Antigravity, Cline, Pi, or Muse Code, you can keep working with them here.'
 		},
 		{
 			icon: ShieldCheck,
@@ -26,7 +26,7 @@
 
 <Seo
 	title="Download CodeInOven (Code In Oven) for Mac, Windows, Linux"
-	description="Download CodeInOven (Code in Oven) for macOS, Windows, and Linux. Desktop software engineering workbench with bundled Pi, inner browser, terminal, and GitHub PR reviews."
+	description="Download CodeInOven for macOS, Windows, or Linux. Build real software with AI in a free, open-source workspace for coding, testing, reviews, automations, and long-running work."
 	canonical="/download"
 />
 
@@ -35,8 +35,8 @@
 
 	<h1>Download CodeInOven</h1>
 	<p class="dl-lead">
-		Every button below opens the latest published release on GitHub. Pick the artifact for your
-		platform. There is no installer script, no account, and no telemetry gate.
+		Choose your platform and start building. Every download comes from the latest GitHub release.
+		There is no installer script and no account wall.
 	</p>
 
 	<ul class="dl-grid">
