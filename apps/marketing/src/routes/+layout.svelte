@@ -15,7 +15,6 @@
     { href: "/#zero-ceremony", label: "Get started" },
     { href: "/#harnesses", label: "Tools" },
     { href: "/#lifecycle", label: "How it works" },
-    { href: "/#ethos", label: "Open source" },
   ];
 
   let menuOpen = $state(false);
@@ -30,10 +29,9 @@
   }}
 />
 
-
 <div class="shell" class:menu-open={menuOpen}>
   <header class="nav">
-      <a class="brand" aria-label="CodeInOven home" href="/" onclick={close}>
+    <a class="brand" aria-label="CodeInOven home" href="/" onclick={close}>
       <BrandMark size={26} />
       <span class="brand-word">Code<em>In</em>Oven</span>
     </a>

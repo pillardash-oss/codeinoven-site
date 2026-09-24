@@ -174,7 +174,7 @@
 </script>
 
 <Seo
-  title="CodeInOven: Build real products with AI"
+  title="CodeInOven: Build Real Products With AI"
   description="A free, open-source workspace for building real software with AI. Start without setup friction, then take on PR reviews, automations, deployments, worktrees, and long-running engineering work."
   canonical="/"
 />
@@ -183,14 +183,8 @@
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-inner">
     <h1 id="hero-title" class="hero-title anim" style="--d:60ms">
-      Build real products with AI.
+      Build Real Products With AI
     </h1>
-
-    <p class="hero-lead anim" style="--d:120ms">
-      Open a project and start. The agents, terminal, browser, reviews, and
-      deployment tools you need are already in one workspace, with no setup
-      ritual between you and the work.
-    </p>
 
     <div class="hero-actions anim" style="--d:180ms">
       <DownloadCommand release={data.release} />
@@ -243,11 +237,6 @@
 >
   <div class="section-head">
     <h2 id="workstation-title">Everything you need to do the work.</h2>
-    <p class="section-lead">
-      Start with an idea. Prototype it, write the code, test the real app,
-      review the pull request, and watch the deployment. CodeInOven keeps the
-      whole job together.
-    </p>
   </div>
 
   <div class="cap-grid">
@@ -317,11 +306,6 @@
 >
   <div class="section-head">
     <h2 id="ceremony-title">Open your project. Start building.</h2>
-    <p class="section-lead">
-      You do not need to assemble a toolchain or write instruction files before
-      useful work can begin. CodeInOven gives agents the structure they need and
-      gives you control over what they can do.
-    </p>
   </div>
 
   <div class="ceremony-grid">
@@ -362,19 +346,6 @@
 >
   <div class="section-head">
     <h2 id="harnesses-title">Use the models and coding agents you trust.</h2>
-    <p class="section-lead">
-      Keep the tools that already work for you. CodeInOven runs installed coding
-      agents, connects to hosted providers, and works with local models.
-    </p>
-  </div>
-
-  <div class="bundled-banner reveal">
-    <div class="bundled-banner-left">
-      <p>
-        <strong>One workspace, different agents.</strong> Move work across
-        harnesses and models without rebuilding your process around each one.
-      </p>
-    </div>
   </div>
 
   <ul class="harness-grid">
@@ -496,9 +467,7 @@
 <section id="ethos" class="section reveal" aria-labelledby="ethos-title">
   <div class="ethos-banner">
     <div class="ethos-head">
-      <h3 id="ethos-title">
-        Free to use. Open to change.
-      </h3>
+      <h3 id="ethos-title">Free to use. Open to change.</h3>
       <p>
         CodeInOven is open source under the MIT license. Use it for your work,
         study how it works, or add the tool you wish it had. The application can
@@ -510,8 +479,8 @@
       <div class="ethos-col">
         <h4><HeartHandshake aria-hidden="true" /> Made for real work</h4>
         <p>
-          Small prototypes and long-running engineering tasks belong in the
-          same workspace.
+          Small prototypes and long-running engineering tasks belong in the same
+          workspace.
         </p>
       </div>
       <div class="ethos-col">
@@ -529,29 +498,6 @@
         </p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ─── Principles ───────────────────────────────────────────────────────── -->
-<section
-  id="principles"
-  class="section section-narrow reveal"
-  aria-labelledby="principles-title"
->
-  <div class="section-head">
-    <h2 id="principles-title">Serious tools earn trust.</h2>
-  </div>
-
-  <div class="principle-grid">
-    {#each principles as principle (principle.title)}
-      <article class="principle-cell">
-        <principle.icon aria-hidden="true" class="principle-icon" />
-        <div>
-          <h3>{principle.title}</h3>
-          <p>{principle.body}</p>
-        </div>
-      </article>
-    {/each}
   </div>
 </section>
 

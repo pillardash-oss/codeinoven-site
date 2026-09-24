@@ -640,7 +640,6 @@
 }
 
 .section-head h2 {
-	max-width: 34rem;
 	font-size: clamp(1.75rem, 3.6vw, 2.75rem);
 	font-weight: 900;
 	line-height: 1.08;
@@ -1219,10 +1218,6 @@
 	);
 }
 
-.ethos-head {
-	max-width: 44rem;
-}
-
 .ethos-head h3 {
 	font-size: clamp(1.375rem, 2.5vw, 1.875rem);
 	font-weight: 800;
@@ -1323,7 +1318,6 @@
 
 .closer {
 	padding: clamp(4.5rem, 10vw, 8rem) var(--gutter);
-	max-width: 44rem;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
