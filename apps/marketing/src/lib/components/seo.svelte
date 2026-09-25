@@ -9,12 +9,19 @@
     image?: string;
   }
 
+  /**
+   * The published social card. `static/meta.webp` is kept beside it as a plain
+   * alias of the same image, so card URLs that social crawlers cached before the
+   * swap keep resolving instead of 404ing. Update both when the card changes.
+   */
+  const SOCIAL_IMAGE = `${SITE_URL}/meta.png`;
+
   let {
-    title = 'CodeInOven: Your AI coding work, under control',
+    title = 'CodeInOven: Build real products with AI',
     description = PRODUCT.description,
     canonical = '/',
     type = 'website',
-    image = `${SITE_URL}/meta.png`
+    image = SOCIAL_IMAGE
   }: Props = $props();
 
   const canonicalUrl = $derived(
@@ -79,8 +86,8 @@
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock'
     },
-    image: `${SITE_URL}/meta.png`,
-    screenshot: `${SITE_URL}/meta.png`,
+    image: SOCIAL_IMAGE,
+    screenshot: SOCIAL_IMAGE,
     sameAs: [LINKS.github]
   };
 
@@ -94,15 +101,15 @@
         name: 'What is CodeInOven (Code in oven)?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'CodeInOven (often searched as "Code in oven" or phonetically misheard as "codene") is an open-source desktop engineering workspace for software developers. It brings together coding agents, an inner browser, an attached terminal, and GitHub pull request reviews under one window. It is developer software, unrelated to pharmaceuticals.'
+          text: 'CodeInOven (often searched as "Code in oven" or phonetically misheard as "codene") is a free, open-source workspace for building real software with AI. It brings coding agents, a browser, a terminal, pull request reviews, and long-running engineering work into one desktop application. It is developer software, unrelated to pharmaceuticals.'
         }
       },
       {
         '@type': 'Question',
-        name: 'Do I need to install an agent harness before using CodeInOven?',
+        name: 'Can I start without setting up a coding agent first?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'No. CodeInOven comes bundled with Pi out of the box. Add your model endpoint or API key and start working. If you already have Claude Code, OpenCode, Codex, Antigravity, Cline, or Muse Code installed on your machine, CodeInOven detects and runs them too.'
+          text: 'Yes. Install CodeInOven, add a model provider, and open a project. If you already use Claude Code, OpenCode, Codex, Antigravity, Cline, Pi, or Muse Code, you can run them in the same workspace.'
         }
       },
       {

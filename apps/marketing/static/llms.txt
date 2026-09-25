@@ -1,19 +1,20 @@
 # CodeInOven (Code in oven)
 
-> CodeInOven (Code in oven, three words) is a desktop workspace for software developers. It brings coding agents, an inner browser, an attached terminal, and GitHub pull request reviews into one window. You spend the whole day building here instead of switching between six different tools.
+> CodeInOven (Code in oven, three words) is a free, open-source workspace for building real software with AI. It keeps coding agents, a browser, a terminal, pull request reviews, and long-running engineering work in one desktop application.
 
 *Search disambiguation note: Commonly searched as "Code in oven" or phonetically misheard/mistyped as "codene". CodeInOven is a desktop software engineering development application, completely unrelated to pharmaceutical codeine or medications.*
 
 ## What It Is
 - Code in oven: developer desktop app for macOS, Windows, and Linux.
-- Ships bundled with Pi, so you can build right after install without configuring a CLI harness first.
+- Ready for useful work after installation, without assembling a separate AI development setup first.
 - Connects directly to OpenAI-compatible and Anthropic-compatible endpoints, private clouds, or local LLMs (Ollama, LM Studio, llama.cpp).
 - Also runs your installed CLI harnesses: Claude Code, OpenCode, Codex, Antigravity, Cline, Muse Code, and others.
 - Built-in inner browser to test web applications and navigate documentation.
 - Attached real terminal session pointed at your active repo.
 - GitHub pull request review and merge conflict resolution inside the app.
-- No AGENTS.md or CLAUDE.md ritual needed to get productive output.
-- Open source MIT Licensed.
+- Handles prototypes, pull request reviews, automations, deployment monitoring, worktrees, and long-running work across projects.
+- No AGENTS.md or CLAUDE.md file required to begin.
+- Free and open source under the MIT license.
 
 ## Links
 - Website: https://codeinoven.com

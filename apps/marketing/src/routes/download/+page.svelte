@@ -1,86 +1,88 @@
 <script lang="ts">
-	import { LINKS, PLATFORMS, PRODUCT } from '$lib/config';
-	import OsIcon from '$lib/components/os-icon.svelte';
-	import Seo from '$lib/components/seo.svelte';
-	import { ArrowUpRight, ShieldCheck, TerminalSquare } from '@lucide/svelte';
-	import GithubMark from '$lib/components/github-mark.svelte';
+  import GithubMark from "$lib/components/github-mark.svelte";
+  import OsIcon from "$lib/components/os-icon.svelte";
+  import Seo from "$lib/components/seo.svelte";
+  import {
+    LINKS,
+    PLATFORMS,
+    RELEASE_PRIMARY_KIND,
+    RELEASE_SECONDARY_KIND,
+    selectArtifact,
+  } from "$lib/config";
+  import { Download } from "@lucide/svelte";
 
-	/**
-	 * Every button points at the repository's `releases/latest` page rather than
-	 * a pinned artifact URL, so a new release is live here the moment it is
-	 * published — nothing on this site needs editing per version.
-	 */
-	const requirements = [
-		{
-			icon: TerminalSquare,
-			title: 'Bundled with Pi (or connect your existing CLIs)',
-			body: 'Pi is included inside the application, so you can start right away without installing command-line tools first. If you already use OpenCode, Codex, Claude Code, Antigravity, Cline, or Muse Code, CodeInOven detects them on your PATH.'
-		},
-		{
-			icon: ShieldCheck,
-			title: 'Bring your own API key or local server',
-			body: 'Use your existing OpenAI or Anthropic API key, or connect a local server like Ollama, LM Studio, or llama.cpp. Requests go straight to the model provider, never through an intermediary proxy.'
-		}
-	];
+  let { data } = $props();
+
+  /** The stable manifest; null when the mirror could not be read. */
+  const release = $derived(data.release ?? null);
 </script>
 
 <Seo
-	title="Download CodeInOven (Code In Oven) for Mac, Windows, Linux"
-	description="Download CodeInOven (Code in Oven) for macOS, Windows, and Linux. Desktop software engineering workbench with bundled Pi, inner browser, terminal, and GitHub PR reviews."
-	canonical="/download"
+  title="Download CodeInOven (Code In Oven) for Mac, Windows, Linux"
+  description="Download CodeInOven for macOS, Windows, or Linux. Build real software with AI in a free, open-source workspace for coding, testing, reviews, automations, and long-running work."
+  canonical="/download"
 />
 
 <section class="dl">
-	<div class="heat-bar dl-heat" aria-hidden="true"><span class="heat-core"></span></div>
+  <div class="heat-bar dl-heat" aria-hidden="true">
+    <span class="heat-core"></span>
+  </div>
 
-	<h1>Download CodeInOven</h1>
-	<p class="dl-lead">
-		Every button below opens the latest published release on GitHub. Pick the artifact for your
-		platform. There is no installer script, no account, and no telemetry gate.
-	</p>
+  <h1>Download CodeInOven</h1>
+  <p class="dl-lead">
+    Choose your platform and start building. Downloads come straight from our
+    mirror, so they are fast. The GitHub release page stays available as a
+    fallback.
+  </p>
 
-	<ul class="dl-grid">
-		{#each PLATFORMS as platform (platform.id)}
-			<li>
-				<a
-					class="dl-card"
-					href={LINKS.releases}
-					target="_blank"
-					rel="noopener noreferrer"
-					class:dl-card-soon={!platform.available}
-				>
-					<OsIcon os={platform.id} size={26} />
-					<span class="dl-os">{platform.name}</span>
-					<code>{platform.artifact}</code>
-					<span class="dl-go">
-						Latest release
-						<ArrowUpRight aria-hidden="true" />
-					</span>
-				</a>
-			</li>
-		{/each}
-	</ul>
+  <ul class="dl-grid">
+    {#each PLATFORMS as platform (platform.id)}
+      {@const artifact = selectArtifact(
+        release,
+        platform.id,
+        RELEASE_PRIMARY_KIND[platform.id],
+      )}
+      {@const secondaryKind = RELEASE_SECONDARY_KIND[platform.id]}
+      {@const extra = secondaryKind
+        ? selectArtifact(release, platform.id, secondaryKind)
+        : null}
+      <li class="dl-item">
+        <a
+          class="dl-card"
+          href={artifact?.url ?? LINKS.releases}
+          target="_blank"
+          rel="noopener noreferrer"
+          class:dl-card-soon={!platform.available}
+        >
+          <OsIcon os={platform.id} size={26} />
+          <span class="dl-os">{platform.name}</span>
+          {#if artifact}
+            <code>{artifact.name}</code>
+          {:else}
+            <code>{platform.artifact}</code>
+          {/if}
+          <span class="dl-go"> Download </span>
+        </a>
+        {#if extra}
+          <a
+            class="dl-alt"
+            href={extra.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`Download ${extra.name}`}
+          >
+            <Download aria-hidden="true" />
+            <code>{extra.name}</code>
+          </a>
+        {/if}
+      </li>
+    {/each}
+  </ul>
 
-	<div class="dl-meta">
-		<a href={LINKS.github} target="_blank" rel="noopener noreferrer">
-			<GithubMark size={15} />
-			Source on GitHub
-		</a>
-		<span aria-hidden="true">·</span>
-		<a href={LINKS.license} target="_blank" rel="noopener noreferrer">License</a>
-		<span aria-hidden="true">·</span>
-		<a href={LINKS.security} target="_blank" rel="noopener noreferrer">Security policy</a>
-	</div>
-
-	<div class="dl-reqs">
-		{#each requirements as requirement (requirement.title)}
-			<article>
-				<requirement.icon aria-hidden="true" class="dl-req-icon" />
-				<div>
-					<h2>{requirement.title}</h2>
-					<p>{requirement.body}</p>
-				</div>
-			</article>
-		{/each}
-	</div>
+  <div class="dl-meta">
+    <a href={LINKS.releases} target="_blank" rel="noopener noreferrer">
+      <GithubMark size={15} />
+      GitHub releases
+    </a>
+  </div>
 </section>

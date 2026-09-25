@@ -2,20 +2,19 @@
   import "./layout.css";
   import BrandMark from "$lib/components/brand-mark.svelte";
   import GithubMark from "$lib/components/github-mark.svelte";
+  import DownloadCommand from "$lib/components/download-command.svelte";
   import { COMPANY, LICENSE, LINKS, PRODUCT } from "$lib/config";
   import { Kanban, X } from "@lucide/svelte";
 
-  let { children } = $props();
+  let { children, data } = $props();
 
   const year = new Date().getFullYear();
 
   const navLinks = [
     { href: "/#workstation", label: "Workspace" },
-    { href: "/#zero-ceremony", label: "Zero Ceremony" },
-    { href: "/#harnesses", label: "Harnesses" },
-    { href: "/#lifecycle", label: "Lifecycle" },
-    { href: "/#ethos", label: "Ethos" },
-    { href: "/#principles", label: "Principles" },
+    { href: "/#zero-ceremony", label: "Get started" },
+    { href: "/#harnesses", label: "Tools" },
+    { href: "/#lifecycle", label: "How it works" },
   ];
 
   let menuOpen = $state(false);
@@ -30,10 +29,9 @@
   }}
 />
 
-
 <div class="shell" class:menu-open={menuOpen}>
   <header class="nav">
-      <a class="brand" aria-label="CodeInOven home" href="/" onclick={close}>
+    <a class="brand" aria-label="CodeInOven home" href="/" onclick={close}>
       <BrandMark size={26} />
       <span class="brand-word">Code<em>In</em>Oven</span>
     </a>
@@ -115,6 +113,10 @@
           >{COMPANY.name}</a
         >
       </p>
+
+      <div class="footer-download">
+        <DownloadCommand release={data.release} compact />
+      </div>
 
       <nav class="footer-links" aria-label="Footer">
         <a href="/download">Download</a>
