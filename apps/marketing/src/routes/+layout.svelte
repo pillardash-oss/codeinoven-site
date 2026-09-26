@@ -1,4 +1,5 @@
 <script lang="ts">
+  import "./layout.css";
   import { COMPANY, LICENSE, LINKS, PRODUCT } from "$lib/config";
   import GithubMark from "$lib/components/github-mark.svelte";
 
