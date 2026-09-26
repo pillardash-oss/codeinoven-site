@@ -19,8 +19,52 @@
     ...HOSTED_PROVIDERS,
     ...LOCAL_BACKENDS.flatMap((backend) => backend.id ? [backend.id] : []),
   ])];
+  const JOURNEY_STEPS = [
+    {
+      id: "brainstorm",
+      tab: "Brainstorm",
+      src: "/journey/brainstorm.png",
+      alt: "A CodeInOven brainstorm document organizing discoveries, decisions, and open questions for a product idea.",
+      title: "Turn a rough idea into a plan.",
+      description: "Think through the problem, record decisions, and give the work a clear direction before implementation.",
+    },
+    {
+      id: "design",
+      tab: "Design",
+      src: "/journey/design.png",
+      alt: "A website design open in CodeInOven's in-app browser, ready for visual review and feedback.",
+      title: "See the product before you build it.",
+      description: "Preview the interface, leave feedback on what needs to change, and settle the direction together.",
+    },
+    {
+      id: "implement",
+      tab: "Implement",
+      src: "/journey/implement.png",
+      alt: "A CodeInOven engineering thread beside a live website design preview while the implementation is in progress.",
+      title: "Carry the design into the code.",
+      description: "Give your agent the project context and chosen design, then follow the changes in your real workspace.",
+    },
+    {
+      id: "launch",
+      tab: "Launch",
+      src: "/journey/launch.png",
+      alt: "A product launch video playing in CodeInOven's in-app preview.",
+      title: "Make the launch part of the work.",
+      description: "Create a product video, preview the cut, and prepare it to introduce what you made.",
+    },
+    {
+      id: "monitor",
+      tab: "Monitor",
+      src: "/journey/monitor.png",
+      alt: "The CodeInOven assistant reviewing Search Console findings and social engagement in a scheduled routine.",
+      title: "Keep learning after release.",
+      description: "Track Search Console and connected social engagement. Ask your assistant for improvements, then draft or publish posts through connected tools.",
+    },
+  ] as const;
+  type JourneyStepId = (typeof JOURNEY_STEPS)[number]["id"];
 
   let selectedPlatform = $state<OsPlatform>("macos");
+  let selectedJourneyStep = $state<JourneyStepId>("brainstorm");
   let copied = $state(false);
   let resetTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -33,6 +77,9 @@
   );
   const selectedCommand = $derived(
     selectedArtifact ? downloadCommand(selectedArtifact) : null,
+  );
+  const selectedJourney = $derived(
+    JOURNEY_STEPS.find((step) => step.id === selectedJourneyStep) ?? JOURNEY_STEPS[0],
   );
 
   function selectPlatformWithKeyboard(event: KeyboardEvent, current: OsPlatform) {
@@ -48,6 +95,21 @@
     const next = PLATFORMS[nextIndex];
     selectedPlatform = next.id;
     document.getElementById(`platform-${next.id}`)?.focus();
+  }
+
+  function selectJourneyWithKeyboard(event: KeyboardEvent, current: JourneyStepId) {
+    const index = JOURNEY_STEPS.findIndex((step) => step.id === current);
+    let nextIndex = index;
+    if (event.key === "ArrowRight") nextIndex = (index + 1) % JOURNEY_STEPS.length;
+    else if (event.key === "ArrowLeft") nextIndex = (index - 1 + JOURNEY_STEPS.length) % JOURNEY_STEPS.length;
+    else if (event.key === "Home") nextIndex = 0;
+    else if (event.key === "End") nextIndex = JOURNEY_STEPS.length - 1;
+    else return;
+
+    event.preventDefault();
+    const next = JOURNEY_STEPS[nextIndex];
+    selectedJourneyStep = next.id;
+    document.getElementById(`journey-tab-${next.id}`)?.focus();
   }
 
   async function copyCommand() {
@@ -294,49 +356,50 @@
             </p>
           </div>
 
-          <ol class="journey-steps">
-            <li class="journey-step">
-              <span class="journey-num" aria-hidden="true">01</span>
-              <div>
-                <h3>Design before code</h3>
-                <p>
-                  Explore an idea as a real interface. Review the screens, refine
-                  the experience, and carry the approved design into implementation.
-                </p>
-              </div>
-            </li>
-            <li class="journey-step">
-              <span class="journey-num" aria-hidden="true">02</span>
-              <div>
-                <h3>Build with your agent</h3>
-                <p>
-                  Give your agent the goal and project context. Follow the work,
-                  inspect every change, and decide what ships.
-                </p>
-              </div>
-            </li>
-            <li class="journey-step">
-              <span class="journey-num" aria-hidden="true">03</span>
-              <div>
-                <h3>Make the launch video</h3>
-                <p>
-                  Create a product video in CodeInOven, review it in the in-app
-                  preview, and get it ready to share.
-                </p>
-              </div>
-            </li>
-            <li class="journey-step">
-              <span class="journey-num" aria-hidden="true">04</span>
-              <div>
-                <h3>Learn what reaches people</h3>
-                <p>
-                  Connect Google Search Console and your social channels. Ask your
-                  assistant to track search and engagement, suggest improvements,
-                  and draft or publish posts through the tools you connect.
-                </p>
-              </div>
-            </li>
-          </ol>
+          <div class="journey-showcase">
+            <div class="journey-tabs" role="tablist" aria-label="Product journey">
+              {#each JOURNEY_STEPS as step, index (step.id)}
+                <button
+                  id="journey-tab-{step.id}"
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedJourneyStep === step.id}
+                  aria-controls="journey-panel"
+                  tabindex={selectedJourneyStep === step.id ? 0 : -1}
+                  onclick={() => (selectedJourneyStep = step.id)}
+                  onkeydown={(event) => selectJourneyWithKeyboard(event, step.id)}
+                >
+                  <span class="journey-tab-num" aria-hidden="true">0{index + 1}</span>
+                  <span>{step.tab}</span>
+                </button>
+              {/each}
+            </div>
+
+            <div
+              class="journey-panel"
+              id="journey-panel"
+              role="tabpanel"
+              aria-labelledby="journey-tab-{selectedJourney.id}"
+              tabindex="0"
+            >
+              <figure class="screen journey-visual">
+                <div class="screen-bar" aria-hidden="true">
+                  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                  <span class="screen-title">{selectedJourney.tab} in CodeInOven</span>
+                </div>
+                <img
+                  src={selectedJourney.src}
+                  alt={selectedJourney.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  <h3>{selectedJourney.title}</h3>
+                  <p>{selectedJourney.description}</p>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
         </div>
       </section>
 
