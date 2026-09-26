@@ -1,530 +1,523 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import {
-    HARNESSES,
-    HOSTED_PROVIDERS,
-    LOCAL_BACKENDS,
-  } from "$lib/data/harnesses";
-  import { LINKS } from "$lib/config";
-  import DownloadCommand from "$lib/components/download-command.svelte";
-  import OsIcon from "$lib/components/os-icon.svelte";
   import Seo from "$lib/components/seo.svelte";
+  import { HARNESSES, HOSTED_PROVIDERS, LOCAL_BACKENDS } from "$lib/data/harnesses";
   import {
-    ArrowUpRight,
-    Boxes,
-    Brain,
-    Cloud,
-    FileCheck2,
-    Flame,
-    Gauge,
-    GitFork,
-    GitPullRequest,
-    Globe,
-    HeartHandshake,
-    Kanban,
-    MonitorPlay,
-    Radio,
-    Replace,
-    ScanEye,
-    ShieldCheck,
-    SlidersHorizontal,
-    Smartphone,
-    Sparkles,
-    Target,
-    Terminal,
-    TerminalSquare,
-    Workflow,
-  } from "@lucide/svelte";
+    LINKS,
+    PLATFORMS,
+    RELEASE_PRIMARY_KIND,
+    RELEASE_SECONDARY_KIND,
+    downloadCommand,
+    selectArtifact,
+    type OsPlatform,
+  } from "$lib/config";
+  import { Check, Copy, ArrowUpRight } from "@lucide/svelte";
 
-  /** The four lifecycle stages, exactly as the app models them. */
-  const lifecycle = [
-    {
-      id: "specify",
-      title: "Specify",
-      lead: "A spec with fixed sections.",
-      body: "Problem, Resolution, Success Criteria, Test Strategy, Commit Pattern, Constraints & Risks. Same structure every time, so nothing important stays unsaid.",
-      marks: [
-        "problem",
-        "resolution",
-        "success criteria",
-        "test strategy",
-        "commit pattern",
-      ],
-    },
-    {
-      id: "review",
-      title: "Review",
-      lead: "Read it before anything runs.",
-      body: "The agent drafts the spec from your thread. Annotate any section and send it back. Once you approve, that text is the contract the work is held to.",
-      marks: ["annotations", "versions", "approve", "send back"],
-    },
-    {
-      id: "approve",
-      title: "Approve",
-      lead: "Permissions are explicit.",
-      body: "Tool calls ask within the tier you set. Auto Review by default; full access only if you switch it on yourself.",
-      marks: ["Auto Review", "Full Access"],
-    },
-    {
-      id: "implement",
-      title: "Implement",
-      lead: "Checked work, phase by phase.",
-      body: "Each phase lands as a checkpoint with a diff. An audit pass tests the result against Success Criteria before you merge.",
-      marks: ["checkpoints", "diffs", "audit", "rollback"],
-    },
-  ];
+  let { data }: import("./$types").PageProps = $props();
+  const release = $derived(data.release ?? null);
+  const providers = [...new Set([
+    ...HOSTED_PROVIDERS,
+    ...LOCAL_BACKENDS.flatMap((backend) => backend.id ? [backend.id] : []),
+  ])];
 
-  /** Core capabilities of the all-day engineering workstation. */
-  const workstationCapabilities = [
-    {
-      icon: Globe,
-      title: "Build and test in one place",
-      body: "Run your app, inspect the DOM, and let agents test real browser flows without leaving the workspace.",
-    },
-    {
-      icon: Terminal,
-      title: "Attached terminal",
-      body: "A real shell in your project root. Run builds, migrations, and scripts next to your agent.",
-    },
-    {
-      icon: GitPullRequest,
-      title: "Review pull requests",
-      body: "Inspect diffs, resolve conflicts, and commit the right files without moving the work to another tool.",
-    },
-    {
-      icon: Sparkles,
-      title: "Think before you commit",
-      body: "Turn a rough idea into a PRD, test a prototype, and settle the architecture before changing production code.",
-    },
-    {
-      icon: Gauge,
-      title: "Know what the work costs",
-      body: "See token use, latency, and cost for each step. Save repeated commands as actions you can run again.",
-    },
-    {
-      icon: Kanban,
-      title: "Many projects, one workspace",
-      body: "Move between repositories, keep long-running work organized, and isolate parallel changes in worktrees.",
-    },
-    {
-      icon: Replace,
-      title: "Use the agents you trust",
-      body: "Work across Claude Code, OpenCode, Codex, Cline, Pi, and more. Change agents without changing how you work.",
-    },
-    {
-      icon: ScanEye,
-      title: "Vision and computer use",
-      body: "Give any supported model screenshots and mockups. Let agents use the desktop to check the result themselves.",
-    },
-    {
-      icon: Smartphone,
-      title: "Keep an eye on long runs",
-      body: "Check diffs, follow progress, and approve tool permissions from your phone while work continues.",
-    },
-  ];
+  let selectedPlatform = $state<OsPlatform>("macos");
+  let copied = $state(false);
+  let resetTimer: ReturnType<typeof setTimeout> | undefined;
 
-  /** Straight from the app bible — the product's actual commitments. */
-  const principles = [
-    {
-      icon: Radio,
-      title: "Work you can inspect",
-      body: "Runs, tool calls, diffs, and checkpoints stay visible. You can see what changed and why.",
-    },
-    {
-      icon: FileCheck2,
-      title: "You stay in charge",
-      body: "Set the permission level, review the plan, and decide what lands in your project.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Never touch what is not yours",
-      body: "CodeInOven keeps its state in its own config directory and writes nothing uninvited into your repository.",
-    },
-    {
-      icon: SlidersHorizontal,
-      title: "Bounded on purpose",
-      body: "Threads, history chunks, and checkpoints are capped. Growth is a decision, not drift.",
-    },
-  ];
+  const selectedArtifact = $derived(
+    selectArtifact(release, selectedPlatform, RELEASE_PRIMARY_KIND[selectedPlatform]),
+  );
+  const secondaryKind = $derived(RELEASE_SECONDARY_KIND[selectedPlatform]);
+  const secondaryArtifact = $derived(
+    secondaryKind ? selectArtifact(release, selectedPlatform, secondaryKind) : null,
+  );
+  const selectedCommand = $derived(
+    selectedArtifact ? downloadCommand(selectedArtifact) : null,
+  );
 
-  let { data } = $props();
+  function selectPlatformWithKeyboard(event: KeyboardEvent, current: OsPlatform) {
+    const index = PLATFORMS.findIndex((platform) => platform.id === current);
+    let nextIndex = index;
+    if (event.key === "ArrowRight") nextIndex = (index + 1) % PLATFORMS.length;
+    else if (event.key === "ArrowLeft") nextIndex = (index - 1 + PLATFORMS.length) % PLATFORMS.length;
+    else if (event.key === "Home") nextIndex = 0;
+    else if (event.key === "End") nextIndex = PLATFORMS.length - 1;
+    else return;
+
+    event.preventDefault();
+    const next = PLATFORMS[nextIndex];
+    selectedPlatform = next.id;
+    document.getElementById(`platform-${next.id}`)?.focus();
+  }
+
+  async function copyCommand() {
+    if (!selectedCommand) return;
+    try {
+      await navigator.clipboard.writeText(selectedCommand);
+      copied = true;
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => (copied = false), 1600);
+    } catch {
+      // The command remains selectable if clipboard access is unavailable.
+    }
+  }
 
   onMount(() => {
-    const els = document.querySelectorAll(".reveal");
-    // `js` is set synchronously in app.html; drop it if we cannot observe, so
-    // nothing stays stuck at opacity 0.
+    const heroVideo = document.querySelector<HTMLVideoElement>("[data-hero-video]");
+    if (heroVideo && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      void heroVideo.play().catch(() => {});
+    }
+
+    const elements = document.querySelectorAll("[data-reveal]");
     if (!("IntersectionObserver" in window)) {
-      document.documentElement.classList.remove("js");
+      elements.forEach((element) => element.classList.add("is-visible"));
       return;
     }
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
+            entry.target.classList.add("is-visible");
             observer.unobserve(entry.target);
           }
         }
       },
-      { threshold: 0.12 },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
     );
-    for (const el of els) observer.observe(el);
+    elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   });
 </script>
 
 <Seo
   title="CodeInOven: Build Real Products With AI"
-  description="A free, open-source workspace for building real software with AI. Start without setup friction, then take on PR reviews, automations, deployments, worktrees, and long-running engineering work."
+  description="CodeInOven is a free, open-source workspace for building real software with AI. Plan, build, test, review, and ship with the coding agents you already trust."
   canonical="/"
 />
 
-<!-- ─── Hero ─────────────────────────────────────────────────────────────── -->
-<section class="hero" aria-labelledby="hero-title">
-  <div class="hero-inner">
-    <h1 id="hero-title" class="hero-title anim" style="--d:60ms">
-      Build Real Products With AI
-    </h1>
+      <!-- ─── Hero ──────────────────────────────────────────────────────── -->
+      <section class="hero">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="wrap hero-inner">
+          <h1 class="hero-title">
+            Turn your agent<br />
+            into an <span class="hl">engineer</span>.
+          </h1>
 
-    <div class="hero-actions anim" style="--d:180ms">
-      <DownloadCommand release={data.release} />
-    </div>
+          <p class="hero-sub">
+            Every plan, tool call, diff, and commit lands in your real project.
+            Agents that read the codebase, run the tests, and ship the change
+            while you stay in charge.
+          </p>
 
-    <!-- The heat element from the product mark, made live. -->
-    <div class="heat-bar anim" style="--d:210ms" aria-hidden="true">
-      <span class="heat-core"></span>
-    </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/download">
+              Download for macOS, Windows, and Linux
+            </a>
+            <a class="btn btn-ghost" href={LINKS.github} target="_blank" rel="noopener noreferrer">
+              View on GitHub
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
 
-    <!-- The harnesses, in their own colors, right where the claim is made. -->
-    <div class="hero-harnesses anim" style="--d:260ms">
-      <ul>
-        {#each HARNESSES as harness, i (harness.id)}
-          <li
-            style="--i:{i}"
-            title={harness.name}
-            class={harness.tile ? "is-tile" : "is-glyph"}
-          >
-            <img src="/harness/{harness.id}.svg" alt={harness.name} />
-          </li>
-        {/each}
-      </ul>
-    </div>
-  </div>
-
-  <!-- Real capture of the running application. -->
-  <figure class="hero-shot reveal">
-    <video
-      src="/shots/workspace-hero.mp4"
-      poster="/shots/workspace.png"
-      aria-label="The CodeInOven workspace: project rail on the left, agent run in the
-			middle showing reasoning traces and tool calls with status, and a context panel on the right."
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      width="1920"
-      height="1254"
-    ></video>
-  </figure>
-</section>
-
-<!-- ─── The All-Day Workstation ─────────────────────────────────────────── -->
-<section
-  id="workstation"
-  class="section reveal"
-  aria-labelledby="workstation-title"
->
-  <div class="section-head">
-    <h2 id="workstation-title">Everything you need to do the work.</h2>
-  </div>
-
-  <div class="cap-grid">
-    {#each workstationCapabilities as capability (capability.title)}
-      <article class="cap-cell reveal">
-        <capability.icon aria-hidden="true" class="cap-icon" />
-        <h3>{capability.title}</h3>
-        <p>{capability.body}</p>
-      </article>
-    {/each}
-  </div>
-
-  <!-- Real screenshots of the Engineering Toolbox and Scopes Board -->
-  <div class="workspace-duo reveal">
-    <figure class="workspace-card">
-      <img
-        src="/shots/engineering-toolbox.png"
-        alt="Engineering Toolbox stages: Brainstorm, PRD, Spec, Assignment, Achievement, and Auto Pilot"
-        width="1400"
-        height="875"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>
-        <strong>Engineering toolbox:</strong> Pick the phase you need, from initial
-        brainstorm and PRD to spec creation and implementation.
-      </figcaption>
-    </figure>
-
-    <figure class="workspace-card">
-      <img
-        src="/shots/scopes-board.png"
-        alt="Scopes board organizing threads into Pinned, Todo, Spec, and Done columns across project scopes"
-        width="1400"
-        height="875"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>
-        <strong>Scopes board:</strong> Track work across Pinned, Todo, Spec, and
-        Done columns for each project repository.
-      </figcaption>
-    </figure>
-  </div>
-
-  <figure class="composer-shot reveal">
-    <img
-      src="/shots/composer.png"
-      alt="The CodeInOven composer, showing permission scope, model selector, and run controls."
-      width="1400"
-      height="263"
-      loading="lazy"
-      decoding="async"
-    />
-    <figcaption>
-      Permission controls sit right in the composer, so you verify access before
-      sending a prompt.
-    </figcaption>
-  </figure>
-</section>
-
-<!-- ─── Zero Ceremony & Prompt Rigor ────────────────────────────────────── -->
-<section
-  id="zero-ceremony"
-  class="section reveal"
-  aria-labelledby="ceremony-title"
->
-  <div class="section-head">
-    <h2 id="ceremony-title">Open your project. Start building.</h2>
-  </div>
-
-  <div class="ceremony-grid">
-    <article class="ceremony-cell">
-      <Sparkles aria-hidden="true" class="ceremony-icon" />
-      <h3>It reads before it writes</h3>
-      <p>
-        Agents inspect your repository, follow its patterns, keep changes
-        focused, and check their work.
-      </p>
-    </article>
-
-    <article class="ceremony-cell">
-      <Workflow aria-hidden="true" class="ceremony-icon" />
-      <h3>Long work has a shape</h3>
-      <p>
-        Complex tasks move through clear phases with checkpoints, diffs, and
-        approvals. You can step away without losing the thread.
-      </p>
-    </article>
-
-    <article class="ceremony-cell">
-      <Boxes aria-hidden="true" class="ceremony-icon" />
-      <h3>Setup is not the product</h3>
-      <p>
-        Open a folder and get to the part that matters. Add your own tools and
-        preferences when you need them.
-      </p>
-    </article>
-  </div>
-</section>
-
-<!-- ─── Harness and model support ───────────────────────────────────────── -->
-<section
-  id="harnesses"
-  class="section reveal"
-  aria-labelledby="harnesses-title"
->
-  <div class="section-head">
-    <h2 id="harnesses-title">Use the models and coding agents you trust.</h2>
-  </div>
-
-  <ul class="harness-grid">
-    {#each HARNESSES as harness (harness.id)}
-      <li class="harness-cell">
-        <a href={harness.website} target="_blank" rel="noopener noreferrer">
-          <span class="harness-mark {harness.tile ? 'is-tile' : 'is-glyph'}">
-            <img src="/harness/{harness.id}.svg" alt="" aria-hidden="true" />
-          </span>
-          <span class="harness-name">{harness.name}</span>
-        </a>
-      </li>
-    {/each}
-  </ul>
-
-  <div class="backend-split">
-    <div class="backend-block">
-      <h3>Local models and private clouds</h3>
-      <p>
-        Supports OpenAI-compatible and Anthropic-compatible endpoints. Connect
-        Ollama, LM Studio, vLLM, or dedicated private cloud servers with a base
-        URL and model name.
-      </p>
-      <ul class="backend-list">
-        {#each LOCAL_BACKENDS as backend (backend.name)}
-          <li>
-            <span class="backend-mark">
-              {#if backend.id}
-                <img
-                  src="/providers/{backend.id}.svg"
-                  alt=""
-                  aria-hidden="true"
-                />
-              {:else}
-                <TerminalSquare aria-hidden="true" size={16} />
-              {/if}
-            </span>
-            <span class="backend-name">{backend.name}</span>
-            <code>{backend.baseUrl}</code>
-          </li>
-        {/each}
-      </ul>
-    </div>
-
-    <div class="backend-block">
-      <h3>Hosted provider keys</h3>
-      <p>
-        Sign in through the provider or bring your own API key. Keys stay on
-        your machine. CodeInOven does not route your code or prompts through its
-        own proxy.
-      </p>
-      <ul class="provider-wall">
-        {#each HOSTED_PROVIDERS as provider (provider)}
-          <li>
-            <img
-              src="/providers/{provider}.svg"
-              alt={provider}
-              loading="lazy"
-              class={provider === "huggingface" ? "is-brand" : ""}
-            />
-          </li>
-        {/each}
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Lifecycle ────────────────────────────────────────────────────────── -->
-<section
-  id="lifecycle"
-  class="section section-narrow reveal"
-  aria-labelledby="lifecycle-title"
->
-  <div class="section-head">
-    <h2 id="lifecycle-title">Give complex work a clear path.</h2>
-    <p class="section-lead">
-      Describe the outcome, review the plan, set the permissions, and let the
-      agent work. Every step leaves a record you can inspect.
-    </p>
-  </div>
-
-  <ol class="stage-rail">
-    {#each lifecycle as stage, index (stage.id)}
-      <li class="stage reveal">
-        <div class="stage-index" aria-hidden="true">
-          <span>{String(index + 1).padStart(2, "0")}</span>
+          <p class="hero-note">Free and open source under the MIT license.</p>
         </div>
-        <div class="stage-body">
-          <h3>{stage.title}</h3>
-          <p class="stage-lead">{stage.lead}</p>
-          <p class="stage-copy">{stage.body}</p>
-          <div class="stage-marks">
-            {#each stage.marks as mark (mark)}
-              <span>{mark}</span>
-            {/each}
+
+        <div class="wrap hero-media" data-reveal>
+          <figure class="screen screen-hero">
+            <div class="screen-bar" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="screen-title">codeinoven / workspace</span>
+            </div>
+            <video
+              poster="./assets/shots/workspace.png"
+              data-hero-video
+              aria-label="The CodeInOven workspace: project rail on the left, an agent run in the middle showing reasoning traces and tool calls, and a context panel on the right."
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            >
+              <source src="/shots/workspace-hero.mp4" type="video/mp4" />
+            </video>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ─── Agents strip ──────────────────────────────────────────────── -->
+      <section class="agents-band" id="agents" aria-labelledby="agents-title">
+        <div class="wrap">
+          <p class="band-line" id="agents-title">Bring the coding agents you already run.</p>
+        </div>
+        <div class="marquee" data-marquee>
+          <ul class="marquee-track">
+            <li class="agent-chip"><img src="/harness/pi.svg" alt="" /><span>Pi</span></li>
+            <li class="agent-chip"><img src="/harness/codex.svg" alt="" /><span>Codex CLI</span></li>
+            <li class="agent-chip is-glyph"><img src="/harness/claude-code.svg" alt="" /><span>Claude Code</span></li>
+            <li class="agent-chip"><img src="/harness/opencode.svg" alt="" /><span>OpenCode</span></li>
+            <li class="agent-chip is-glyph"><img src="/harness/cline.svg" alt="" /><span>Cline</span></li>
+            <li class="agent-chip"><img src="/harness/antigravity.svg" alt="" /><span>Antigravity</span></li>
+            <li class="agent-chip"><img src="/harness/muse-code.svg" alt="" /><span>Muse Code</span></li>
+          </ul>
+        </div>
+        <div class="wrap agents-foot">
+          <p>
+            Point them at any model. Hosted keys or a local server, your choice.
+            Keys stay on your machine, and CodeInOven never routes your code or
+            prompts through its own proxy.
+          </p>
+          <ul class="provider-wall" aria-label="Supported model providers">
+            <li><img src="/providers/openai.svg" alt="OpenAI" /></li>
+            <li><img src="/providers/anthropic.svg" alt="Anthropic" /></li>
+            <li><img src="/providers/google.svg" alt="Google" /></li>
+            <li><img src="/providers/xai.svg" alt="xAI" /></li>
+            <li><img src="/providers/deepseek.svg" alt="DeepSeek" /></li>
+            <li><img src="/providers/qwen.svg" alt="Qwen" /></li>
+            <li><img src="/providers/mistral.svg" alt="Mistral" /></li>
+            <li><img src="/providers/groq.svg" alt="Groq" /></li>
+            <li><img src="/providers/openrouter.svg" alt="OpenRouter" /></li>
+            <li><img class="is-brand" src="/providers/huggingface.svg" alt="Hugging Face" /></li>
+            <li><img src="/providers/ollama.svg" alt="Ollama" /></li>
+            <li><img src="/providers/lmstudio.svg" alt="LM Studio" /></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ─── Statement one ─────────────────────────────────────────────── -->
+      <section class="statement" aria-labelledby="stmt1">
+        <div class="wrap statement-inner" data-reveal>
+          <div class="statement-main">
+            <p class="statement-label">Your project. Your agent.</p>
+            <h2 id="stmt1" class="statement-title">
+              A workspace for you and the agents you run.
+            </h2>
+          </div>
+          <div class="statement-detail">
+            <p class="statement-lead">
+              Plan, build, test, and review in one place. Use the desktop app or
+              your own terminal, keep control of each change, and inspect the
+              MIT-licensed source.
+            </p>
+            <div class="statement-actions">
+              <a class="btn btn-primary" href="/download">Download</a>
+              <a class="btn btn-ghost" href={LINKS.github} target="_blank" rel="noopener noreferrer">View the source</a>
+            </div>
           </div>
         </div>
-      </li>
-    {/each}
-  </ol>
+      </section>
 
-  <figure class="inline-shot reveal">
-    <img
-      src="/shots/trace.png"
-      alt="A CodeInOven run in progress showing reasoning traces, shell commands, and file reads with status"
-      width="1400"
-      height="960"
-      loading="lazy"
-      decoding="async"
-    />
-    <figcaption>
-      Reasoning steps, shell commands, execution time, and output stay visible
-      on screen.
-    </figcaption>
-  </figure>
-</section>
+      <!-- ─── Feature: board + workspace ────────────────────────────────── -->
+      <section class="feature" id="workspace" aria-labelledby="feat1">
+        <div class="wrap feature-head" data-reveal>
+          <h2 id="feat1" class="section-title">
+            See the work as it moves.
+          </h2>
+          <p class="section-lead">
+            Track projects across Pinned, Todo, Unread, and Done. Open a thread
+            to inspect the agent's reasoning, commands, diffs, and checkpoints.
+          </p>
+        </div>
 
-<!-- ─── Ethos ────────────────────────────────────────────────────────── -->
-<section id="ethos" class="section reveal" aria-labelledby="ethos-title">
-  <div class="ethos-banner">
-    <div class="ethos-head">
-      <h3 id="ethos-title">Free to use. Open to change.</h3>
-      <p>
-        CodeInOven is open source under the MIT license. Use it for your work,
-        study how it works, or add the tool you wish it had. The application can
-        grow with the people building real things in it.
-      </p>
-    </div>
+        <div class="wrap board-grid" data-reveal>
+          <figure class="screen board-a">
+            <div class="screen-bar" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="screen-title">scopes board</span>
+            </div>
+            <img src="/shots/scopes-board.png" alt="The Scopes board showing Pinned, Todo, Unread, and Done columns across project boards." loading="lazy" decoding="async" />
+            <figcaption>
+              Each project has a board for work that needs attention.
+            </figcaption>
+          </figure>
 
-    <div class="ethos-grid">
-      <div class="ethos-col">
-        <h4><HeartHandshake aria-hidden="true" /> Made for real work</h4>
-        <p>
-          Small prototypes and long-running engineering tasks belong in the same
-          workspace.
-        </p>
-      </div>
-      <div class="ethos-col">
-        <h4><GitFork aria-hidden="true" /> Yours to extend</h4>
-        <p>
-          If a model, integration, or workflow is missing, the source is open
-          and contributions are welcome.
-        </p>
-      </div>
-      <div class="ethos-col">
-        <h4><ShieldCheck aria-hidden="true" /> Local and private</h4>
-        <p>
-          Your code never routes through third-party proxies. State stays on
-          your machine.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+          <figure class="screen board-b">
+            <div class="screen-bar" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="screen-title">engineering toolbox</span>
+            </div>
+            <img src="/shots/engineering-toolbox.png" alt="The Engineering Toolbox with stages for Brainstorm, PRD, Spec, Assignment, Achievement, and Auto Pilot." loading="lazy" decoding="async" />
+            <figcaption>
+              Choose a workflow stage for planning, implementation, and review.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
 
-<!-- ─── Close ────────────────────────────────────────────────────────────── -->
-<section id="get-started" class="closer reveal" aria-labelledby="closer-title">
-  <div class="heat-bar closer-heat" aria-hidden="true">
-    <span class="heat-core"></span>
-  </div>
-  <h2 id="closer-title">
-    What will you build when setup stops getting in the way?
-  </h2>
-  <p>CodeInOven is free and open source under the MIT license.</p>
-  <div class="closer-actions">
-    <a class="button" href="/download">
-      <OsIcon os="macos" />
-      <OsIcon os="windows" />
-      <OsIcon os="linux" />
-      Download CodeInOven
-    </a>
-    <a
-      class="ghost-link"
-      href={LINKS.github}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Read the source
-      <ArrowUpRight aria-hidden="true" />
-    </a>
-  </div>
-</section>
+      <!-- ─── Feature: idea to merged ───────────────────────────────────── -->
+      <section class="feature" id="how" aria-labelledby="feat2">
+        <div class="wrap feature-head" data-reveal>
+          <h2 id="feat2" class="section-title">
+            A change, from first plan to final review.
+          </h2>
+          <p class="section-lead">
+            Plan the work, implement it in phases, then review the diff and
+            checkpoints before you keep the change.
+          </p>
+        </div>
+
+        <div class="wrap shot-stack" data-reveal>
+          <figure class="screen shot-wide">
+            <div class="screen-bar" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="screen-title">run trace</span>
+            </div>
+            <img src="/shots/trace.png" alt="A CodeInOven run in progress showing reasoning steps, shell commands, and file reads with status." loading="lazy" decoding="async" />
+          </figure>
+          <figure class="screen shot-narrow">
+            <div class="screen-bar" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="screen-title">composer</span>
+            </div>
+            <img src="/shots/composer.png" alt="The CodeInOven composer showing permission scope, model selector, and run controls." loading="lazy" decoding="async" />
+          </figure>
+          <figure class="screen shot-narrow">
+            <div class="screen-bar" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="screen-title">terminal</span>
+            </div>
+            <img src="/shots/terminal.png" alt="An attached terminal running a build inside the CodeInOven workspace." loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- ─── Principles ────────────────────────────────────────────────── -->
+      <section class="principles" aria-labelledby="principles-title">
+        <div class="wrap">
+          <div class="feature-head" data-reveal>
+            <h2 id="principles-title" class="section-title">
+              Long work, given a clear shape.
+            </h2>
+            <p class="section-lead">
+              Agents are useful when you can see what they did and decide what
+              happens next. That is the whole design.
+            </p>
+          </div>
+
+          <ul class="principle-grid" data-reveal>
+            <li class="principle">
+              <span class="principle-num">01</span>
+              <h3>Read before writing</h3>
+              <p>
+                Agents inspect the repository, follow its patterns, keep changes
+                focused, and check their own work.
+              </p>
+            </li>
+            <li class="principle">
+              <span class="principle-num">02</span>
+              <h3>Permission you set</h3>
+              <p>
+                Tool calls ask within the tier you choose. Auto Review by
+                default, full access only if you switch it on yourself.
+              </p>
+            </li>
+            <li class="principle">
+              <span class="principle-num">03</span>
+              <h3>Every step on record</h3>
+              <p>
+                Reasoning, commands, diffs, and checkpoints stay visible, and
+                any phase can be rolled back.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ─── Stats ─────────────────────────────────────────────────────── -->
+      <section class="stats" aria-label="CodeInOven at a glance">
+        <div class="wrap">
+          <ul class="stat-row" data-reveal>
+            <li class="stat">
+              <span class="stat-value">7</span>
+              <span class="stat-label">coding agents, one workspace</span>
+            </li>
+            <li class="stat">
+              <span class="stat-value">12</span>
+              <span class="stat-label">model providers shown here</span>
+            </li>
+            <li class="stat">
+              <span class="stat-value">Direct</span>
+              <span class="stat-label">requests go to your chosen provider</span>
+            </li>
+            <li class="stat">
+              <span class="stat-value">MIT</span>
+              <span class="stat-label">free, open source license</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ─── Desktop ───────────────────────────────────────────────────── -->
+      <section class="desktop" id="download" aria-labelledby="desktop-title">
+        <div class="wrap desktop-inner" data-reveal>
+          <div class="desktop-copy">
+            <h2 id="desktop-title" class="section-title">CodeInOven for your desktop.</h2>
+            <p class="section-lead">
+              The full workspace on macOS, Windows, and Linux. Point it at your
+              project and your agent gets everything it needs: an attached
+              terminal, an inner browser, diffs, pull requests, and worktrees.
+            </p>
+            <div class="download-block">
+              <div class="dl-tabs" role="tablist" aria-label="Choose your platform">
+                {#each PLATFORMS as platform (platform.id)}
+                  <button
+                    id="platform-{platform.id}"
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedPlatform === platform.id}
+                    aria-controls="platform-download-panel"
+                    tabindex={selectedPlatform === platform.id ? 0 : -1}
+                    onclick={() => {
+                      selectedPlatform = platform.id;
+                      copied = false;
+                    }}
+                    onkeydown={(event) => selectPlatformWithKeyboard(event, platform.id)}
+                  >
+                    {platform.name}
+                  </button>
+                {/each}
+              </div>
+              <div
+                class="cmd"
+                id="platform-download-panel"
+                role="tabpanel"
+                aria-labelledby="platform-{selectedPlatform}"
+              >
+                <code>{selectedCommand ?? "Open the download page for available builds"}</code>
+                <button
+                  class="cmd-copy"
+                  type="button"
+                  aria-label={copied ? "Download command copied" : "Copy download command"}
+                  title="Copy download command"
+                  disabled={!selectedCommand}
+                  onclick={copyCommand}
+                >
+                  {#if copied}
+                    <Check aria-hidden="true" />
+                  {:else}
+                    <Copy aria-hidden="true" />
+                  {/if}
+                </button>
+              </div>
+              {#if selectedPlatform === "linux" && secondaryArtifact}
+                <p class="dl-alt">
+                  Prefer Debian or Ubuntu?
+                  <a href={secondaryArtifact.url}>Download the .deb package</a>
+                </p>
+              {:else if !selectedCommand}
+                <p class="dl-alt">
+                  Build links are unavailable right now. <a href="/download">See all downloads</a>.
+                </p>
+              {/if}
+            </div>
+          </div>
+
+          <figure class="screen screen-desktop" data-reveal>
+            <div class="screen-bar" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="screen-title">workspace</span>
+            </div>
+            <img src="/shots/workspace.png" alt="The CodeInOven workspace with a project list, agent run, and code editor." loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- ─── FAQ ───────────────────────────────────────────────────────── -->
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <div class="wrap">
+          <h2 id="faq-title" class="section-title" data-reveal>Frequently asked questions</h2>
+
+          <div class="faq-list" data-reveal>
+            <details class="faq-item">
+              <summary>What is CodeInOven?</summary>
+              <div class="faq-body">
+                <p>
+                  CodeInOven is an open-source workspace for building real
+                  software with AI. You bring a coding agent, open a project,
+                  and work on the same change together: plan it, write it, run
+                  it, review the diff, and commit what you keep.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>Which coding agents work with CodeInOven?</summary>
+              <div class="faq-body">
+                <p>
+                  Pi, Codex CLI, Claude Code, OpenCode, Cline, Antigravity, and
+                  Muse Code. CodeInOven detects the ones installed on your
+                  machine and you pick between them per thread. You are never
+                  locked to one.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>Can I use my own models?</summary>
+              <div class="faq-body">
+                <p>
+                  Yes. Sign in through a hosted provider or bring your own API
+                  key. CodeInOven also speaks OpenAI-compatible and
+                  Anthropic-compatible endpoints, so Ollama, LM Studio, vLLM, or
+                  a private cloud server all work with a base URL and a model
+                  name.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>Where does my code go?</summary>
+              <div class="faq-body">
+                <p>
+                  Nowhere you did not send it. Your code never routes through a
+                  CodeInOven proxy, keys stay on your machine, and the app keeps
+                  its own state in its own config directory rather than writing
+                  into your repository.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>What does it cost?</summary>
+              <div class="faq-body">
+                <p>
+                  CodeInOven is free and open source under the MIT license. You
+                  pay only for the models you choose to use, directly to the
+                  provider you choose.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>What platforms does it run on?</summary>
+              <div class="faq-body">
+                <p>
+                  macOS, Windows, and Linux. Builds for all three are published
+                  to the stable release mirror, and the download above picks the
+                  right one for your machine.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── Closer ────────────────────────────────────────────────────── -->
+      <section class="closer" aria-labelledby="closer-title">
+        <div class="wrap closer-inner" data-reveal>
+          <h2 id="closer-title" class="closer-title">
+            What will you build when<br />
+            setup stops getting in the way?
+          </h2>
+          <p class="closer-sub">CodeInOven is free and open source under the MIT license.</p>
+          <div class="closer-actions">
+            <a class="btn btn-primary" href="/download">Download CodeInOven</a>
+            <a class="btn btn-ghost" href={LINKS.github} target="_blank" rel="noopener noreferrer">
+              Read the source
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+
+        </div>
+      </section>
