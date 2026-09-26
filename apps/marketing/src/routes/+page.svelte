@@ -131,7 +131,7 @@
               <span class="screen-title">codeinoven / workspace</span>
             </div>
             <video
-              poster="./assets/shots/workspace.png"
+              poster="/shots/workspace.png"
               data-hero-video
               aria-label="The CodeInOven workspace: project rail on the left, an agent run in the middle showing reasoning traces and tool calls, and a context panel on the right."
               muted
