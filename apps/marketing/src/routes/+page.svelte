@@ -188,16 +188,16 @@
       <section class="statement" aria-labelledby="stmt1">
         <div class="wrap statement-inner" data-reveal>
           <div class="statement-main">
-            <p class="statement-label">Your project. Your agent.</p>
+            <p class="statement-label">From idea to launch, in one workspace.</p>
             <h2 id="stmt1" class="statement-title">
-              A workspace for you and the agents you run.
+              Make the product. Then help it grow.
             </h2>
           </div>
           <div class="statement-detail">
             <p class="statement-lead">
-              Plan, build, test, and review in one place. Use the desktop app or
-              your own terminal, keep control of each change, and inspect the
-              MIT-licensed source.
+              Design the experience before you build it, carry the approved
+              direction into implementation, create a launch video, and keep
+              learning from the people who find your product.
             </p>
             <div class="statement-actions">
               <a class="btn btn-primary" href="/download">Download</a>
@@ -248,11 +248,12 @@
       <section class="feature" id="how" aria-labelledby="feat2">
         <div class="wrap feature-head" data-reveal>
           <h2 id="feat2" class="section-title">
-            A change, from first plan to final review.
+            Start with the design. Finish with a change you can review.
           </h2>
           <p class="section-lead">
-            Plan the work, implement it in phases, then review the diff and
-            checkpoints before you keep the change.
+            Explore the experience before implementation. Carry the approved
+            direction into your codebase, then follow the agent's work through
+            tests, diffs, and checkpoints.
           </p>
         </div>
 
@@ -278,6 +279,64 @@
             </div>
             <img src="/shots/terminal.png" alt="An attached terminal running a build inside the CodeInOven workspace." loading="lazy" decoding="async" />
           </figure>
+        </div>
+      </section>
+
+      <!-- ─── Idea to growth ────────────────────────────────────────────── -->
+      <section class="journey" id="journey" aria-labelledby="journey-title">
+        <div class="wrap journey-inner" data-reveal>
+          <div class="journey-intro">
+            <p class="journey-eyebrow">One loop, from idea to audience</p>
+            <h2 id="journey-title">Keep the whole product moving.</h2>
+            <p class="journey-lead">
+              Design, implementation, launch, and what comes after. Work through
+              the full product cycle without scattering the context across tools.
+            </p>
+          </div>
+
+          <ol class="journey-steps">
+            <li class="journey-step">
+              <span class="journey-num" aria-hidden="true">01</span>
+              <div>
+                <h3>Design before code</h3>
+                <p>
+                  Explore an idea as a real interface. Review the screens, refine
+                  the experience, and carry the approved design into implementation.
+                </p>
+              </div>
+            </li>
+            <li class="journey-step">
+              <span class="journey-num" aria-hidden="true">02</span>
+              <div>
+                <h3>Build with your agent</h3>
+                <p>
+                  Give your agent the goal and project context. Follow the work,
+                  inspect every change, and decide what ships.
+                </p>
+              </div>
+            </li>
+            <li class="journey-step">
+              <span class="journey-num" aria-hidden="true">03</span>
+              <div>
+                <h3>Make the launch video</h3>
+                <p>
+                  Create a product video in CodeInOven, review it in the in-app
+                  preview, and get it ready to share.
+                </p>
+              </div>
+            </li>
+            <li class="journey-step">
+              <span class="journey-num" aria-hidden="true">04</span>
+              <div>
+                <h3>Learn what reaches people</h3>
+                <p>
+                  Connect Google Search Console and your social channels. Ask your
+                  assistant to track search and engagement, suggest improvements,
+                  and draft or publish posts through the tools you connect.
+                </p>
+              </div>
+            </li>
+          </ol>
         </div>
       </section>
 
