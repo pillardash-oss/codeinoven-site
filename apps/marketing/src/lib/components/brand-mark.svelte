@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The real product mark, using `/brand/codeinoven-logo.png` from the desktop app.
+	 * The real product mark, using `/brand/codeinoven-logo.webp` from the desktop app.
 	 */
 	interface Props {
 		/** Rendered size in pixels. */
@@ -11,7 +11,7 @@
 </script>
 
 <img
-	src="/brand/codeinoven-logo.png"
+	src="/brand/codeinoven-logo.webp"
 	alt="CodeInOven logo"
 	width={size}
 	height={size}

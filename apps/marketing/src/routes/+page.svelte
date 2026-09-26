@@ -23,7 +23,8 @@
     {
       id: "brainstorm",
       tab: "Brainstorm",
-      src: "/journey/brainstorm.png",
+      src: "/journey/brainstorm.webp",
+      srcset: "/journey/brainstorm-480.webp 480w, /journey/brainstorm-960.webp 960w, /journey/brainstorm-1440.webp 1440w, /journey/brainstorm.webp 1920w",
       alt: "A CodeInOven brainstorm document organizing discoveries, decisions, and open questions for a product idea.",
       title: "Turn a rough idea into a plan.",
       description: "Think through the problem, record decisions, and give the work a clear direction before implementation.",
@@ -31,7 +32,8 @@
     {
       id: "design",
       tab: "Design",
-      src: "/journey/design.png",
+      src: "/journey/design.webp",
+      srcset: "/journey/design-480.webp 480w, /journey/design-960.webp 960w, /journey/design-1440.webp 1440w, /journey/design.webp 1920w",
       alt: "A website design open in CodeInOven's in-app browser, ready for visual review and feedback.",
       title: "See the product before you build it.",
       description: "Preview the interface, leave feedback on what needs to change, and settle the direction together.",
@@ -39,7 +41,8 @@
     {
       id: "implement",
       tab: "Implement",
-      src: "/journey/implement.png",
+      src: "/journey/implement.webp",
+      srcset: "/journey/implement-480.webp 480w, /journey/implement-960.webp 960w, /journey/implement-1440.webp 1440w, /journey/implement.webp 1920w",
       alt: "A CodeInOven engineering thread beside a live website design preview while the implementation is in progress.",
       title: "Carry the design into the code.",
       description: "Give your agent the project context and chosen design, then follow the changes in your real workspace.",
@@ -47,7 +50,8 @@
     {
       id: "launch",
       tab: "Launch",
-      src: "/journey/launch.png",
+      src: "/journey/launch.webp",
+      srcset: "/journey/launch-480.webp 480w, /journey/launch-960.webp 960w, /journey/launch-1440.webp 1440w, /journey/launch.webp 1920w",
       alt: "A product launch video playing in CodeInOven's in-app preview.",
       title: "Make the launch part of the work.",
       description: "Create a product video, preview the cut, and prepare it to introduce what you made.",
@@ -55,7 +59,8 @@
     {
       id: "monitor",
       tab: "Monitor",
-      src: "/journey/monitor.png",
+      src: "/journey/monitor.webp",
+      srcset: "/journey/monitor-480.webp 480w, /journey/monitor-960.webp 960w, /journey/monitor-1440.webp 1440w, /journey/monitor.webp 1920w",
       alt: "The CodeInOven assistant reviewing Search Console findings and social engagement in a scheduled routine.",
       title: "Keep learning after release.",
       description: "Track Search Console and connected social engagement. Ask your assistant for improvements, then draft or publish posts through connected tools.",
@@ -126,14 +131,28 @@
 
   onMount(() => {
     const heroVideo = document.querySelector<HTMLVideoElement>("[data-hero-video]");
+    let videoObserver: IntersectionObserver | undefined;
     if (heroVideo && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      void heroVideo.play().catch(() => {});
+      if ("IntersectionObserver" in window) {
+        videoObserver = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+              void heroVideo.play().catch(() => {});
+              videoObserver?.disconnect();
+            }
+          },
+          { rootMargin: "160px" },
+        );
+        videoObserver.observe(heroVideo);
+      } else {
+        void heroVideo.play().catch(() => {});
+      }
     }
 
     const elements = document.querySelectorAll("[data-reveal]");
     if (!("IntersectionObserver" in window)) {
       elements.forEach((element) => element.classList.add("is-visible"));
-      return;
+      return () => videoObserver?.disconnect();
     }
 
     const observer = new IntersectionObserver(
@@ -148,7 +167,10 @@
       { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
     );
     elements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      videoObserver?.disconnect();
+    };
   });
 </script>
 
@@ -193,13 +215,13 @@
               <span class="screen-title">codeinoven / workspace</span>
             </div>
             <video
-              poster="/shots/workspace.png"
+              poster="/shots/workspace.webp"
               data-hero-video
               aria-label="The CodeInOven workspace: project rail on the left, an agent run in the middle showing reasoning traces and tool calls, and a context panel on the right."
               muted
               loop
               playsinline
-              preload="metadata"
+              preload="none"
             >
               <source src="/shots/workspace-hero.mp4" type="video/mp4" />
             </video>
@@ -287,7 +309,7 @@
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
               <span class="screen-title">scopes board</span>
             </div>
-            <img src="/shots/scopes-board.png" alt="The Scopes board showing Pinned, Todo, Unread, and Done columns across project boards." loading="lazy" decoding="async" />
+            <img src="/shots/scopes-board.webp" srcset="/shots/scopes-board-480.webp 480w, /shots/scopes-board-960.webp 960w, /shots/scopes-board-1440.webp 1440w, /shots/scopes-board.webp 2048w" sizes="(min-width: 80rem) 46rem, (min-width: 64rem) 58vw, calc(100vw - 2.5rem)" width="2048" height="1339" alt="The Scopes board showing Pinned, Todo, Unread, and Done columns across project boards." loading="lazy" decoding="async" />
             <figcaption>
               Each project has a board for work that needs attention.
             </figcaption>
@@ -298,7 +320,7 @@
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
               <span class="screen-title">engineering toolbox</span>
             </div>
-            <img src="/shots/engineering-toolbox.png" alt="The Engineering Toolbox with stages for Brainstorm, PRD, Spec, Assignment, Achievement, and Auto Pilot." loading="lazy" decoding="async" />
+            <img src="/shots/engineering-toolbox.webp" srcset="/shots/engineering-toolbox-480.webp 480w, /shots/engineering-toolbox-960.webp 960w, /shots/engineering-toolbox.webp 1528w" sizes="(min-width: 80rem) 31rem, (min-width: 64rem) 38vw, calc(100vw - 2.5rem)" width="1528" height="1128" alt="The Engineering Toolbox with stages for Brainstorm, PRD, Spec, Assignment, Achievement, and Auto Pilot." loading="lazy" decoding="async" />
             <figcaption>
               Choose a workflow stage for planning, implementation, and review.
             </figcaption>
@@ -325,21 +347,21 @@
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
               <span class="screen-title">run trace</span>
             </div>
-            <img src="/shots/trace.png" alt="A CodeInOven run in progress showing reasoning steps, shell commands, and file reads with status." loading="lazy" decoding="async" />
+            <img src="/shots/trace.webp" srcset="/shots/trace-480.webp 480w, /shots/trace-960.webp 960w, /shots/trace.webp 1380w" sizes="(min-width: 80rem) 46rem, (min-width: 64rem) 58vw, calc(100vw - 2.5rem)" width="1380" height="860" alt="A CodeInOven run in progress showing reasoning steps, shell commands, and file reads with status." loading="lazy" decoding="async" />
           </figure>
           <figure class="screen shot-narrow">
             <div class="screen-bar" aria-hidden="true">
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
               <span class="screen-title">composer</span>
             </div>
-            <img src="/shots/composer.png" alt="The CodeInOven composer showing permission scope, model selector, and run controls." loading="lazy" decoding="async" />
+            <img src="/shots/composer.webp" srcset="/shots/composer-480.webp 480w, /shots/composer-960.webp 960w, /shots/composer.webp 1498w" sizes="(min-width: 80rem) 31rem, (min-width: 64rem) 38vw, calc(100vw - 2.5rem)" width="1498" height="304" alt="The CodeInOven composer showing permission scope, model selector, and run controls." loading="lazy" decoding="async" />
           </figure>
           <figure class="screen shot-narrow">
             <div class="screen-bar" aria-hidden="true">
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
               <span class="screen-title">terminal</span>
             </div>
-            <img src="/shots/terminal.png" alt="An attached terminal running a build inside the CodeInOven workspace." loading="lazy" decoding="async" />
+            <img src="/shots/terminal.webp" srcset="/shots/terminal-480.webp 480w, /shots/terminal.webp 950w" sizes="(min-width: 80rem) 31rem, (min-width: 64rem) 38vw, calc(100vw - 2.5rem)" width="950" height="620" alt="An attached terminal running a build inside the CodeInOven workspace." loading="lazy" decoding="async" />
           </figure>
         </div>
       </section>
@@ -389,6 +411,10 @@
                 </div>
                 <img
                   src={selectedJourney.src}
+                  srcset={selectedJourney.srcset}
+                  sizes="(min-width: 1240px) 1192px, calc(100vw - 2.5rem)"
+                  width="1920"
+                  height="1247"
                   alt={selectedJourney.alt}
                   loading="lazy"
                   decoding="async"
@@ -539,7 +565,7 @@
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
               <span class="screen-title">workspace</span>
             </div>
-            <img src="/shots/workspace.png" alt="The CodeInOven workspace with a project list, agent run, and code editor." loading="lazy" decoding="async" />
+            <img src="/shots/workspace.webp" srcset="/shots/workspace-480.webp 480w, /shots/workspace-960.webp 960w, /shots/workspace-1440.webp 1440w, /shots/workspace.webp 2048w" sizes="(min-width: 1240px) 1192px, calc(100vw - 2.5rem)" width="2048" height="1339" alt="The CodeInOven workspace with a project list, agent run, and code editor." loading="lazy" decoding="async" />
           </figure>
         </div>
       </section>

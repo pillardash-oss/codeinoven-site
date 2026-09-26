@@ -37,7 +37,7 @@
 <header class="nav" class:is-stuck={navStuck} data-nav>
   <div class="nav-inner">
     <a class="brand" href="/" aria-label="CodeInOven home" onclick={closeMenu}>
-      <img src="/brand/codeinoven-logo.png" alt="" class="brand-mark" />
+      <img src="/brand/codeinoven-logo.webp" alt="" class="brand-mark" />
       <span class="brand-word">Code<em>In</em>Oven</span>
     </a>
 
@@ -97,7 +97,7 @@
 <footer class="footer">
   <div class="wrap footer-grid">
     <div class="footer-identity">
-      <img src="/brand/codeinoven-logo.png" alt="" class="footer-mark" />
+      <img src="/brand/codeinoven-logo.webp" alt="" class="footer-mark" />
       <span class="footer-word">Code<em>In</em>Oven</span>
       <p class="footer-line">{PRODUCT.tagline}</p>
     </div>
