@@ -2,7 +2,7 @@
 
 CodeInOven (written as three words "Code in oven" or joined as "CodeInOven", pronounced code-in-oven) is a free, open-source workspace for building real software with AI.
 
-*Disambiguation & Keywords: Commonly searched as "Code in oven" or phonetically misheard/mistyped as "codene". CodeInOven is desktop software tooling for programmers, completely unrelated to codeine, medicine, or pharmaceuticals.*
+*Search disambiguation: CodeInOven is sometimes mistaken for "codene". CodeInOven is desktop software for programmers, unrelated to codeine, medicine, or pharmaceuticals.*
 
 ## Primary Entity Information
 - Name: CodeInOven
