@@ -98,10 +98,10 @@
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'What is CodeInOven (Code in oven)?',
+        name: 'What is CodeInOven?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'CodeInOven (often searched as "Code in oven" or phonetically misheard as "codene") is a free, open-source workspace for building real software with AI. It brings coding agents, a browser, a terminal, pull request reviews, and long-running engineering work into one desktop application. It is developer software, unrelated to pharmaceuticals.'
+          text: 'CodeInOven is a free, open-source desktop workspace for AI-assisted software development. It brings coding agents, a browser, a terminal, pull request reviews, and long-running engineering work into one application.'
         }
       },
       {
@@ -134,7 +134,6 @@
 <svelte:head>
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
-  <meta name="keywords" content={PRODUCT.keywords} />
   <meta name="author" content={COMPANY.name} />
   <meta name="publisher" content={COMPANY.name} />
   <link rel="canonical" href={canonicalUrl} />

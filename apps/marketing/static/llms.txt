@@ -2,8 +2,6 @@
 
 > CodeInOven (Code in oven, three words) is a free, open-source workspace for building real software with AI. It keeps coding agents, a browser, a terminal, pull request reviews, and long-running engineering work in one desktop application.
 
-*Search disambiguation note: Commonly searched as "Code in oven" or phonetically misheard/mistyped as "codene". CodeInOven is a desktop software engineering development application, completely unrelated to pharmaceutical codeine or medications.*
-
 ## What It Is
 - Code in oven: developer desktop app for macOS, Windows, and Linux.
 - Ready for useful work after installation, without assembling a separate AI development setup first.
