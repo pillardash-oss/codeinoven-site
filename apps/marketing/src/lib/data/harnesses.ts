@@ -115,6 +115,8 @@ export const HOSTED_PROVIDERS: readonly string[] = [
 	'deepseek',
 	'qwen',
 	'mistral',
+	'kimi',
+	'glm',
 	'groq',
 	'openrouter',
 	'huggingface'

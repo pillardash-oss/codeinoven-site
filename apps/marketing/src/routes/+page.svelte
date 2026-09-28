@@ -15,10 +15,26 @@
 
   let { data }: import("./$types").PageProps = $props();
   const release = $derived(data.release ?? null);
+  const providerNames: Record<string, string> = {
+    openai: "OpenAI",
+    anthropic: "Anthropic",
+    google: "Google",
+    xai: "xAI",
+    deepseek: "DeepSeek",
+    qwen: "Qwen",
+    mistral: "Mistral",
+    kimi: "Kimi",
+    glm: "GLM",
+    groq: "Groq",
+    openrouter: "OpenRouter",
+    huggingface: "Hugging Face",
+    ollama: "Ollama",
+    lmstudio: "LM Studio",
+  };
   const providers = [...new Set([
     ...HOSTED_PROVIDERS,
     ...LOCAL_BACKENDS.flatMap((backend) => backend.id ? [backend.id] : []),
-  ])];
+  ])].map((id) => ({ id, name: providerNames[id] ?? id }));
   const JOURNEY_STEPS = [
     {
       id: "brainstorm",
@@ -234,16 +250,25 @@
         <div class="wrap">
           <p class="band-line" id="agents-title">Bring the coding agents you already run.</p>
         </div>
-        <div class="marquee" data-marquee>
-          <ul class="marquee-track">
-            <li class="agent-chip"><img src="/harness/pi.svg" alt="" /><span>Pi</span></li>
-            <li class="agent-chip"><img src="/harness/codex.svg" alt="" /><span>Codex CLI</span></li>
-            <li class="agent-chip is-glyph"><img src="/harness/claude-code.svg" alt="" /><span>Claude Code</span></li>
-            <li class="agent-chip"><img src="/harness/opencode.svg" alt="" /><span>OpenCode</span></li>
-            <li class="agent-chip is-glyph"><img src="/harness/cline.svg" alt="" /><span>Cline</span></li>
-            <li class="agent-chip"><img src="/harness/antigravity.svg" alt="" /><span>Antigravity</span></li>
-            <li class="agent-chip"><img src="/harness/muse-code.svg" alt="" /><span>Muse Code</span></li>
-          </ul>
+        <div class="marquee">
+          <div class="marquee-track">
+            <ul class="marquee-group">
+              {#each HARNESSES as harness (harness.id)}
+                <li class="agent-chip" class:is-glyph={!harness.tile}>
+                  <img src="/harness/{harness.id}.svg" alt="" />
+                  <span>{harness.name}</span>
+                </li>
+              {/each}
+            </ul>
+            <ul class="marquee-group" aria-hidden="true">
+              {#each HARNESSES as harness (harness.id)}
+                <li class="agent-chip" class:is-glyph={!harness.tile}>
+                  <img src="/harness/{harness.id}.svg" alt="" />
+                  <span>{harness.name}</span>
+                </li>
+              {/each}
+            </ul>
+          </div>
         </div>
         <div class="wrap agents-foot">
           <p>
@@ -252,18 +277,9 @@
             prompts through its own proxy.
           </p>
           <ul class="provider-wall" aria-label="Supported model providers">
-            <li><img src="/providers/openai.svg" alt="OpenAI" /></li>
-            <li><img src="/providers/anthropic.svg" alt="Anthropic" /></li>
-            <li><img src="/providers/google.svg" alt="Google" /></li>
-            <li><img src="/providers/xai.svg" alt="xAI" /></li>
-            <li><img src="/providers/deepseek.svg" alt="DeepSeek" /></li>
-            <li><img src="/providers/qwen.svg" alt="Qwen" /></li>
-            <li><img src="/providers/mistral.svg" alt="Mistral" /></li>
-            <li><img src="/providers/groq.svg" alt="Groq" /></li>
-            <li><img src="/providers/openrouter.svg" alt="OpenRouter" /></li>
-            <li><img class="is-brand" src="/providers/huggingface.svg" alt="Hugging Face" /></li>
-            <li><img src="/providers/ollama.svg" alt="Ollama" /></li>
-            <li><img src="/providers/lmstudio.svg" alt="LM Studio" /></li>
+            {#each providers as provider (provider.id)}
+              <li><img src="/providers/{provider.id}.svg" alt={provider.name} /></li>
+            {/each}
           </ul>
         </div>
       </section>
@@ -480,7 +496,7 @@
               <span class="stat-label">coding agents, one workspace</span>
             </li>
             <li class="stat">
-              <span class="stat-value">12</span>
+              <span class="stat-value">{providers.length}</span>
               <span class="stat-label">model providers shown here</span>
             </li>
             <li class="stat">
