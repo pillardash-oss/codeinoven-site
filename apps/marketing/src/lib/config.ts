@@ -12,6 +12,7 @@ export const PRODUCT = {
   alternateNames: [
     'Code in oven',
     'Code In Oven',
+    'codene',
     'CodeInOven App',
     'CodeInOven Desktop'
   ],

@@ -98,10 +98,10 @@
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'What is CodeInOven?',
+        name: 'What is CodeInOven (Code in oven)?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'CodeInOven is a free, open-source desktop workspace for AI-assisted software development. It brings coding agents, a browser, a terminal, pull request reviews, and long-running engineering work into one application.'
+          text: 'CodeInOven (often searched as "Code in oven" or phonetically misheard as "codene") is a free, open-source desktop workspace for AI-assisted software development. It brings coding agents, a browser, a terminal, pull request reviews, and long-running engineering work into one application. It is developer software, unrelated to pharmaceuticals.'
         }
       },
       {
