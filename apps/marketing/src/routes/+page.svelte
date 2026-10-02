@@ -215,7 +215,6 @@
             <a class="btn btn-primary" href="/download">
               Download for macOS, Windows, and Linux
             </a>
-            <a class="btn btn-ghost" href="/desktop-coding-workspace">Explore the desktop workspace</a>
             <a class="btn btn-ghost" href={LINKS.github} target="_blank" rel="noopener noreferrer">
               View on GitHub
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
