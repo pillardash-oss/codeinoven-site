@@ -144,7 +144,8 @@
   .workspace-hero h1 { max-width: 680px; font-size: clamp(2.8rem, 6.4vw, 5.6rem); }
   .workspace-intro { max-width: 610px; margin: 28px 0 0; color: #c0c1b7; font-size: 1rem; line-height: 1.85; }
   .workspace-actions { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin-top: 34px; }
-  .workspace-button { display: inline-flex; gap: 26px; align-items: center; padding: 15px 18px; color: #120a03; background: var(--brand); font-size: .8rem; font-weight: 700; text-decoration: none; transition: background .2s, transform .2s; }
+  .workspace-button { display: inline-flex; gap: 26px; align-items: center; padding: 15px 18px; color: #f5f4f0; background: var(--brand); font-size: .8rem; font-weight: 700; text-decoration: none; transition: background .2s, transform .2s; }
+  .workspace-button:focus-visible { outline: 2px solid var(--brand-hover); outline-offset: 4px; }
   .workspace-button:hover { background: var(--brand-hover); transform: translateY(-2px); }
   .workspace-button span { font-size: 1.1rem; }
   .workspace-text-link { color: var(--ink); font-size: .78rem; text-underline-offset: 5px; }
