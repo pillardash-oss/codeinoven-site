@@ -191,8 +191,8 @@
 </script>
 
 <Seo
-  title="CodeInOven | AI coding workspace for real software"
-  description="CodeInOven is a free, open-source desktop workspace for AI-assisted software development. Work with coding agents, your code, terminal, browser, and GitHub pull requests in one place."
+  title="CodeInOven | Desktop workspace for AI coding agents"
+  description="Work with AI coding agents in your real project. CodeInOven brings your code, terminal, browser, and Git review into a free, open-source desktop workspace."
   canonical="/"
 />
 
@@ -215,6 +215,7 @@
             <a class="btn btn-primary" href="/download">
               Download for macOS, Windows, and Linux
             </a>
+            <a class="btn btn-ghost" href="/desktop-coding-workspace">Explore the desktop workspace</a>
             <a class="btn btn-ghost" href={LINKS.github} target="_blank" rel="noopener noreferrer">
               View on GitHub
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>

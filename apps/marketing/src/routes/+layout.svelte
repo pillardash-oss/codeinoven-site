@@ -107,6 +107,7 @@
       <a href="/#workspace">Workspace</a>
       <a href="/#how">How it works</a>
       <a href="/download">Download</a>
+      <a href="/desktop-coding-workspace">Desktop coding workspace</a>
       <a href="/#faq">FAQ</a>
     </nav>
 
