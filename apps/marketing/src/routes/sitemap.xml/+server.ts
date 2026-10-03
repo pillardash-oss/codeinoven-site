@@ -6,6 +6,7 @@ const SITE_URL = 'https://codeinoven.com';
 
 const pages = [
 	{ url: '', changefreq: 'weekly', priority: '1.0' },
+	{ url: '/desktop-coding-workspace', changefreq: 'monthly', priority: '0.8' },
 	{ url: '/download', changefreq: 'weekly', priority: '0.9' },
 	{ url: '/privacy', changefreq: 'monthly', priority: '0.5' }
 ];

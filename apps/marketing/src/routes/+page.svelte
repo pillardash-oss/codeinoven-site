@@ -191,8 +191,8 @@
 </script>
 
 <Seo
-  title="CodeInOven | AI coding workspace for real software"
-  description="CodeInOven is a free, open-source desktop workspace for AI-assisted software development. Work with coding agents, your code, terminal, browser, and GitHub pull requests in one place."
+  title="CodeInOven | Desktop workspace for AI coding agents"
+  description="Work with AI coding agents in your real project. CodeInOven brings your code, terminal, browser, and Git review into a free, open-source desktop workspace."
   canonical="/"
 />
 
