@@ -306,11 +306,11 @@ Do not introduce:
 
 ## Marketing Site
 
-`apps/marketing` is the one place where marketing voice and display typography are correct. It shares the brand, not the workspace rules.
+This repo is the one place where marketing voice and display typography are correct. It shares the brand, not the app's workspace rules.
 
 - The site is dark-only. It mirrors the app's dark tokens rather than redefining them: `app #0B0B0D`, `surface #141417`, `elevated #1C1C20`, `overlay #242429`, `foreground #F5F4F0`, `line #27272C`, `accent #CA5A00`.
 
-- Tokens live in `apps/marketing/src/routes/layout.css`. When `src/renderer/app.css` changes in the desktop app, this file has to follow.
+- Tokens live in `src/routes/layout.css`. When `src/renderer/app.css` changes in the desktop app, this file has to follow.
 
 - Hero sections, display type, scroll reveals, and the orbital signal animation are allowed here and only here.
 

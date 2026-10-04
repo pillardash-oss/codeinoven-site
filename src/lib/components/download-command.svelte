@@ -8,7 +8,7 @@
 		selectArtifact,
 		type OsPlatform,
 		type ReleaseManifest
-	} from '$lib/config';
+	} from '#lib/config.ts';
 	import OsIcon from './os-icon.svelte';
 	import { Check, Copy } from '@lucide/svelte';
 

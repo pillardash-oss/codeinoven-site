@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { COMPANY, LICENSE, LINKS, PRODUCT } from "$lib/config";
-  import Seo from "$lib/components/seo.svelte";
+  import { COMPANY, LICENSE, LINKS, PRODUCT } from "#lib/config.ts";
+  import Seo from "#lib/components/seo.svelte";
 
   const updated = "September 2026";
 </script>

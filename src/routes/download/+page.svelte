@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Seo from "$lib/components/seo.svelte";
+  import Seo from "#lib/components/seo.svelte";
   import {
     LINKS,
     PLATFORMS,
     RELEASE_PRIMARY_KIND,
     RELEASE_SECONDARY_KIND,
     selectArtifact,
-  } from "$lib/config";
-  import OsIcon from "$lib/components/os-icon.svelte";
+  } from "#lib/config.ts";
+  import OsIcon from "#lib/components/os-icon.svelte";
   import { ArrowUpRight } from "@lucide/svelte";
 
   let { data }: import("./$types").PageProps = $props();

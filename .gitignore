@@ -1,10 +1,30 @@
 node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# Package manager — bun.lock is the only lockfile this repo keeps
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+.npmrc
+
+# OS
 .DS_Store
 Thumbs.db
+
+# Env
 .env
 .env.*
 !.env.example
 !.env.test
+
+# Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
