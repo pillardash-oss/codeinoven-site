@@ -1,4 +1,4 @@
-import { loadRelease } from '$lib/config';
+import { loadRelease } from '#lib/config.ts';
 import type { LayoutServerLoad } from './$types';
 
 /**

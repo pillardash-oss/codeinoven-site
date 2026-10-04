@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Seo from "$lib/components/seo.svelte";
-  import { LINKS } from "$lib/config";
+  import Seo from "#lib/components/seo.svelte";
+  import { LINKS } from "#lib/config.ts";
 
   const workflow = [
     {

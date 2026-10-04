@@ -1,7 +1,7 @@
 <script lang="ts">
   import "./layout.css";
-  import { COMPANY, LICENSE, LINKS, PRODUCT } from "$lib/config";
-  import GithubMark from "$lib/components/github-mark.svelte";
+  import { COMPANY, LICENSE, LINKS, PRODUCT } from "#lib/config.ts";
+  import GithubMark from "#lib/components/github-mark.svelte";
 
   let { children }: import("./$types").LayoutProps = $props();
   let menuOpen = $state(false);

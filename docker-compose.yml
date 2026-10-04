@@ -1,10 +1,9 @@
 # Local/self-hosted deployment for the CodeInOven marketing site.
 # On Coolify, point a Docker Compose resource at this file.
-# Build context is the monorepo root; the Dockerfile lives there too.
 services:
   web:
     build:
-      context: ../..
+      context: .
       dockerfile: Dockerfile.marketing
     ports:
       - '8080:3000'

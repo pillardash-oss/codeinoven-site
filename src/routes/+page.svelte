@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import Seo from "$lib/components/seo.svelte";
-  import { HARNESSES, HOSTED_PROVIDERS, LOCAL_BACKENDS } from "$lib/data/harnesses";
+  import Seo from "#lib/components/seo.svelte";
+  import { HARNESSES, HOSTED_PROVIDERS, LOCAL_BACKENDS } from "#lib/data/harnesses.ts";
   import {
     LINKS,
     PLATFORMS,
@@ -10,7 +10,7 @@
     downloadCommand,
     selectArtifact,
     type OsPlatform,
-  } from "$lib/config";
+  } from "#lib/config.ts";
   import { Check, Copy, ArrowUpRight } from "@lucide/svelte";
 
   let { data }: import("./$types").PageProps = $props();
