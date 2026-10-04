@@ -8,6 +8,12 @@ node_modules
 /.svelte-kit
 /build
 
+# Package manager — bun.lock is the only lockfile this repo keeps
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+.npmrc
+
 # OS
 .DS_Store
 Thumbs.db

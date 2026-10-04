@@ -4,7 +4,9 @@ FROM oven/bun:1-slim AS builder
 WORKDIR /app
 
 # Manifest and lockfile first, so the dependency layer caches independently of src.
+# scripts/ has to land here too: preinstall runs during install and enforces Bun.
 COPY package.json bun.lock ./
+COPY scripts ./scripts
 
 RUN bun install --frozen-lockfile
 
