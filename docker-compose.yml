@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.marketing
+      args:
+        PUBLIC_POSTHOG_TOKEN: ${PUBLIC_POSTHOG_TOKEN:-}
     ports:
       - '8080:3000'
     restart: unless-stopped

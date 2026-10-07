@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { capture, flushAnalytics } from '#lib/analytics.ts';
 	import { onMount } from 'svelte';
 	import {
 		detectPlatform,
@@ -44,6 +45,8 @@
 		try {
 			await navigator.clipboard.writeText(text);
 			copied = id;
+			capture('website_download_command_copied', { platform: platform ?? 'other', package: id === 'secondary' ? 'deb' : primary?.kind ?? 'unknown', placement: compact ? 'footer' : 'command' });
+			void flushAnalytics();
 			clearTimeout(resetTimer);
 			resetTimer = setTimeout(() => (copied = null), 1600);
 		} catch {

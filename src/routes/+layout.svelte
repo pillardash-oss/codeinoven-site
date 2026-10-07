@@ -1,6 +1,7 @@
 <script lang="ts">
   import "./layout.css";
   import { COMPANY, LICENSE, LINKS, PRODUCT } from "#lib/config.ts";
+  import WebsiteAnalytics from "#lib/components/website-analytics.svelte";
   import GithubMark from "#lib/components/github-mark.svelte";
 
   let { children }: import("./$types").LayoutProps = $props();
@@ -65,6 +66,7 @@
       class="nav-burger"
       type="button"
       aria-label={menuOpen ? "Close menu" : "Open menu"}
+      title={menuOpen ? "Close menu" : "Open menu"}
       aria-expanded={menuOpen}
       aria-controls="mobile-menu"
       onclick={() => (menuOpen = !menuOpen)}
@@ -122,6 +124,7 @@
     <nav class="footer-col" aria-label="Company">
       <h3>Company</h3>
       <a href={LINKS.privacy}>Privacy</a>
+      <WebsiteAnalytics />
       <a href={COMPANY.url} target="_blank" rel="noopener noreferrer">{COMPANY.shortName}</a>
     </nav>
   </div>

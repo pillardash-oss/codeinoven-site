@@ -68,17 +68,17 @@
               <p>Choose the package that fits your distribution.</p>
             </div>
             <div class="linux-actions">
-              <a class="download-action" href={artifact?.url ?? LINKS.releases}>
+              <a class="download-action" href={artifact?.url ?? LINKS.releases} data-platform={platform.id}>
                 <span><strong>AppImage</strong><small>Portable · most distributions</small></span>
                 <ArrowUpRight aria-hidden="true" />
               </a>
               {#if extra}
-                <a class="download-action download-action-secondary" href={extra.url}>
+                <a class="download-action download-action-secondary" href={extra.url} data-platform={platform.id}>
                   <span><strong>Debian package</strong><small>For Debian and Ubuntu</small></span>
                   <ArrowUpRight aria-hidden="true" />
                 </a>
               {:else}
-                <a class="download-action download-action-secondary" href={LINKS.releases}>
+                <a class="download-action download-action-secondary" href={LINKS.releases} data-platform={platform.id}>
                   <span><strong>Debian package</strong><small>See current GitHub release assets</small></span>
                   <ArrowUpRight aria-hidden="true" />
                 </a>
@@ -100,7 +100,7 @@
                 : "Run the installer to add CodeInOven to your desktop."}
             </p>
             <code class="artifact-name">{artifact?.name ?? platform.artifact}</code>
-            <a class="download-action" href={artifact?.url ?? LINKS.releases}>
+            <a class="download-action" href={artifact?.url ?? LINKS.releases} data-platform={platform.id}>
               <span>Download for {platform.name}</span>
               <ArrowUpRight aria-hidden="true" />
             </a>
