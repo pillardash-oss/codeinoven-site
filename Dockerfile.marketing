@@ -11,6 +11,9 @@ COPY scripts ./scripts
 RUN bun install --frozen-lockfile
 
 COPY . .
+# Public ingestion token only, never a PostHog personal API key.
+ARG PUBLIC_POSTHOG_TOKEN=
+ENV PUBLIC_POSTHOG_TOKEN=$PUBLIC_POSTHOG_TOKEN
 RUN bun run --bun build
 
 # Production stage — Bun serves the SvelteKit output.

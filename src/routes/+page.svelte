@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { capture, flushAnalytics } from "#lib/analytics.ts";
   import Seo from "#lib/components/seo.svelte";
   import { HARNESSES, HOSTED_PROVIDERS, LOCAL_BACKENDS } from "#lib/data/harnesses.ts";
   import {
@@ -115,6 +116,7 @@
     event.preventDefault();
     const next = PLATFORMS[nextIndex];
     selectedPlatform = next.id;
+    capture("website_platform_selected", { platform: next.id });
     document.getElementById(`platform-${next.id}`)?.focus();
   }
 
@@ -137,6 +139,8 @@
     if (!selectedCommand) return;
     try {
       await navigator.clipboard.writeText(selectedCommand);
+      capture("website_download_command_copied", { platform: selectedPlatform, placement: "download", package: selectedArtifact?.kind ?? "unknown" });
+      void flushAnalytics();
       copied = true;
       clearTimeout(resetTimer);
       resetTimer = setTimeout(() => (copied = false), 1600);
@@ -533,6 +537,7 @@
                     tabindex={selectedPlatform === platform.id ? 0 : -1}
                     onclick={() => {
                       selectedPlatform = platform.id;
+                      capture("website_platform_selected", { platform: platform.id });
                       copied = false;
                     }}
                     onkeydown={(event) => selectPlatformWithKeyboard(event, platform.id)}

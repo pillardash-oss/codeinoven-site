@@ -2,7 +2,7 @@
   import { COMPANY, LICENSE, LINKS, PRODUCT } from "#lib/config.ts";
   import Seo from "#lib/components/seo.svelte";
 
-  const updated = "September 2026";
+  const updated = "October 2026";
 </script>
 
 <Seo
@@ -23,7 +23,7 @@
         This policy describes what {PRODUCT.name} stores, where coding-agent
         requests go, and what data the website collects.
       </p>
-      <p class="policy-updated">Last updated <time datetime="2026-09">{updated}</time></p>
+      <p class="policy-updated">Last updated <time datetime="2026-10">{updated}</time></p>
     </header>
 
     <div class="policy-layout">
@@ -80,8 +80,21 @@
           <p class="policy-kicker">04 / Website and downloads</p>
           <h2 id="website-title">This website</h2>
           <p>
-            The website serves static pages. It does not set cookies or use
-            analytics or third-party tracking scripts.
+            The website serves static pages. If you allow analytics, we send
+            page visits, referring domains, campaign tags, device platform,
+            scroll depth, and download interactions to PostHog in the US.
+            We use these statistics to improve the website. We do not record
+            sessions, form contents, or complete URLs with query strings.
+          </p>
+          <p>
+            Your analytics choice is stored in your browser. If you opt in,
+            a random browser identifier and a temporary session identifier
+            connect visits and interactions. These are not account identifiers.
+            We do not set analytics cookies. You can decline or withdraw consent
+            using Analytics preferences in the footer. Declining removes the
+            local identifiers and stops collection. We respect Do Not Track
+            and Global Privacy Control signals. Browser counts do not represent
+            unique people, and download clicks do not confirm completed downloads.
           </p>
           <p>
             Downloads come from the {PRODUCT.name} release mirror. GitHub
