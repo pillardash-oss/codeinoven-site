@@ -8,7 +8,7 @@ async function api(path: string, body?: unknown): Promise<Record<string, unknown
 	const response = await fetch(`${base}${path}`, { method: body ? 'POST' : 'GET',
 		headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
 		body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(30_000) });
-	if (!response.ok) throw new Error(`PostHog returned HTTP ${response.status}`);
+	if (!response.ok) throw new Error(`PostHog ${path} returned HTTP ${response.status}`);
 	const result: unknown = await response.json();
 	if (!result || typeof result !== 'object' || Array.isArray(result)) throw new Error('Unexpected PostHog response');
 	return result as Record<string, unknown>;
@@ -54,13 +54,14 @@ const insights = [
 	{ name: 'Device platform', description: 'Detected desktop platform or other/mobile.', query: trend('$pageview', 'dau', '$os') },
 	{ name: 'Scroll depth by page', description: 'Highest observed scroll milestones. Helps identify pages visitors stop reading.', query: table(`SELECT properties.$pathname AS page, properties.depth AS depth_percent, count(DISTINCT distinct_id) AS browsers FROM events WHERE event = 'website_scroll_depth' AND ${where} GROUP BY page, depth_percent ORDER BY page, depth_percent LIMIT 50`) },
 	{ name: 'Visit to download funnel', description: 'Ordered within 30 minutes by browser: page visit, download CTA, download link click. Direct downloads and command copies are measured separately.', query: { kind: 'InsightVizNode', source: { kind: 'FunnelsQuery', dateRange: { date_from: '-30d' },
-		series: ['$pageview', 'website_download_cta_clicked', 'website_download_clicked'].map((event, order) => ({ kind: 'EventsNode', event, order, properties: [website] })),
+		series: ['$pageview', 'website_download_cta_clicked', 'website_download_clicked'].map((event) => ({ kind: 'EventsNode', event, properties: [website] })),
 		funnelsFilter: { funnelVizType: 'steps', funnelOrderType: 'ordered', funnelWindowInterval: 30, funnelWindowIntervalUnit: 'minute' } } } },
 	{ name: 'GitHub and release fallback', description: 'Source interest and use of GitHub when mirror links are unavailable.', query: table(`SELECT event, properties.placement AS placement, count() AS clicks FROM events WHERE event IN ('website_github_clicked', 'website_releases_clicked') AND ${where} GROUP BY event, placement ORDER BY clicks DESC LIMIT 50`) }
 ];
 const existing = (await list('/insights/?limit=100')).filter((item) => Array.isArray(item.dashboards) && item.dashboards.includes(dashboard.id));
 let created = 0;
 for (const insight of insights) {
+	process.stderr.write(`Validating ${insight.name}\n`);
 	// Validate the query before creating a persistent insight.
 	await api('/query/', { query: insight.query.source });
 	if (!existing.some((item) => item.name === insight.name && !item.deleted)) {
