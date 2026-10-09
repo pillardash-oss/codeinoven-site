@@ -10,6 +10,7 @@
 
   const year = new Date().getFullYear();
   const navLinks = [
+    { href: "/guide", label: "Guide" },
     { href: "/desktop-coding-workspace", label: "Desktop workspace" },
     { href: "/#workspace", label: "Workspace" },
     { href: "/#how", label: "How it works" },
@@ -111,6 +112,7 @@
       <a href="/#how">How it works</a>
       <a href="/download">Download</a>
       <a href="/desktop-coding-workspace">Desktop workspace</a>
+      <a href="/guide">Getting started guide</a>
       <a href="/#faq">FAQ</a>
     </nav>
 
