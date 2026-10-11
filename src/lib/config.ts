@@ -10,6 +10,8 @@ export const SITE_URL = 'https://codeinoven.com';
 export const PRODUCT = {
   name: 'CodeInOven',
   alternateNames: [
+    'CIO',
+    'cio',
     'Code in oven',
     'Code In Oven',
     'codene',

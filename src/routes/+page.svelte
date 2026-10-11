@@ -598,10 +598,10 @@
 
           <div class="faq-list" data-reveal>
             <details class="faq-item">
-              <summary>What is CodeInOven?</summary>
+              <summary>What is CodeInOven (CIO)?</summary>
               <div class="faq-body">
                 <p>
-                  CodeInOven is an open-source workspace for building real
+                  CodeInOven (often abbreviated as CIO) is an open-source workspace for building real
                   software with AI. You bring a coding agent, open a project,
                   and work on the same change together: plan it, write it, run
                   it, review the diff, and commit what you keep.
