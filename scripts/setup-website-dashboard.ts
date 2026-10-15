@@ -34,7 +34,7 @@ async function list(path: string) {
 }
 const dashboards = await list(`/dashboards/?search=${encodeURIComponent(name)}&limit=100`);
 const dashboard = dashboards.find((item) => item.name === name && !item.deleted) ??
-	await api('/dashboards/', { name, description: 'Opt-in website traffic and download intent. Browser IDs are not unique people; clicks and command copies are not completed downloads.', pinned: true });
+	await api('/dashboards/', { name, description: 'Website traffic and download intent. Browser IDs are not unique people; clicks and command copies are not completed downloads.', pinned: true });
 if (typeof dashboard.id !== 'number') throw new Error('Missing dashboard ID');
 const website = { key: 'source', value: ['website'], operator: 'exact', type: 'event' };
 function trend(event: string, math = 'total', breakdown?: string) {
@@ -46,7 +46,7 @@ function trend(event: string, math = 'total', breakdown?: string) {
 function table(query: string) { return { kind: 'DataTableNode', source: { kind: 'HogQLQuery', query } }; }
 const where = "properties.source = 'website' AND timestamp >= now() - INTERVAL 30 DAY";
 const insights = [
-	{ name: 'Daily website browsers', description: 'Distinct consenting browser IDs, not unique people.', query: trend('$pageview', 'dau') },
+	{ name: 'Daily website browsers', description: 'Distinct browser IDs, not unique people.', query: trend('$pageview', 'dau') },
 	{ name: 'Pages visited', description: 'Page views by route.', query: trend('$pageview', 'total', '$pathname') },
 	{ name: 'Traffic sources and campaigns', description: 'External referrer domains and campaign tags, with direct traffic included.', query: table(`SELECT coalesce(nullIf(properties.$referring_domain, ''), 'Direct') AS referrer, coalesce(nullIf(properties.utm_source, ''), 'None') AS campaign_source, count() AS pageviews, count(DISTINCT distinct_id) AS browsers FROM events WHERE event = '$pageview' AND ${where} GROUP BY referrer, campaign_source ORDER BY browsers DESC LIMIT 50`) },
 	{ name: 'Download CTA placement', description: 'Which links lead visitors to the download page.', query: trend('website_download_cta_clicked', 'total', 'placement') },

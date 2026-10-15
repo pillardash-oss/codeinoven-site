@@ -84,7 +84,8 @@
             domains, campaign tags, device platform, scroll depth, and download
             interactions to PostHog in the US. We use these statistics to
             improve the website. We do not record sessions, form contents, or
-            complete URLs with query strings.
+            complete URLs with query strings, and we do not send your location
+            or IP address.
           </p>
           <p>
             A random browser identifier and a temporary session identifier

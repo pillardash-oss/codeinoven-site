@@ -1,6 +1,7 @@
 import { detectPlatform, LINKS, MIRROR_ORIGIN, SITE_URL } from './config.ts';
 
-type Properties = Record<string, string | number | boolean>;
+/** `null` is allowed because `$ip: null` is how a sender tells PostHog to drop the address. */
+type Properties = Record<string, string | number | boolean | null>;
 interface EventRecord { event: string; properties: Properties; timestamp: string; }
 const VISITOR = 'codeinoven.analytics.visitor';
 const SESSION = 'codeinoven.analytics.session';
@@ -102,6 +103,9 @@ export function capture(event: string, properties: Properties = {}) {
 	queue.push({ event, timestamp: new Date(now).toISOString(), properties: {
 		...attribution, ...properties, distinct_id: visitor, $session_id: session,
 		$insert_id: crypto.randomUUID(), $process_person_profile: false,
+		// Website interaction only. Location and IP are excluded, matching the
+		// desktop app's sender, so no visitor is placed beyond a page and a device.
+		$geoip_disable: true, $ip: null,
 		source: 'website', $lib: 'codeinoven-web', $pathname: pathname,
 		$current_url: `${SITE_URL}${pathname}`, $host: new URL(SITE_URL).host,
 		$os: detectPlatform() ?? 'other', device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
