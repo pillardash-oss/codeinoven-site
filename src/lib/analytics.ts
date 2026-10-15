@@ -7,7 +7,10 @@ const CHOICE = 'codeinoven.analytics.choice';
 const VISITOR = 'codeinoven.analytics.visitor';
 const SESSION = 'codeinoven.analytics.session';
 const ENDPOINT = 'https://us.i.posthog.com/batch/';
-const ROUTES = new Set(['/', '/download', '/privacy', '/desktop-coding-workspace']);
+/** A PostHog project ingestion key. A personal key must never reach the browser. */
+const INGESTION_TOKEN = /^phc_[\w-]+$/;
+/** Routes this site serves. Anything else is folded so pageviews cannot explode the property's cardinality. */
+const ROUTES = new Set(['/', '/download', '/privacy', '/desktop-coding-workspace', '/guide']);
 let token = '';
 let visitor = '';
 let session = '';
@@ -41,7 +44,9 @@ export function analyticsChoice(): AnalyticsChoice {
 	return choice === 'allowed' || choice === 'declined' ? choice : null;
 }
 export function configureAnalytics(projectToken: string): boolean {
-	token = projectToken;
+	// Refuse a personal API key or any other shape: it is invalid for ingestion
+	// (PostHog answers 401) and shipping one publicly is a credential leak.
+	token = INGESTION_TOKEN.test(projectToken) ? projectToken : '';
 	return Boolean(token); // Local previews show the control but never send analytics.
 }
 function stop() {
@@ -95,7 +100,8 @@ export function capture(event: string, properties: Properties = {}) {
 	if (!session || now - sessionUpdated > 30 * 60_000) session = crypto.randomUUID();
 	sessionUpdated = now;
 	tab(SESSION, JSON.stringify({ id: session, updated: now }));
-	const pathname = ROUTES.has(window.location.pathname) ? window.location.pathname : '/other';
+	const raw = window.location.pathname.replace(/\/+$/, '') || '/';
+	const pathname = ROUTES.has(raw) ? raw : '/other';
 	queue.push({ event, timestamp: new Date(now).toISOString(), properties: {
 		...attribution, ...properties, distinct_id: visitor, $session_id: session,
 		$insert_id: crypto.randomUUID(), $process_person_profile: false,
@@ -107,8 +113,10 @@ export function capture(event: string, properties: Properties = {}) {
 	if (!timer) timer = setTimeout(() => { timer = undefined; void flushAnalytics(); }, 3000);
 }
 export function pageViewed() {
-	if (!visitor || page === window.location.pathname) return;
-	page = window.location.pathname;
+	// Normalized so `/guide` and `/guide/` are one visit, not two.
+	const path = (window.location.pathname.replace(/\/+$/, '') || '/') + window.location.search;
+	if (!visitor || page === path) return;
+	page = path;
 	capture('$pageview');
 }
 export async function flushAnalytics() {
