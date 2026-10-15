@@ -14,7 +14,7 @@ export const variables = defineEnvVars({
 		static: true,
 		schema: (value) => {
 			const token = value?.trim() ?? '';
-			// Empty is a supported state: analytics off, consent control hidden.
+			// Empty is a supported state: analytics off, nothing collected.
 			if (!token) return '';
 			if (!INGESTION_TOKEN.test(token)) {
 				throw new Error(

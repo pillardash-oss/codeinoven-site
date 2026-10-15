@@ -80,21 +80,19 @@
           <p class="policy-kicker">04 / Website and downloads</p>
           <h2 id="website-title">This website</h2>
           <p>
-            The website serves static pages. If you allow analytics, we send
-            page visits, referring domains, campaign tags, device platform,
-            scroll depth, and download interactions to PostHog in the US.
-            We use these statistics to improve the website. We do not record
-            sessions, form contents, or complete URLs with query strings.
+            The website serves static pages. We send page visits, referring
+            domains, campaign tags, device platform, scroll depth, and download
+            interactions to PostHog in the US. We use these statistics to
+            improve the website. We do not record sessions, form contents, or
+            complete URLs with query strings.
           </p>
           <p>
-            Your analytics choice is stored in your browser. If you opt in,
-            a random browser identifier and a temporary session identifier
+            A random browser identifier and a temporary session identifier
             connect visits and interactions. These are not account identifiers.
-            We do not set analytics cookies. You can decline or withdraw consent
-            using Analytics preferences in the footer. Declining removes the
-            local identifiers and stops collection. We respect Do Not Track
-            and Global Privacy Control signals. Browser counts do not represent
-            unique people, and download clicks do not confirm completed downloads.
+            We do not set analytics cookies. We respect Do Not Track and Global
+            Privacy Control signals, and collection stops when your browser
+            sends either. Browser counts do not represent unique people, and
+            download clicks do not confirm completed downloads.
           </p>
           <p>
             Downloads come from the {PRODUCT.name} release mirror. GitHub

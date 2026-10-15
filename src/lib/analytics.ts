@@ -1,11 +1,11 @@
 import { detectPlatform, LINKS, MIRROR_ORIGIN, SITE_URL } from './config.ts';
 
-export type AnalyticsChoice = 'allowed' | 'declined' | null;
 type Properties = Record<string, string | number | boolean>;
 interface EventRecord { event: string; properties: Properties; timestamp: string; }
-const CHOICE = 'codeinoven.analytics.choice';
 const VISITOR = 'codeinoven.analytics.visitor';
 const SESSION = 'codeinoven.analytics.session';
+/** A key left over from the old opt-in prompt. Cleared on start so no visitor keeps a stale choice. */
+const LEGACY_CHOICE = 'codeinoven.analytics.choice';
 const ENDPOINT = 'https://us.i.posthog.com/batch/';
 /** A PostHog project ingestion key. A personal key must never reach the browser. */
 const INGESTION_TOKEN = /^phc_[\w-]+$/;
@@ -35,19 +35,19 @@ function local(key: string, value?: string) {
 function tab(key: string, value?: string) {
 	try { return storage(window.sessionStorage, key, value); } catch { return null; }
 }
+/**
+ * Visitors who explicitly asked not to be tracked are left alone. This is not a
+ * prompt and needs no UI: it is the browser's own signal, and we honour it.
+ */
 export function privacyRequested(): boolean {
 	return navigator.doNotTrack === '1' ||
 		(navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
-}
-export function analyticsChoice(): AnalyticsChoice {
-	const choice = local(CHOICE);
-	return choice === 'allowed' || choice === 'declined' ? choice : null;
 }
 export function configureAnalytics(projectToken: string): boolean {
 	// Refuse a personal API key or any other shape: it is invalid for ingestion
 	// (PostHog answers 401) and shipping one publicly is a credential leak.
 	token = INGESTION_TOKEN.test(projectToken) ? projectToken : '';
-	return Boolean(token); // Local previews show the control but never send analytics.
+	return Boolean(token); // Local previews send nothing, because the origin check below fails.
 }
 function stop() {
 	clearTimeout(timer);
@@ -59,9 +59,14 @@ function stop() {
 	page = '';
 	attribution = {};
 }
-export function syncAnalyticsConsent() {
+/**
+ * Establish the identifiers analytics runs on. Called once per page load.
+ * Collection is unconditional apart from the browser's do-not-track signals.
+ */
+export function startAnalytics() {
 	stop();
-	if (!token || window.location.origin !== SITE_URL || privacyRequested() || analyticsChoice() !== 'allowed') return;
+	local(LEGACY_CHOICE, '');
+	if (!token || window.location.origin !== SITE_URL || privacyRequested()) return;
 	const stored = local(VISITOR);
 	visitor = stored && /^[\da-f-]{36}$/i.test(stored) ? stored : crypto.randomUUID();
 	local(VISITOR, visitor);
@@ -86,16 +91,8 @@ export function syncAnalyticsConsent() {
 		if (referrer.origin !== SITE_URL) attribution.$referring_domain = referrer.hostname;
 	} catch { /* Direct traffic has no referrer. */ }
 }
-export function chooseAnalytics(choice: Exclude<AnalyticsChoice, null>) {
-	local(CHOICE, choice);
-	if (choice === 'declined') {
-		local(VISITOR, '');
-		tab(SESSION, '');
-	}
-	syncAnalyticsConsent();
-}
 export function capture(event: string, properties: Properties = {}) {
-	if (!visitor || privacyRequested() || analyticsChoice() !== 'allowed') return;
+	if (!visitor || privacyRequested()) return;
 	const now = Date.now();
 	if (!session || now - sessionUpdated > 30 * 60_000) session = crypto.randomUUID();
 	sessionUpdated = now;
@@ -121,7 +118,7 @@ export function pageViewed() {
 }
 export async function flushAnalytics() {
 	if (request || !queue.length || !visitor) return;
-	if (privacyRequested() || analyticsChoice() !== 'allowed') { stop(); return; }
+	if (privacyRequested()) { stop(); return; }
 	clearTimeout(timer);
 	timer = undefined;
 	const batch = queue.splice(0, 20);
