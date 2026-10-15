@@ -88,6 +88,13 @@
             or IP address.
           </p>
           <p>
+            If you are in Europe, we ask before collecting anything. Nothing is
+            sent until you choose Allow analytics, and you can change that
+            answer any time using Analytics preferences in the footer. Your
+            answer is stored in your browser, and choosing Decline removes the
+            local identifiers and stops collection.
+          </p>
+          <p>
             A random browser identifier and a temporary session identifier
             connect visits and interactions. These are not account identifiers.
             We do not set analytics cookies. We respect Do Not Track and Global

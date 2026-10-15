@@ -2,16 +2,24 @@ import { detectPlatform, LINKS, MIRROR_ORIGIN, SITE_URL } from './config.ts';
 
 /** `null` is allowed because `$ip: null` is how a sender tells PostHog to drop the address. */
 type Properties = Record<string, string | number | boolean | null>;
+export type AnalyticsChoice = 'allowed' | 'declined' | null;
 interface EventRecord { event: string; properties: Properties; timestamp: string; }
+const CHOICE = 'codeinoven.analytics.choice';
 const VISITOR = 'codeinoven.analytics.visitor';
 const SESSION = 'codeinoven.analytics.session';
-/** A key left over from the old opt-in prompt. Cleared on start so no visitor keeps a stale choice. */
-const LEGACY_CHOICE = 'codeinoven.analytics.choice';
 const ENDPOINT = 'https://us.i.posthog.com/batch/';
 /** A PostHog project ingestion key. A personal key must never reach the browser. */
 const INGESTION_TOKEN = /^phc_[\w-]+$/;
 /** Routes this site serves. Anything else is folded so pageviews cannot explode the property's cardinality. */
 const ROUTES = new Set(['/', '/download', '/privacy', '/desktop-coding-workspace', '/guide']);
+/**
+ * European zones that the IANA database files under another continent. Anything
+ * starting `Europe/` already covers the EU, the EEA and the UK.
+ */
+const EUROPEAN_ZONES = new Set([
+	'Africa/Ceuta', 'Arctic/Longyearbyen', 'Asia/Famagusta', 'Asia/Istanbul',
+	'Asia/Nicosia', 'Atlantic/Azores', 'Atlantic/Canary', 'Atlantic/Madeira', 'Atlantic/Reykjavik'
+]);
 let token = '';
 let visitor = '';
 let session = '';
@@ -21,6 +29,8 @@ let attribution: Properties = {};
 let queue: EventRecord[] = [];
 let timer: ReturnType<typeof setTimeout> | undefined;
 let request: AbortController | undefined;
+/** Resolved once per page load. See `consentRequired`. */
+let consentNeeded: boolean | null = null;
 
 function storage(store: Storage, key: string, value?: string): string | null {
 	try {
@@ -44,6 +54,30 @@ export function privacyRequested(): boolean {
 	return navigator.doNotTrack === '1' ||
 		(navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
 }
+/**
+ * Whether this visitor must opt in before anything is collected.
+ *
+ * Read from the browser's own time zone, so no IP lookup, no network request and
+ * no geolocation prompt happen. A time zone is a coarse signal: it errs toward
+ * asking more often than strictly necessary, because showing the card to
+ * someone outside Europe costs a dismissal while the reverse does not.
+ */
+export function consentRequired(): boolean {
+	if (consentNeeded !== null) return consentNeeded;
+	// An undetectable region is treated as one that needs consent.
+	let zone = '';
+	try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone ?? ''; } catch { /* Fall through to required. */ }
+	consentNeeded = !zone || zone.startsWith('Europe/') || EUROPEAN_ZONES.has(zone);
+	return consentNeeded;
+}
+export function analyticsChoice(): AnalyticsChoice {
+	const choice = local(CHOICE);
+	return choice === 'allowed' || choice === 'declined' ? choice : null;
+}
+/** True when collection may run: freely outside Europe, or after an opt-in inside it. */
+export function analyticsGranted(): boolean {
+	return !consentRequired() || analyticsChoice() === 'allowed';
+}
 export function configureAnalytics(projectToken: string): boolean {
 	// Refuse a personal API key or any other shape: it is invalid for ingestion
 	// (PostHog answers 401) and shipping one publicly is a credential leak.
@@ -61,13 +95,12 @@ function stop() {
 	attribution = {};
 }
 /**
- * Establish the identifiers analytics runs on. Called once per page load.
- * Collection is unconditional apart from the browser's do-not-track signals.
+ * Establish the identifiers analytics runs on, or wait for a European visitor
+ * to make a choice. Called on page load and again whenever that choice changes.
  */
 export function startAnalytics() {
 	stop();
-	local(LEGACY_CHOICE, '');
-	if (!token || window.location.origin !== SITE_URL || privacyRequested()) return;
+	if (!token || window.location.origin !== SITE_URL || privacyRequested() || !analyticsGranted()) return;
 	const stored = local(VISITOR);
 	visitor = stored && /^[\da-f-]{36}$/i.test(stored) ? stored : crypto.randomUUID();
 	local(VISITOR, visitor);
@@ -91,6 +124,15 @@ export function startAnalytics() {
 		const referrer = new URL(document.referrer);
 		if (referrer.origin !== SITE_URL) attribution.$referring_domain = referrer.hostname;
 	} catch { /* Direct traffic has no referrer. */ }
+}
+/** Record a European visitor's decision and start or stop collection to match. */
+export function chooseAnalytics(choice: Exclude<AnalyticsChoice, null>) {
+	local(CHOICE, choice);
+	if (choice === 'declined') {
+		local(VISITOR, '');
+		tab(SESSION, '');
+	}
+	startAnalytics();
 }
 export function capture(event: string, properties: Properties = {}) {
 	if (!visitor || privacyRequested()) return;
