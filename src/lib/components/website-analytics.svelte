@@ -3,15 +3,17 @@
   import { afterNavigate } from '$app/navigation';
   import { PUBLIC_POSTHOG_TOKEN } from '$app/env/public';
   import {
-    analyticsChoice, capture, chooseAnalytics, configureAnalytics, disposeAnalytics,
-    flushAnalytics, pageViewed, privacyRequested, syncAnalyticsConsent, trackLink,
+    analyticsChoice, capture, chooseAnalytics, configureAnalytics, consentRequired,
+    disposeAnalytics, flushAnalytics, pageViewed, privacyRequested, startAnalytics, trackLink,
     type AnalyticsChoice,
   } from '#lib/analytics.ts';
 
   let enabled = $state(false);
+  let needsConsent = $state(false);
   let choice = $state<AnalyticsChoice>(null);
   let editing = $state(false);
   let privateVisit = $state(false);
+  let collecting = $state(false);
   let ready = false;
   let scrollTimer: ReturnType<typeof setTimeout> | undefined;
   let scrollDepth = 0;
@@ -19,8 +21,11 @@
   onMount(() => {
     enabled = configureAnalytics(PUBLIC_POSTHOG_TOKEN);
     privateVisit = privacyRequested();
+    // Read once: outside Europe there is no card and no choice to make.
+    needsConsent = consentRequired();
     choice = analyticsChoice();
-    syncAnalyticsConsent();
+    startAnalytics();
+    collecting = Boolean(analyticsChoice() === 'allowed' || !needsConsent);
     ready = true;
     pageViewed();
     return () => { clearTimeout(scrollTimer); disposeAnalytics(); };
@@ -35,17 +40,20 @@
     chooseAnalytics(value);
     choice = value;
     editing = false;
+    collecting = value === 'allowed';
+    scrollDepth = 0;
     pageViewed();
   }
   function syncChoice(event: StorageEvent) {
     if (event.key !== 'codeinoven.analytics.choice' && event.key !== null) return;
     choice = analyticsChoice();
-    syncAnalyticsConsent();
+    startAnalytics();
+    collecting = Boolean(analyticsChoice() === 'allowed' || !needsConsent);
     scrollDepth = 0;
     pageViewed();
   }
   function scroll() {
-    if (choice !== 'allowed' || scrollTimer) return;
+    if (!collecting || scrollTimer) return;
     scrollTimer = setTimeout(() => {
       scrollTimer = undefined;
       const height = document.documentElement.scrollHeight - window.innerHeight;
@@ -64,7 +72,7 @@
 }} />
 <svelte:window onstorage={syncChoice} onscroll={scroll} onpagehide={() => { void flushAnalytics(); }} />
 
-{#if enabled && !privateVisit}
+{#if enabled && needsConsent && !privateVisit}
   <button class="analytics-settings" type="button" onclick={() => (editing = !editing)} aria-expanded={editing || choice === null}>
     Analytics preferences
   </button>

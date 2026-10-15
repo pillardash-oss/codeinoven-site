@@ -1,13 +1,25 @@
 import { detectPlatform, LINKS, MIRROR_ORIGIN, SITE_URL } from './config.ts';
 
+/** `null` is allowed because `$ip: null` is how a sender tells PostHog to drop the address. */
+type Properties = Record<string, string | number | boolean | null>;
 export type AnalyticsChoice = 'allowed' | 'declined' | null;
-type Properties = Record<string, string | number | boolean>;
 interface EventRecord { event: string; properties: Properties; timestamp: string; }
 const CHOICE = 'codeinoven.analytics.choice';
 const VISITOR = 'codeinoven.analytics.visitor';
 const SESSION = 'codeinoven.analytics.session';
 const ENDPOINT = 'https://us.i.posthog.com/batch/';
-const ROUTES = new Set(['/', '/download', '/privacy', '/desktop-coding-workspace']);
+/** A PostHog project ingestion key. A personal key must never reach the browser. */
+const INGESTION_TOKEN = /^phc_[\w-]+$/;
+/** Routes this site serves. Anything else is folded so pageviews cannot explode the property's cardinality. */
+const ROUTES = new Set(['/', '/download', '/privacy', '/desktop-coding-workspace', '/guide']);
+/**
+ * European zones that the IANA database files under another continent. Anything
+ * starting `Europe/` already covers the EU, the EEA and the UK.
+ */
+const EUROPEAN_ZONES = new Set([
+	'Africa/Ceuta', 'Arctic/Longyearbyen', 'Asia/Famagusta', 'Asia/Istanbul',
+	'Asia/Nicosia', 'Atlantic/Azores', 'Atlantic/Canary', 'Atlantic/Madeira', 'Atlantic/Reykjavik'
+]);
 let token = '';
 let visitor = '';
 let session = '';
@@ -17,6 +29,8 @@ let attribution: Properties = {};
 let queue: EventRecord[] = [];
 let timer: ReturnType<typeof setTimeout> | undefined;
 let request: AbortController | undefined;
+/** Resolved once per page load. See `consentRequired`. */
+let consentNeeded: boolean | null = null;
 
 function storage(store: Storage, key: string, value?: string): string | null {
 	try {
@@ -32,17 +46,43 @@ function local(key: string, value?: string) {
 function tab(key: string, value?: string) {
 	try { return storage(window.sessionStorage, key, value); } catch { return null; }
 }
+/**
+ * Visitors who explicitly asked not to be tracked are left alone. This is not a
+ * prompt and needs no UI: it is the browser's own signal, and we honour it.
+ */
 export function privacyRequested(): boolean {
 	return navigator.doNotTrack === '1' ||
 		(navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
+}
+/**
+ * Whether this visitor must opt in before anything is collected.
+ *
+ * Read from the browser's own time zone, so no IP lookup, no network request and
+ * no geolocation prompt happen. A time zone is a coarse signal: it errs toward
+ * asking more often than strictly necessary, because showing the card to
+ * someone outside Europe costs a dismissal while the reverse does not.
+ */
+export function consentRequired(): boolean {
+	if (consentNeeded !== null) return consentNeeded;
+	// An undetectable region is treated as one that needs consent.
+	let zone = '';
+	try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone ?? ''; } catch { /* Fall through to required. */ }
+	consentNeeded = !zone || zone.startsWith('Europe/') || EUROPEAN_ZONES.has(zone);
+	return consentNeeded;
 }
 export function analyticsChoice(): AnalyticsChoice {
 	const choice = local(CHOICE);
 	return choice === 'allowed' || choice === 'declined' ? choice : null;
 }
+/** True when collection may run: freely outside Europe, or after an opt-in inside it. */
+export function analyticsGranted(): boolean {
+	return !consentRequired() || analyticsChoice() === 'allowed';
+}
 export function configureAnalytics(projectToken: string): boolean {
-	token = projectToken;
-	return Boolean(token); // Local previews show the control but never send analytics.
+	// Refuse a personal API key or any other shape: it is invalid for ingestion
+	// (PostHog answers 401) and shipping one publicly is a credential leak.
+	token = INGESTION_TOKEN.test(projectToken) ? projectToken : '';
+	return Boolean(token); // Local previews send nothing, because the origin check below fails.
 }
 function stop() {
 	clearTimeout(timer);
@@ -54,9 +94,13 @@ function stop() {
 	page = '';
 	attribution = {};
 }
-export function syncAnalyticsConsent() {
+/**
+ * Establish the identifiers analytics runs on, or wait for a European visitor
+ * to make a choice. Called on page load and again whenever that choice changes.
+ */
+export function startAnalytics() {
 	stop();
-	if (!token || window.location.origin !== SITE_URL || privacyRequested() || analyticsChoice() !== 'allowed') return;
+	if (!token || window.location.origin !== SITE_URL || privacyRequested() || !analyticsGranted()) return;
 	const stored = local(VISITOR);
 	visitor = stored && /^[\da-f-]{36}$/i.test(stored) ? stored : crypto.randomUUID();
 	local(VISITOR, visitor);
@@ -81,24 +125,29 @@ export function syncAnalyticsConsent() {
 		if (referrer.origin !== SITE_URL) attribution.$referring_domain = referrer.hostname;
 	} catch { /* Direct traffic has no referrer. */ }
 }
+/** Record a European visitor's decision and start or stop collection to match. */
 export function chooseAnalytics(choice: Exclude<AnalyticsChoice, null>) {
 	local(CHOICE, choice);
 	if (choice === 'declined') {
 		local(VISITOR, '');
 		tab(SESSION, '');
 	}
-	syncAnalyticsConsent();
+	startAnalytics();
 }
 export function capture(event: string, properties: Properties = {}) {
-	if (!visitor || privacyRequested() || analyticsChoice() !== 'allowed') return;
+	if (!visitor || privacyRequested()) return;
 	const now = Date.now();
 	if (!session || now - sessionUpdated > 30 * 60_000) session = crypto.randomUUID();
 	sessionUpdated = now;
 	tab(SESSION, JSON.stringify({ id: session, updated: now }));
-	const pathname = ROUTES.has(window.location.pathname) ? window.location.pathname : '/other';
+	const raw = window.location.pathname.replace(/\/+$/, '') || '/';
+	const pathname = ROUTES.has(raw) ? raw : '/other';
 	queue.push({ event, timestamp: new Date(now).toISOString(), properties: {
 		...attribution, ...properties, distinct_id: visitor, $session_id: session,
 		$insert_id: crypto.randomUUID(), $process_person_profile: false,
+		// Website interaction only. Location and IP are excluded, matching the
+		// desktop app's sender, so no visitor is placed beyond a page and a device.
+		$geoip_disable: true, $ip: null,
 		source: 'website', $lib: 'codeinoven-web', $pathname: pathname,
 		$current_url: `${SITE_URL}${pathname}`, $host: new URL(SITE_URL).host,
 		$os: detectPlatform() ?? 'other', device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
@@ -107,13 +156,15 @@ export function capture(event: string, properties: Properties = {}) {
 	if (!timer) timer = setTimeout(() => { timer = undefined; void flushAnalytics(); }, 3000);
 }
 export function pageViewed() {
-	if (!visitor || page === window.location.pathname) return;
-	page = window.location.pathname;
+	// Normalized so `/guide` and `/guide/` are one visit, not two.
+	const path = (window.location.pathname.replace(/\/+$/, '') || '/') + window.location.search;
+	if (!visitor || page === path) return;
+	page = path;
 	capture('$pageview');
 }
 export async function flushAnalytics() {
 	if (request || !queue.length || !visitor) return;
-	if (privacyRequested() || analyticsChoice() !== 'allowed') { stop(); return; }
+	if (privacyRequested()) { stop(); return; }
 	clearTimeout(timer);
 	timer = undefined;
 	const batch = queue.splice(0, 20);
